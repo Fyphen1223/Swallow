@@ -1,6 +1,8 @@
 <h1 align="center">Swallow</h1>
 
+<div align="center">
 <img src="https://img.shields.io/badge/-Node.js-339933.svg?logo=node.js&style=for-the-badge"><img src="https://img.shields.io/badge/-Npm-CB3837.svg?logo=npm&style=for-the-badge"><img src="https://img.shields.io/badge/-Pnpm-BD081C.svg?logo=pnpm&style=for-the-badge"><img src="https://img.shields.io/badge/-Eslint-4B32C3.svg?logo=eslint&style=for-the-badge"><img src="https://img.shields.io/badge/-Prettier-F7B93E.svg?logo=prettier&style=for-the-badge">
+</div>
 
 # What is Swallow?
 Swallow is a versatile yet easy-to-use and fast Discord music bot written in Node.js
