@@ -1,0 +1,17 @@
+{
+	"bot": {
+		"token": "YOUR TOKEN",
+		"applicationId": "YOUR APPLICATION ID",
+		"clientSecret": "YOUR CLIENT SECRET",
+		"clientKey": "YOUR CLIENT"
+	},
+	"nodes": [
+		{
+			"serverName": "Tsumi",
+			"secure": false,
+			"host": "localhost",
+			"pass": "youshallnotpass",
+			"port": 2333
+		}
+	]
+}
