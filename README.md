@@ -50,4 +50,17 @@ pnpm i
 pnpm run start
 ```
 
+<details>
+
+<summary>When you encounter error</summary>
+First, please make sure that you have installed Node.js and pnpm correctly.
+
+Second, try removing `node_modules` folder and re-install packages.
+
+Third, make sure Lava/NodeLink is running if you configured it it config.json.
+
+Lastly, if you still have a problem, please create an issue and let me know!
+
+</details>
+
 # Showcase
