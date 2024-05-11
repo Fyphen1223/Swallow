@@ -31,6 +31,7 @@ Node.js, npm, pnpm
 
 > [!IMPORTANT]
 > Install or update pnpm using this command below
+> 
 > `npm i pnpm@latest -g`
 
 #### First, clone this repository using this command
