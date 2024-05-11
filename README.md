@@ -4,15 +4,9 @@ Swallow is a versatile yet easy-to-use and fast Discord music bot written in Nod
 # What you expect for Swallow
 ✔️ Insanely fast
 
-✔️ Versatile queue system
-
 ✔️ Wide-variety content loading from famous providers to minor providers
 
 ✔️ Easy-to-use, informative, intuitive UI for users
-
-✔️ Completely configurable eco-system 
-
-✔️ Easy-to-read code, easy-to-customize for youself
 
 ✔️ Compatible with LavaLink and NodeLink, using TsumiLink client
 
@@ -27,8 +21,6 @@ Swallow is a versatile yet easy-to-use and fast Discord music bot written in Nod
 
 # What not expect for Swallow
 ☹ Insanely laggy audio streaming from only limited sources
-
-☹ Too complex UI; incredibly hard-to-use
 
 ☹ Takes too much time for local setup, takes up a lot of disk space like a blackhole
 
