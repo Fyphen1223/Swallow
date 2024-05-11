@@ -50,9 +50,12 @@ pnpm i
 pnpm run start
 ```
 
+<br>
+
 <details>
 
 <summary>When you encounter error</summary>
+
 First, please make sure that you have installed Node.js and pnpm correctly.
 
 Second, try removing `node_modules` folder and re-install packages.
