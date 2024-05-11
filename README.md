@@ -1,4 +1,4 @@
-# What is Swallow? 🕊
+# What is Swallow?
 Swallow is a versatile yet easy-to-use and fast Discord music bot written in Node.js
 
 # What you expect for Swallow
