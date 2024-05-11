@@ -8,7 +8,7 @@
 # What is Swallow?
 Swallow is a versatile yet easy-to-use and fast Discord music bot written in Node.js
 
-# What you expect for Swallow
+<h1 align="center">What you expect for Swallow</h1>
 #### ⚡ Insanely fast
 
 #### 👍 Wide-variety content loading from famous providers to minor providers
@@ -21,19 +21,21 @@ Swallow is a versatile yet easy-to-use and fast Discord music bot written in Nod
 
 #### 🧠 Completely optional AI system integrated, with voice recognition and more
 
-# What you will expect for Swallow
+<h1 align="center">What you can expect future for Swallow</h1>
 #### ✅ Dashboard system that can be used through Discord Activity
 
 #### 🔈 Additional audio providers
 
-# What not expect for Swallow
+<h1 align="center">What not expect for Swallow</h1>
 #### 🤮 Insanely laggy audio streaming from only limited sources
 
 #### 🫠 Takes too much time for local setup, takes up a lot of disk space like a blackhole
 
 #### ☹ Hard to configure, too complex code system to re-write
 
-# Rquirements
+</div>
+
+<h1 align="center">Requirements</h1>
 Node.js, npm, pnpm
 
 > [!IMPORTANT]
@@ -74,6 +76,4 @@ Lastly, if you still have a problem, please create an issue and let me know!
 
 </details>
 
-# Showcase
-
-</div>
+<h1 align="center">Showcase</h1>
