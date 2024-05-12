@@ -1,5 +1,6 @@
 {
 	"vc": {
 		"noVC": "No valid VC detected. Please join a VC and try again."
-	}
+	},
+	"ping": "Pong! Current Ping is"
 }
