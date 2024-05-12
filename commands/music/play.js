@@ -24,6 +24,9 @@ module.exports = {
 				.setAutocomplete(true)
 				.setRequired(false)
 		),
+	async autocomplete(interaction) {
+		// handle the autocompletion response (more on how to do that below)
+	},
 	async execute(interaction) {
 		await interaction.deferReply();
 		if (!interaction.member.voice.channelId) {
