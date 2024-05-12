@@ -16,7 +16,14 @@ const {
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('play')
-		.setDescription('Play music from a URL or search query'),
+		.setDescription('Play music from a URL or search query')
+		.addStringOption((option) =>
+			option
+				.setName('query')
+				.setDescription('The URL or search query')
+				.setAutocomplete(true)
+				.setRequired(false)
+		),
 	async execute(interaction) {
 		await interaction.deferReply();
 		if (!interaction.member.voice.channelId) {
