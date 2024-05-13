@@ -3,7 +3,11 @@
 		"noVC": "🚫 - No valid VC detected. Please join a VC and try again.",
 		"joined": "👋 - Joined your VC.",
 		"differentVC": "🚫 - You need to be in the same VC as me to use this command.",
-		"noQuery": "🚫 - Please provide a query to search for."
+		"noQuery": "🚫 - Please provide a query to search for.",
+		"queueEnded": "👋 - Queue has ended.",
+		"invalidFormat": "🚫 - Invalid format. Please use the following format: `12h34m56s`",
+		"outOfLength": "🚫 - The time you provided is out of the length of the song.",
+		"seeked": "⭕ - Seeked to {time}"
 	},
-	"ping": "Pong! Current Ping is"
+	"ping": "Pong! Current Ping is "
 }

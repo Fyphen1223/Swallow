@@ -72,16 +72,14 @@ module.exports = {
 			global.queue[guildId].voiceChannel = interaction.member.voice.channel;
 			global.queue[guildId].player = await global.queue[
 				guildId
-			].node.joinVoiceChannel(
-				{
-					guildId: guildId,
-					channelId: interaction.member.voice.channelId,
+			].node.joinVoiceChannel({
+				guildId: guildId,
+				channelId: interaction.member.voice.channelId,
+				options: {
+					deaf: true,
+					mute: false,
 				},
-				{
-					selfDeaf: true,
-					selfMute: false,
-				}
-			);
+			});
 			listenEvents(guildId);
 		}
 
@@ -104,7 +102,7 @@ module.exports = {
 		*/
 
 		// クエリが無いがキューは空ではない
-		if (!query && !global.queue.isEmpty()) {
+		if (!query && !global.queue[guildId].isEmpty()) {
 			// Start playing the queue
 			return;
 		}
@@ -170,7 +168,7 @@ module.exports = {
 			});
 
 		await interaction.editReply({ embeds: [resultEmbed] });
-
+		if (global.queue[guildId].player.status === 'playing') return;
 		await global.queue[guildId].player.play({
 			track: {
 				encoded:

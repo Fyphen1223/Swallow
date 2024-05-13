@@ -3,18 +3,19 @@ const config = require('../config.json');
 const { formatTime } = require('./time.js');
 
 const { EmbedBuilder } = require('discord.js');
+const { client } = require('discord.js');
 
 function createMessageEmbed(content, interaction) {
 	const embed = new EmbedBuilder()
 		.setColor(config.config?.color?.info || '#000000')
 		.setAuthor({
 			name: ` | ${content}`,
-			iconURL: interaction.user.avatarURL({}),
+			iconURL: interaction ? interaction.user.avatarURL() : null,
 		});
 	return embed;
 }
 
-function createMusicEmbed(guildId, mode, type) {
+async function createMusicEmbed(guildId, mode, type) {
 	const current = global.queue[guildId].queue[global.queue[guildId].index].data.info;
 	let requester = '';
 	if (
@@ -25,6 +26,7 @@ function createMusicEmbed(guildId, mode, type) {
 	} else {
 		requester = `<@${queue[guildId].queue[queue[guildId].index].user.id}>`;
 	}
+	await global.queue[guildId].player.get();
 	const embed = new EmbedBuilder()
 		.setColor(config.config?.color?.info || '#000000')
 		.addFields(
