@@ -7,7 +7,8 @@ const { ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const listenEvents = async (guildId) => {
 	global.queue[guildId].player.on('start', async (data) => {
 		const current = global.queue[guildId].queue[global.queue[guildId].index];
-		global.queue[guildId].textChannel.send(`Now playing: ${current.data.info.title}`);
+		const embed = createMusicEmbed(guildId, 'Start');
+		await global.queue[guildId].textChannel.send({ embeds: [embed] });
 	});
 };
 
