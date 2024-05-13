@@ -91,4 +91,12 @@ for (const file of eventFiles) {
 	}
 }
 
+global.Tsumi.on('ready', () => {
+	log.info('Tsumi is ready', true, config.config.log.saveToFile);
+});
+
+client.on('raw', (data) => {
+	global.Tsumi.handleRaw(data);
+});
+
 client.login(config.bot.token);

@@ -12,5 +12,8 @@ module.exports = {
 			true,
 			config.config.log.saveToFile
 		);
+		config.nodes.forEach((node) => {
+			global.Tsumi.addNode(node);
+		});
 	},
 };

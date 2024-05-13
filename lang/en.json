@@ -1,6 +1,9 @@
 {
 	"vc": {
-		"noVC": "No valid VC detected. Please join a VC and try again."
+		"noVC": "🚫 - No valid VC detected. Please join a VC and try again.",
+		"joined": "👋 - Joined your VC.",
+		"differentVC": "🚫 - You need to be in the same VC as me to use this command.",
+		"noQuery": "🚫 - Please provide a query to search for."
 	},
 	"ping": "Pong! Current Ping is"
 }

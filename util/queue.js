@@ -8,23 +8,26 @@ class queue extends EventEmitter {
 		this.queue = [];
 	}
 
-	add = function (data) {
-		this.queue.push(data);
+	add = (data, user) => {
+		this.queue.push({
+			data: data,
+			user: user,
+		});
 	};
 
-	remove = function (index) {
+	remove = (index) => {
 		this.queue.splice(index, 1);
 	};
 
-	get = function () {
+	get = () => {
 		return this.queue;
 	};
 
-	isEmpty = function () {
+	isEmpty = () => {
 		return this.queue.length === 0;
 	};
 
-	getTitles = function () {
+	getTitles = () => {
 		let result = [];
 
 		for (let i = 0; i < this.queue.length; i++) {
@@ -43,6 +46,7 @@ class queue extends EventEmitter {
 	autoReplay = false;
 	autoPlay = false;
 	previous = null;
+	index = 0;
 }
 
 class playerQueue extends EventEmitter {
@@ -50,11 +54,11 @@ class playerQueue extends EventEmitter {
 		super();
 	}
 
-	add = function (guildId) {
+	add = (guildId) => {
 		this[guildId] = new queue({ guildId });
 	};
 
-	remove = function (guildId) {
+	remove = (guildId) => {
 		delete this[guildId];
 	};
 }
