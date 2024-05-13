@@ -7,7 +7,12 @@
 		"queueEnded": "👋 - Queue has ended.",
 		"invalidFormat": "🚫 - Invalid format. Please use the following format: `12h34m56s`",
 		"outOfLength": "🚫 - The time you provided is out of the length of the song.",
-		"seeked": "⭕ - Seeked to {time}"
+		"seeked": "⭕ - Seeked to {time}",
+		"noMusic": "🚫 - There is no music in the queue.",
+		"noMoreToSkip": "🚫 - There are no more songs to skip.",
+		"skipped": "⏭️ - Skipped the current song.",
+		"noMoreToBack": "🚫 - There are no more songs to go back.",
+		"backed": "⏮️ - Went back to the previous song."
 	},
 	"ping": "Pong! Current Ping is "
 }

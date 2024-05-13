@@ -19,7 +19,7 @@ const listenEvents = async (guildId) => {
 		global.queue[guildId].previous =
 			global.queue[guildId].queue[global.queue[guildId].index];
 		global.queue[guildId].player.status = 'finished';
-		if (index === global.queue[guildId].queue.length) {
+		if (index >= global.queue[guildId].queue.length) {
 			if (global.queue[guildId].autoReplay) {
 				//Do replay things
 			} else if (global.queue[guildId].autoPlay) {
