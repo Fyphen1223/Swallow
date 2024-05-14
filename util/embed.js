@@ -23,7 +23,7 @@ async function createMusicEmbed(guildId, mode, type) {
 	) {
 		requester = 'Auto Recommendation';
 	} else {
-		requester = `<@${queue[guildId].queue[queue[guildId].index].user.id}>`;
+		requester = `<@${global.queue[guildId].queue[global.queue[guildId].index].user.id}>`;
 	}
 	await global.queue[guildId].player.get();
 	const embed = new EmbedBuilder()
@@ -53,7 +53,7 @@ async function createMusicEmbed(guildId, mode, type) {
 			},
 			{
 				name: 'Volume',
-				value: `${queue[guildId].volume}%`,
+				value: `${global.queue[guildId].volume}%`,
 				inline: true,
 			},
 			{
