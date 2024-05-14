@@ -134,7 +134,7 @@ module.exports = {
 					.setColor(config.config.color.info)
 					.setAuthor({
 						name: ` | 🔍 Added ${result.data.info.name} to the queue.`,
-						iconURL: interaction.user.avatarURL({}),
+						iconURL: interaction.user.avatarURL(),
 					});
 
 				await interaction.editReply({ embeds: [resultEmbed] });
@@ -164,7 +164,7 @@ module.exports = {
 			.setColor(config.config?.color?.info || '#000000')
 			.setAuthor({
 				name: ` | 🔍 Added ${res.info.title} to the queue.`,
-				iconURL: interaction.user.avatarURL({}),
+				iconURL: interaction.user.avatarURL(),
 			});
 
 		await interaction.editReply({ embeds: [resultEmbed] });
