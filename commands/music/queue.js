@@ -5,15 +5,7 @@ const { createMessageEmbed } = require('../../util/embed.js');
 
 const guilds = require('../../data/guilds.json');
 
-const discord = require('discord.js');
-const {
-	SlashCommandBuilder,
-	ButtonBuilder,
-	ButtonStyle,
-	ActionRowBuilder,
-	EmbedBuilder,
-} = require('discord.js');
-const listenEvents = require('../../util/playerEvent.js');
+const { SlashCommandBuilder, EmbedBuilder, codeBlock } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -70,7 +62,7 @@ module.exports = {
 				// Show the current queue
 				let content = '';
 				if (global.queue[guildId].queue.length === 0) {
-					const embed = new discord.EmbedBuilder()
+					const embed = new EmbedBuilder()
 						.setColor(config.config.color.info)
 						.setTitle('Queue')
 						.setDescription('No music added to the queue.');
@@ -84,10 +76,10 @@ module.exports = {
 					global.queue[guildId].queue.forEach((item, i) => {
 						content += `\n${i + 1}: ${item.data.info.title}`;
 					});
-					const embed = new discord.EmbedBuilder()
+					const embed = new EmbedBuilder()
 						.setColor(config.config?.color?.info || '#000000')
 						.setTitle('Queue')
-						.setDescription(discord.codeBlock(content));
+						.setDescription(codeBlock(content));
 
 					await interaction.editReply({ embeds: [embed] });
 				}

@@ -6,13 +6,7 @@ const { createMessageEmbed } = require('../../util/embed.js');
 const guilds = require('../../data/guilds.json');
 
 const discord = require('discord.js');
-const {
-	SlashCommandBuilder,
-	ButtonBuilder,
-	ButtonStyle,
-	ActionRowBuilder,
-	EmbedBuilder,
-} = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 const listenEvents = require('../../util/playerEvent.js');
 
 module.exports = {

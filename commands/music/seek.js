@@ -1,20 +1,10 @@
-const config = require('../../config.json');
-
 const { getLocale } = require('../../lang/lang.js');
 const { createMessageEmbed } = require('../../util/embed.js');
 const { parseTimeToSeconds } = require('../../util/time.js');
 
 const guilds = require('../../data/guilds.json');
 
-const discord = require('discord.js');
-const {
-	SlashCommandBuilder,
-	ButtonBuilder,
-	ButtonStyle,
-	ActionRowBuilder,
-	EmbedBuilder,
-} = require('discord.js');
-const listenEvents = require('../../util/playerEvent.js');
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -23,9 +13,6 @@ module.exports = {
 		.addStringOption((subcommand) =>
 			subcommand.setName('time').setDescription('Time to seek on').setRequired(true)
 		),
-	async autocomplete(interaction) {
-		// handle the autocompletion response (more on how to do that below)
-	},
 	async execute(interaction) {
 		await interaction.deferReply();
 
