@@ -3,7 +3,6 @@ const config = require('../config.json');
 const { formatTime } = require('./time.js');
 
 const { EmbedBuilder } = require('discord.js');
-const { client } = require('discord.js');
 
 function createMessageEmbed(content, interaction) {
 	const embed = new EmbedBuilder()
