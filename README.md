@@ -49,13 +49,13 @@ Node.js, npm, pnpm
 
 #### First, clone this repository using this command
 
-```
+```bash
 git clone https://github.com/Fyphen1223/Swallow
 ```
 
 #### Second, cd into that directory and execute this command
 
-```
+```bash
 pnpm i
 ```
 
@@ -63,7 +63,7 @@ pnpm i
 
 #### Lastly, run the bot by just executing this command
 
-```
+```bash
 pnpm run start
 ```
 
