@@ -14,5 +14,5 @@
 		"noMoreToBack": "🚫 - There are no more songs to go back.",
 		"backed": "⏮️ - Went back to the previous song."
 	},
-	"ping": "Pong! Current Ping is "
+	"ping": "Pong! Current Ping is {ping}ms."
 }
