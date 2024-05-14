@@ -47,21 +47,23 @@ Node.js, npm, pnpm
 > 
 > `npm i pnpm@latest -g`
 
-
 #### First, clone this repository using this command
-```
+
+```bash
 git clone https://github.com/Fyphen1223/Swallow
 ```
 
 #### Second, cd into that directory and execute this command
-```
+
+```bash
 pnpm i
 ```
 
 #### Third, create config.json according to config.example.json file
 
 #### Lastly, run the bot by just executing this command
-```
+
+```bash
 pnpm run start
 ```
 
@@ -75,7 +77,7 @@ First, please make sure that you have installed Node.js and pnpm correctly.
 
 Second, try removing `node_modules` folder and re-install packages.
 
-Third, make sure Lava/NodeLink is running if you configured it it config.json.
+Third, make sure Lava/NodeLink is running if you configured it in config.json.
 
 Lastly, if you still have a problem, please create an issue and let me know!
 
