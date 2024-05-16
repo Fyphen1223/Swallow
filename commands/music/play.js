@@ -21,7 +21,35 @@ module.exports = {
 				.setRequired(false)
 		),
 	async autocomplete(interaction) {
-		// handle the autocompletion response (more on how to do that below)
+		const query = interaction.options.getString('query');
+		if (!query) {
+			return {
+				suggestions: [
+					{
+						name: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+						value: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+					},
+				],
+			};
+		}
+		const result = await global.queue[interaction.guild.id].node.loadTracks(
+			`ytsearch:${query}`
+		);
+		if (!result?.data.length) {
+			return {
+				suggestions: [
+					{
+						name: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+						value: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+					},
+				],
+			};
+		}
+		const suggestions = result.data.map((track) => ({
+			name: track.info.title,
+			value: track.info.uri,
+		}));
+		return { suggestions };
 	},
 	async execute(interaction) {
 		await interaction.deferReply();

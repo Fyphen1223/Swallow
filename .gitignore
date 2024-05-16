@@ -130,7 +130,12 @@ dist
 .pnp.*
 
 config.json
+!log
 log/*
+!data
 data/*
 
 NodeLink
+
+!cache
+cache/*
