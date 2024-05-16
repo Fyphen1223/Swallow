@@ -53,6 +53,35 @@ globalThis.Tsumi = new TsumiInstance({
 
 client.commands = new discord.Collection();
 
+function createFolderIfNotExists(folderPath) {
+	if (!fs.existsSync(folderPath)) {
+		fs.mkdirSync(folderPath);
+	}
+}
+
+const dataFolderPath = path.join(__dirname, 'data');
+const logFolderPath = path.join(__dirname, 'log');
+const cacheFolderPath = path.join(__dirname, 'cache');
+createFolderIfNotExists(dataFolderPath);
+createFolderIfNotExists(logFolderPath);
+createFolderIfNotExists(cacheFolderPath);
+
+function createFileIfNotExists(filePath) {
+	if (!fs.existsSync(filePath)) {
+		fs.writeFileSync(filePath, filePath.match('log') ? '' : JSON.stringify({}));
+	}
+}
+
+const file = [
+	'./cache/search.json',
+	'./cache/searchResults.json',
+	'./data/guilds.json',
+	'./log/log.txt',
+];
+file.forEach((filePath) => {
+	createFileIfNotExists(filePath);
+});
+
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
