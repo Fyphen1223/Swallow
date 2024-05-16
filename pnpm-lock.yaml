@@ -10,7 +10,7 @@ dependencies:
     version: 14.15.2
   tsumi:
     specifier: github:Fyphen1223/TsumiLink
-    version: github.com/Fyphen1223/TsumiLink/7ad8300c6d699bb9e3852e2577ddf56bd561e3a7
+    version: github.com/Fyphen1223/TsumiLink/5516d4d33b3014f83ff6e43d90f23c2b927b13f1
 
 devDependencies:
   '@eslint/js':
@@ -191,8 +191,8 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
-  /@types/node@20.12.11:
-    resolution: {integrity: sha512-vDg9PZ/zi+Nqp6boSOT7plNuthRugEKixDv5sFTIpkE89MmNtEArAShI4mxuX2+UrLEe9pxC1vm2cjm9YlWbJw==}
+  /@types/node@20.12.12:
+    resolution: {integrity: sha512-eWLDGF/FOSPtAvEqeRAQ4C8LSA7M1I7i0ky1I8U7kD1J5ITyW3AsRhQrKVoWf5pFKZ2kILsEGJhsI9r93PYnOw==}
     dependencies:
       undici-types: 5.26.5
     dev: false
@@ -200,7 +200,7 @@ packages:
   /@types/ws@8.5.10:
     resolution: {integrity: sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==}
     dependencies:
-      '@types/node': 20.12.11
+      '@types/node': 20.12.12
     dev: false
 
   /@vladfrangu/async_event_emitter@2.2.4:
@@ -774,8 +774,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/Fyphen1223/TsumiLink/7ad8300c6d699bb9e3852e2577ddf56bd561e3a7:
-    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/7ad8300c6d699bb9e3852e2577ddf56bd561e3a7}
+  github.com/Fyphen1223/TsumiLink/5516d4d33b3014f83ff6e43d90f23c2b927b13f1:
+    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5516d4d33b3014f83ff6e43d90f23c2b927b13f1}
     name: tsumi
     version: 0.0.18
     dependencies:

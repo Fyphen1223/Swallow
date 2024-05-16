@@ -59,12 +59,10 @@ function createFolderIfNotExists(folderPath) {
 	}
 }
 
-const dataFolderPath = path.join(__dirname, 'data');
-const logFolderPath = path.join(__dirname, 'log');
-const cacheFolderPath = path.join(__dirname, 'cache');
-createFolderIfNotExists(dataFolderPath);
-createFolderIfNotExists(logFolderPath);
-createFolderIfNotExists(cacheFolderPath);
+const folders = ['./data', './log', './cache'];
+folders.forEach((folderPath) => {
+	createFolderIfNotExists(folderPath);
+});
 
 function createFileIfNotExists(filePath) {
 	if (!fs.existsSync(filePath)) {
