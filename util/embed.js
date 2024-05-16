@@ -20,19 +20,19 @@ function createMessageEmbed(content, interaction) {
 }
 
 async function createMusicEmbed(guildId, mode, type) {
-	const current = global.queue[guildId].queue[global.queue[guildId].index].data.info;
+	const current = globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data.info;
 	let requester = '';
 	if (
-		global.queue[guildId].queue[global.queue[guildId].index].user ===
+		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user ===
 		'Auto Recommendation'
 	) {
 		requester = 'Auto Recommendation';
 	} else {
 		requester = `<@${
-			global.queue[guildId].queue[global.queue[guildId].index].user.id
+			globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user.id
 		}>`;
 	}
-	await global.queue[guildId].player.get();
+	await globalThis.queue[guildId].player.get();
 	const embed = new EmbedBuilder()
 		.setColor(config.config?.color?.info || '#000000')
 		.addFields(
@@ -49,7 +49,7 @@ async function createMusicEmbed(guildId, mode, type) {
 			{
 				name: 'Duration',
 				value: `${formatTime(
-					Math.floor(global.queue[guildId].player.position / 1000)
+					Math.floor(globalThis.queue[guildId].player.position / 1000)
 				)}/${formatTime(Math.floor(current.length / 1000))}`,
 				inline: true,
 			},
@@ -60,13 +60,13 @@ async function createMusicEmbed(guildId, mode, type) {
 			},
 			{
 				name: 'Volume',
-				value: `${global.queue[guildId].volume}%`,
+				value: `${globalThis.queue[guildId].volume}%`,
 				inline: true,
 			},
 			{
 				name: 'Position',
-				value: `${global.queue[guildId].index + 1}/${
-					global.queue[guildId].queue.length
+				value: `${globalThis.queue[guildId].index + 1}/${
+					globalThis.queue[guildId].queue.length
 				}`,
 				inline: true,
 			}

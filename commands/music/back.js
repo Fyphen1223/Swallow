@@ -11,7 +11,7 @@ module.exports = {
 		await interaction.deferReply();
 
 		const guildId = interaction.guild.id;
-		if (!interaction.member.voice.channelId || !global.queue[guildId]) {
+		if (!interaction.member.voice.channelId || !globalThis.queue[guildId]) {
 			const noValidVCEmbed = createMessageEmbed(
 				getLocale(guilds[guildId].locale).vc.noVC,
 				interaction
@@ -20,9 +20,9 @@ module.exports = {
 			return;
 		}
 
-		if (global.queue[guildId].voiceChannel) {
+		if (globalThis.queue[guildId].voiceChannel) {
 			if (
-				global.queue[guildId].voiceChannel.id !==
+				globalThis.queue[guildId].voiceChannel.id !==
 				interaction.member.voice.channelId
 			) {
 				const differentVCEmbed = createMessageEmbed(
@@ -34,7 +34,7 @@ module.exports = {
 			}
 		}
 
-		if (global.queue[guildId].queue.length === 0) {
+		if (globalThis.queue[guildId].queue.length === 0) {
 			const noMusicEmbed = createMessageEmbed(
 				getLocale(guilds[guildId].locale).vc.noMusic,
 				interaction
@@ -43,25 +43,26 @@ module.exports = {
 			return;
 		}
 
-		const index = global.queue[guildId].index - 1;
-		global.queue[guildId].previous =
-			global.queue[guildId].queue[global.queue[guildId].index];
+		const index = globalThis.queue[guildId].index - 1;
+		globalThis.queue[guildId].previous =
+			globalThis.queue[guildId].queue[globalThis.queue[guildId].index];
 
 		if (index < 0) {
 			const embed = createMessageEmbed(
 				getLocale(guilds[guildId].locale).vc.noMoreToBack
 			);
-			global.queue[guildId].textChannel.send({ embeds: [embed] });
+			globalThis.queue[guildId].textChannel.send({ embeds: [embed] });
 			return;
 		}
 
-		global.queue[guildId].index--;
-		global.queue[guildId].suppressEnd = true;
-		global.queue[guildId].player.position = 0;
-		global.queue[guildId].player.play({
+		globalThis.queue[guildId].index--;
+		globalThis.queue[guildId].suppressEnd = true;
+		globalThis.queue[guildId].player.position = 0;
+		globalThis.queue[guildId].player.play({
 			track: {
 				encoded:
-					global.queue[guildId].queue[global.queue[guildId].index].data.encoded,
+					globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data
+						.encoded,
 			},
 		});
 

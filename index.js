@@ -6,7 +6,7 @@ const path = require('node:path');
 const log = require('./util/log.js');
 const { playerQueue } = require('./util/queue.js');
 
-global.queue = new playerQueue();
+globalThis.queue = new playerQueue();
 
 const discord = require('discord.js');
 const { TsumiInstance } = require('tsumi');
@@ -42,11 +42,11 @@ const client = new discord.Client({
 	],
 });
 
-global.discordClient = client;
-global.Tsumi = new TsumiInstance({
+globalThis.discordClient = client;
+globalThis.Tsumi = new TsumiInstance({
 	botId: config.bot.applicationId,
 	sendPayload: (guildId, payload) => {
-		global.discordClient.guilds.cache.get(guildId).shard.send(payload);
+		globalThis.discordClient.guilds.cache.get(guildId).shard.send(payload);
 	},
 	userAgent: 'Swallow/0.0.2',
 });
@@ -57,9 +57,7 @@ const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
 const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs
-	.readdirSync(eventsPath)
-	.filter((file) => file.endsWith('.js'));
+const eventFiles = fs.readdirSync(eventsPath).filter((file) => file.endsWith('.js'));
 
 for (const folder of commandFolders) {
 	const commandsPath = path.join(foldersPath, folder);
@@ -91,12 +89,12 @@ for (const file of eventFiles) {
 	}
 }
 
-global.Tsumi.on('ready', () => {
+globalThis.Tsumi.on('ready', () => {
 	log.info('Tsumi is ready', true, config.config.log.saveToFile);
 });
 
 client.on('raw', (data) => {
-	global.Tsumi.handleRaw(data);
+	globalThis.Tsumi.handleRaw(data);
 });
 
 client.login(config.bot.token);

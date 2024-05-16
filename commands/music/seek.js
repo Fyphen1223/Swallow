@@ -17,7 +17,7 @@ module.exports = {
 		await interaction.deferReply();
 
 		const guildId = interaction.guild.id;
-		if (!interaction.member.voice.channelId || !global.queue[guildId]) {
+		if (!interaction.member.voice.channelId || !globalThis.queue[guildId]) {
 			const noValidVCEmbed = createMessageEmbed(
 				getLocale(guilds[guildId].locale).vc.noVC,
 				interaction
@@ -26,9 +26,9 @@ module.exports = {
 			return;
 		}
 
-		if (global.queue[guildId].voiceChannel) {
+		if (globalThis.queue[guildId].voiceChannel) {
 			if (
-				global.queue[guildId].voiceChannel.id !==
+				globalThis.queue[guildId].voiceChannel.id !==
 				interaction.member.voice.channelId
 			) {
 				const differentVCEmbed = createMessageEmbed(
@@ -51,10 +51,10 @@ module.exports = {
 			await interaction.editReply({ embeds: [invalidTimeEmbed] });
 			return;
 		}
-		await global.queue[guildId].player.get();
+		await globalThis.queue[guildId].player.get();
 		if (
 			seconds >
-			global.queue[guildId].queue[global.queue[guildId].index].data.info.length
+			globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data.info.length
 		) {
 			const embed = createMessageEmbed(
 				getLocale(guilds[guildId].locale).vc.outOfLength,
@@ -63,7 +63,7 @@ module.exports = {
 			await interaction.editReply({ embeds: [embed] });
 			return;
 		}
-		global.queue[guildId].player.seek(seconds * 1000);
+		globalThis.queue[guildId].player.seek(seconds * 1000);
 		const embed = createMessageEmbed(
 			getLocale(guilds[guildId].locale).vc.seeked.replace('{time}', time),
 			interaction

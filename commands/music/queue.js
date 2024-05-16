@@ -33,7 +33,7 @@ module.exports = {
 		await interaction.deferReply();
 
 		const guildId = interaction.guild.id;
-		if (!interaction.member.voice.channelId || !global.queue[guildId]) {
+		if (!interaction.member.voice.channelId || !globalThis.queue[guildId]) {
 			const noValidVCEmbed = createMessageEmbed(
 				getLocale(guilds[guildId].locale).vc.noVC,
 				interaction
@@ -42,9 +42,9 @@ module.exports = {
 			return;
 		}
 
-		if (global.queue[guildId].voiceChannel) {
+		if (globalThis.queue[guildId].voiceChannel) {
 			if (
-				global.queue[guildId].voiceChannel.id !==
+				globalThis.queue[guildId].voiceChannel.id !==
 				interaction.member.voice.channelId
 			) {
 				const differentVCEmbed = createMessageEmbed(
@@ -61,7 +61,7 @@ module.exports = {
 			case 'show':
 				// Show the current queue
 				let content = '';
-				if (global.queue[guildId].queue.length === 0) {
+				if (globalThis.queue[guildId].queue.length === 0) {
 					const embed = new EmbedBuilder()
 						.setColor(config.config.color.info)
 						.setTitle('Queue')
@@ -69,11 +69,11 @@ module.exports = {
 					await interaction.editReply({ embeds: [embed] });
 				} else {
 					content += `📀 ${
-						global.queue[guildId].queue[global.queue[guildId].index].data.info
+						globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data.info
 							.title
 					}`;
 
-					global.queue[guildId].queue.forEach((item, i) => {
+					globalThis.queue[guildId].queue.forEach((item, i) => {
 						content += `\n${i + 1}: ${item.data.info.title}`;
 					});
 					const embed = new EmbedBuilder()
