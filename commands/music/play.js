@@ -28,7 +28,6 @@ module.exports = {
 		),
 	async autocomplete(interaction) {
 		const focusedValue = interaction.options.getFocused();
-		log.info(`${focusedValue} is focused.`, false, true);
 		if (searchResultCache[focusedValue]) {
 			const list = [];
 			for (
@@ -44,9 +43,11 @@ module.exports = {
 					value: choice,
 				}))
 			);
+			log.info(`${focusedValue} is focused.`, false, true);
 			return;
 		}
 
+		log.info(`${focusedValue} is focused.`, false, true);
 		const node = globalThis.Tsumi.getIdealNode();
 
 		const result = await node.loadTracks(focusedValue);
