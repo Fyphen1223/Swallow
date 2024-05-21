@@ -138,6 +138,8 @@ targz.compress(
 	}
 );
 
+fs.writeFileSync(logFilePath, new Date().toISOString() + '\n');
+
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 

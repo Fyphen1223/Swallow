@@ -29,17 +29,13 @@ const rest = new REST().setToken(config.bot.token);
 
 (async () => {
 	try {
-		console.log(
-			`Started refreshing ${commands.length} application (/) commands.`
-		);
+		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 		const data = await rest.put(
 			Routes.applicationCommands(config.bot.applicationId),
 			{ body: commands }
 		);
 
-		console.log(
-			`Successfully reloaded ${data.length} application (/) commands.`
-		);
+		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	} catch (error) {
 		console.error(error);
 	}
