@@ -10,7 +10,7 @@ dependencies:
     version: 14.15.2
   tsumi:
     specifier: github:Fyphen1223/TsumiLink
-    version: github.com/Fyphen1223/TsumiLink/5516d4d33b3014f83ff6e43d90f23c2b927b13f1
+    version: github.com/Fyphen1223/TsumiLink/3e31bd15466372cbf87971f5ffb861de4adaeedd
 
 devDependencies:
   '@eslint/js':
@@ -774,8 +774,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/Fyphen1223/TsumiLink/5516d4d33b3014f83ff6e43d90f23c2b927b13f1:
-    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5516d4d33b3014f83ff6e43d90f23c2b927b13f1}
+  github.com/Fyphen1223/TsumiLink/3e31bd15466372cbf87971f5ffb861de4adaeedd:
+    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/3e31bd15466372cbf87971f5ffb861de4adaeedd}
     name: tsumi
     version: 0.0.18
     dependencies:

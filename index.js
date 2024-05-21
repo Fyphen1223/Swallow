@@ -1,9 +1,43 @@
-const config = require('./config.json');
-
 const fs = require('node:fs');
+const log = require('./util/log.js');
+
+if (!fs.existsSync('./config.json')) {
+	log.warn(`No config file detected, creating...`, true, true);
+	fs.copyFileSync('./config.example.json', './config.json');
+	log.warn(`Config file created, please edit it and reboot.`, true, true);
+	process.exit(1);
+}
+
+try {
+	require('./config.json');
+} catch (err) {
+	log.error(
+		`Config file is broken, please try deleting it and rebooting to fix this issue. : ${err}`,
+		true,
+		true
+	);
+	process.exit(1);
+}
+
+const config = require('./config.json');
+if (!config.bot.token || !config.bot.applicationId) {
+	log.error(
+		`Config file is missing required fields, please edit it and reboot.`,
+		true,
+		true
+	);
+	log.error(
+		`Required fields: ${!config.bot.token ? `bot.token` : ``} ${
+			!config.bot.applicationId ? `bot.applicationId` : ``
+		}`,
+		true,
+		true
+	);
+	process.exit(1);
+}
+
 const path = require('node:path');
 
-const log = require('./util/log.js');
 const { playerQueue } = require('./util/queue.js');
 
 globalThis.queue = new playerQueue();
@@ -125,3 +159,18 @@ client.on('raw', (data) => {
 });
 
 client.login(config.bot.token);
+
+process.on('uncaughtException', (err) => {
+	if (err.name === 'AggregateError') {
+		log.error(
+			`Some of nodes you provided are not working, please check your config file.`,
+			true,
+			true
+		);
+		console.log(globalThis.Tsumi.Nodes);
+		if (Object.keys(globalThis.Tsumi.Nodes).length === 0) {
+			log.error(`No valid nodes available, exiting...`, true, true);
+			process.exit(1);
+		}
+	}
+});
