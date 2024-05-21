@@ -95,7 +95,7 @@ function createFolderIfNotExists(folderPath) {
 	}
 }
 
-const folders = ['./data', './log', './cache'];
+const folders = ['./data', './log'];
 folders.forEach((folderPath) => {
 	createFolderIfNotExists(folderPath);
 });
@@ -109,12 +109,7 @@ function createFileIfNotExists(filePath) {
 	}
 }
 
-const file = [
-	'./cache/search.json',
-	'./cache/searchResults.json',
-	'./data/guilds.json',
-	'./log/log.txt',
-];
+const file = ['./data/guilds.json', './log/log.txt'];
 file.forEach((filePath) => {
 	createFileIfNotExists(filePath);
 });

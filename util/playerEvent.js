@@ -10,7 +10,9 @@ const listenEvents = async (guildId) => {
 		globalThis.queue[guildId].suppressEnd = false;
 		const embed = await createMusicEmbed(guildId, 'Start');
 		if (globalThis.queue[guildId].panel) globalThis.queue[guildId].panel.delete();
-		globalThis.queue[guildId].panel = await globalThis.queue[guildId].textChannel.send({
+		globalThis.queue[guildId].panel = await globalThis.queue[
+			guildId
+		].textChannel.send({
 			embeds: [embed],
 			components: createButton(),
 		});
@@ -23,7 +25,15 @@ const listenEvents = async (guildId) => {
 		globalThis.queue[guildId].player.status = 'finished';
 		if (index >= globalThis.queue[guildId].queue.length) {
 			if (globalThis.queue[guildId].autoReplay) {
-				//Do replay things
+				globalThis.queue[guildId].index = 0;
+				globalThis.queue[guildId].player.play({
+					track: {
+						encoded:
+							globalThis.queue[guildId].queue[
+								globalThis.queue[guildId].index
+							].data.encoded,
+					},
+				});
 			} else if (globalThis.queue[guildId].autoPlay) {
 				//Do auto play stuff here
 			} else {
@@ -37,8 +47,8 @@ const listenEvents = async (guildId) => {
 			globalThis.queue[guildId].player.play({
 				track: {
 					encoded:
-						globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data
-							.encoded,
+						globalThis.queue[guildId].queue[globalThis.queue[guildId].index]
+							.data.encoded,
 				},
 			});
 		}

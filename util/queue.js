@@ -43,7 +43,7 @@ class queue extends EventEmitter {
 	voiceChannel = null;
 	volume = 100;
 	suppressEnd = false;
-	autoReplay = false;
+	autoReplay = true;
 	autoPlay = false;
 	previous = null;
 	index = 0;

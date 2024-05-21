@@ -20,7 +20,8 @@ function createMessageEmbed(content, interaction) {
 }
 
 async function createMusicEmbed(guildId, mode, type) {
-	const current = globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data.info;
+	const current =
+		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data.info;
 	let requester = '';
 	if (
 		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user ===
@@ -32,7 +33,6 @@ async function createMusicEmbed(guildId, mode, type) {
 			globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user.id
 		}>`;
 	}
-	await globalThis.queue[guildId].player.get();
 	const embed = new EmbedBuilder()
 		.setColor(config.config?.color?.info || '#000000')
 		.addFields(

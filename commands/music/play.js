@@ -1,13 +1,9 @@
 const config = require('../../config.json');
 
-const fs = require('node:fs');
-
 const { getLocale } = require('../../lang/lang.js');
 const { createMessageEmbed } = require('../../util/embed.js');
 
 const guilds = require('../../data/guilds.json');
-const cache = require('../../cache/search.json');
-const searchResultCache = require('../../cache/searchResults.json');
 
 const discord = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
@@ -28,36 +24,13 @@ module.exports = {
 		),
 	async autocomplete(interaction) {
 		const focusedValue = interaction.options.getFocused();
-		if (searchResultCache[focusedValue]) {
-			const list = [];
-			for (
-				let i = 0;
-				i < 5 && i < searchResultCache[focusedValue].data.length;
-				i++
-			) {
-				list.push(searchResultCache[focusedValue].data[i].info.title);
-			}
-			await interaction.respond(
-				list.map((choice) => ({
-					name: choice,
-					value: choice,
-				}))
-			);
-			log.info(`${focusedValue} is focused.`, false, true);
-			return;
-		}
-
 		log.info(`${focusedValue} is focused.`, false, true);
 		const node = globalThis.Tsumi.getIdealNode();
-
 		const result = await node.loadTracks(focusedValue);
-
 		switch (result.loadType) {
 			case 'empty': {
 				const searchResult = await node.loadTracks(`ytsearch:${focusedValue}`);
 				if (!searchResult?.data.length) return;
-
-				searchResultCache[focusedValue] = searchResult;
 				const list = [];
 				for (let i = 0; i < 5 && i < searchResult.data.length; i++) {
 					list.push(searchResult.data[i]);
@@ -68,43 +41,33 @@ module.exports = {
 						value: choice.info.title,
 					}))
 				);
-				searchResultCache[focusedValue].data = list;
-				fs.writeFileSync(
-					'./cache/searchResults.json',
-					JSON.stringify(searchResultCache)
-				);
 				break;
 			}
 			case 'track': {
 				const list = [result.data.info.title];
 				await interaction.respond(
-					list.map((choice) => ({ name: choice, value: result.encoded }))
+					list.map((choice) => ({ name: choice, value: choice }))
 				);
 				break;
 			}
 			case 'playlist': {
 				const list = [];
 				for (let i = 0; i < 25 && i < result.data.tracks.length; i++) {
-					list.push([
-						result.data.tracks[i].info.title,
-						result.data.tracks[i].info.title,
-					]);
+					list.push(result.data.tracks[i].info.title);
 				}
 
 				await interaction.respond(
-					list.map((choice) => ({ name: choice[0], value: choice[1] }))
+					list.map((choice) => ({ name: choice, value: choice }))
 				);
 
 				break;
 			}
 			case 'search': {
 				if (!result?.data.length) return;
-
 				const list = [];
 				for (let i = 0; i < 5 && i < result.data.length; i++) {
 					list.push(result.data[i].info.title, result.data[i].info.title);
 				}
-
 				await interaction.respond(
 					list.map((choice) => ({ name: choice, value: choice }))
 				);
@@ -187,7 +150,20 @@ module.exports = {
 
 		// クエリが無いがキューは空ではない
 		if (!query && !globalThis.queue[guildId].isEmpty()) {
-			// Start playing the queue
+			globalThis.queue[guildId].index = 0;
+			globalThis.queue[guildId].player.play({
+				track: {
+					encoded: globalThis.queue[guildId].queue[0],
+				},
+			});
+			interaction.reply({
+				embeds: [
+					createMessageEmbed(
+						getLocale(guilds[guildId].locale).vc.queueStarted,
+						interaction
+					),
+				],
+			});
 			return;
 		}
 
@@ -200,10 +176,6 @@ module.exports = {
 				break;
 			}
 			case 'empty': {
-				if (cache[query]) {
-					res = cache[query].res;
-					break;
-				}
 				const searchResult = await globalThis.queue[guildId].node.loadTracks(
 					`ytsearch:${query}`
 				);
@@ -212,10 +184,6 @@ module.exports = {
 					return;
 				}
 				res = searchResult.data.shift();
-				cache[query] = {
-					res,
-					time: new Date(),
-				};
 				break;
 			}
 			case 'playlist': {
@@ -263,9 +231,9 @@ module.exports = {
 		await globalThis.queue[guildId].player.play({
 			track: {
 				encoded:
-					globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data.encoded,
+					globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data
+						.encoded,
 			},
 		});
-		fs.writeFileSync('./cache/search.json', JSON.stringify(cache));
 	},
 };

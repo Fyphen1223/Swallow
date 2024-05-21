@@ -12,7 +12,8 @@
 		"noMoreToSkip": "🚫 - There are no more songs to skip.",
 		"skipped": "⏭️ - Skipped the current song.",
 		"noMoreToBack": "🚫 - There are no more songs to go back.",
-		"backed": "⏮️ - Went back to the previous song."
+		"backed": "⏮️ - Went back to the previous song.",
+		"queueStarted": "⏯ - Queue has started."
 	},
 	"ping": "Pong! Current Ping is {ping}ms."
 }
