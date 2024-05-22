@@ -191,7 +191,7 @@ module.exports = {
 					globalThis.queue[guildId].add(track, interaction.user);
 				});
 				const resultEmbed = new discord.EmbedBuilder()
-					.setColor(config.config.color.info)
+					.setColor(config.config?.color?.info || '#000000')
 					.setAuthor({
 						name: ` | 🔍 Added ${result.data.info.name} to the queue.`,
 						iconURL: interaction.user.avatarURL(),
@@ -199,7 +199,14 @@ module.exports = {
 
 				await interaction.reply({ embeds: [resultEmbed] });
 				if (globalThis.queue[guildId].player.status === 'playing') return;
-				return;
+				await globalThis.queue[guildId].player.play({
+					track: {
+						encoded:
+							globalThis.queue[guildId].queue[
+								globalThis.queue[guildId].index
+							].data.encoded,
+					},
+				});
 			}
 			case 'search': {
 				if (!result?.data.length) {
