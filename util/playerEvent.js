@@ -9,7 +9,11 @@ const listenEvents = async (guildId) => {
 		globalThis.queue[guildId].player.status = 'playing';
 		globalThis.queue[guildId].suppressEnd = false;
 		const embed = await createMusicEmbed(guildId, 'Start');
-		if (globalThis.queue[guildId].panel) globalThis.queue[guildId].panel.delete();
+		if (globalThis.queue[guildId].panel)
+			return await globalThis.queue[guildId].panel.edit({
+				embeds: [embed],
+				components: createButton(),
+			});
 		globalThis.queue[guildId].panel = await globalThis.queue[
 			guildId
 		].textChannel.send({

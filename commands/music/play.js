@@ -207,6 +207,7 @@ module.exports = {
 							].data.encoded,
 					},
 				});
+				return;
 			}
 			case 'search': {
 				if (!result?.data.length) {
