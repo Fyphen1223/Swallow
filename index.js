@@ -109,7 +109,7 @@ function createFileIfNotExists(filePath) {
 	}
 }
 
-const file = ['./data/guilds.json', './log/log.txt'];
+const file = ['./data/guilds.json', './log/log.txt', './data/premium.json'];
 file.forEach((filePath) => {
 	createFileIfNotExists(filePath);
 });
