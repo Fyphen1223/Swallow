@@ -42,7 +42,7 @@ const listenEvents = async (guildId) => {
 				//Do auto play stuff here
 			} else {
 				const embed = createMessageEmbed(
-					getLocale(guilds[guildId]).vc.queueEnded
+					getLocale(guilds[guildId].locale).vc.queueEnded
 				);
 				globalThis.queue[guildId].textChannel.send({ embeds: [embed] });
 			}
