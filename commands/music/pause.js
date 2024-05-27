@@ -1,24 +1,20 @@
 const config = require('../../config.json');
 
 const { getLocale } = require('../../lang/lang.js');
-const { createMessageEmbed } = require('../../util/embed.js');
-const { parseTimeToSeconds } = require('../../util/time.js');
+const {
+	createMessageEmbed,
+	createMusicEmbed,
+	createButton,
+} = require('../../util/embed.js');
 
 const guilds = require('../../data/guilds.json');
 
-const {
-	SlashCommandBuilder,
-	ButtonBuilder,
-	ButtonStyle,
-	ActionRowBuilder,
-	EmbedBuilder,
-} = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('pause').setDescription('Pause music'),
 	async execute(interaction) {
 		await interaction.deferReply();
-
 		const guildId = interaction.guild.id;
 		if (!interaction.member.voice.channelId || !globalThis.queue[guildId]) {
 			const noValidVCEmbed = createMessageEmbed(
@@ -43,36 +39,18 @@ module.exports = {
 			}
 		}
 
-		const time = interaction.options.getString('time');
-
-		const seconds = parseTimeToSeconds(time);
-		if (!seconds) {
-			const invalidTimeEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.invalidFormat,
-				interaction
-			);
-			await interaction.editReply({ embeds: [invalidTimeEmbed] });
-			return;
-		}
 		await globalThis.queue[guildId].player.get();
-		if (
-			seconds >
-			globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data.info
-				.length
-		) {
-			const embed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.outOfLength,
-				interaction
-			);
-			await interaction.editReply({ embeds: [embed] });
-			return;
-		}
-		globalThis.queue[guildId].player.seek(seconds * 1000);
+		await globalThis.queue[guildId].player.pause();
 		const embed = createMessageEmbed(
-			getLocale(guilds[guildId].locale).vc.seeked.replace('{time}', time),
+			getLocale(guilds[guildId].locale).vc.paused,
 			interaction
 		);
 		await interaction.editReply({ embeds: [embed] });
+		const panel = await createMusicEmbed(guildId);
+		await globalThis.queue[guildId].panel.edit({
+			embeds: [panel],
+			components: createButton('pause'),
+		});
 		return;
 	},
 };

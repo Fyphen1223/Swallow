@@ -81,13 +81,11 @@ module.exports = {
 	async execute(interaction) {
 		const guildId = interaction.guild.id;
 
-		//Add guild queue to the global queue and node
 		if (!globalThis.queue[interaction.guild.id]) {
 			globalThis.queue.add(interaction.guild.id);
 			globalThis.queue[guildId].node = globalThis.Tsumi.getIdealNode();
 		}
 
-		// Check if the user is in a voice channel
 		if (!interaction.member.voice.channelId) {
 			const noValidVCEmbed = createMessageEmbed(
 				getLocale(guilds[guildId].locale).vc.noVC,
@@ -113,7 +111,6 @@ module.exports = {
 
 		const query = interaction.options.getString('query');
 
-		//Join channel first
 		if (!globalThis.queue[guildId].voiceChannel) {
 			globalThis.queue[guildId].textChannel = interaction.channel;
 			globalThis.queue[guildId].voiceChannel = interaction.member.voice.channel;
@@ -130,7 +127,6 @@ module.exports = {
 			listenEvents(guildId);
 		}
 
-		//そもそもVCに未参加
 		if (!query && globalThis.queue[guildId].isEmpty()) {
 			const noQueryEmbed = createMessageEmbed(
 				getLocale(guilds[guildId].locale).vc.joined,
@@ -140,15 +136,6 @@ module.exports = {
 			return;
 		}
 
-		/*
-		1. そもそもVCに未参加
-		2. キューがないかつクエリがない
-		3. キューがあるかつクエリがない
-		4. キューがあるかつクエリがある
-		5. キューがないかつクエリがある
-		*/
-
-		// クエリが無いがキューは空ではない
 		if (!query && !globalThis.queue[guildId].isEmpty()) {
 			globalThis.queue[guildId].index = 0;
 			globalThis.queue[guildId].player.play({
