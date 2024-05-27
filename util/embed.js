@@ -33,7 +33,6 @@ async function createMusicEmbed(guildId, mode, type) {
 			globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user.id
 		}>`;
 	}
-	console.log(await globalThis.queue[guildId].player.get());
 	const embed = new EmbedBuilder()
 		.setColor(config.config?.color?.info || '#000000')
 		.addFields(
