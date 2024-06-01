@@ -1,8 +1,6 @@
 const { formatTime } = require('./time');
 
 const { createCanvas, loadImage, GlobalFonts } = require('@napi-rs/canvas');
-GlobalFonts.registerFromPath('./assets/fonts/FiraCode-Light.ttf', 'FiraCode');
-GlobalFonts.registerFromPath('./assets/fonts/Nunito.ttf', 'Nunito');
 GlobalFonts.registerFromPath('./assets/fonts/Jakarta.ttf', 'Jakarta');
 GlobalFonts.registerFromPath('./assets/fonts/NotoSansJP.ttf', 'NotoSansJP');
 const { cropImage } = require('cropify');
@@ -18,19 +16,25 @@ async function generateMusicCard(current, guildId) {
 	const thumbnailImage = await cropImage({
 		imagePath: current.artworkUrl,
 		width: 160 * 2,
-		height: 160 * 2,
+		height: 220 * 2,
 		cropCenter: true,
 		borderRadius: 10,
 	});
 	const image = await loadImage(thumbnailImage);
 	ctx.drawImage(image, 10 * 2, 10 * 2);
 
-	ctx.font = '50px "Jakarta", "FiraCode", "NotoSansJP", "Arial"';
+	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillStyle = '#ffffff';
+	//Title
 	ctx.fillText(formatTitle(current.title) || 'Title', 200 * 2, 45 * 2);
+	//Author
 	ctx.fillText(formatAuthor(current.author) || 'Author', 240 * 2, 90 * 2);
 	ctx.fillStyle = '#26aed4';
+	//by
 	ctx.fillText('by', 200 * 2, 90 * 2);
+	//Requested by
+	const requester =
+		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user.displayName;
 
 	let ratio;
 	if (queue[guildId].player.position == 0) {
@@ -39,20 +43,20 @@ async function generateMusicCard(current, guildId) {
 		ratio = queue[guildId].player.position / current.length / 1000;
 	}
 
+	//Progress Bar
 	ctx.fillStyle = '#646464';
 	ctx.fillRect(100, 575, canvas.width - 200, 10);
-	console.log(880 * ratio);
 	ctx.fillStyle = '#26aed4';
 	ctx.fillRect(100, 575, 880 * ratio * 1000, 10);
-	//1080
-	//880
-	ctx.fillStyle = '#ffffff';
-	ctx.font = '35px "Jakarta", "FiraCode", "NotoSansJP", "Arial"';
-	ctx.fillText(formatTime(globalThis.queue[guildId].player.position / 1000), 100, 550);
 
+	//Progress bar time
+	ctx.fillStyle = '#ffffff';
+	ctx.font = '35px "Jakarta", "NotoSans"';
+	ctx.fillText(formatTime(globalThis.queue[guildId].player.position / 1000), 100, 550);
 	ctx.fillText(formatTime(current.length / 1000), canvas.width - 220, 550);
 
-	ctx.font = '70px "Jakarta", "FiraCode", "NotoSansJP", "Arial"';
+	//Position
+	ctx.font = '70px "Jakarta", "NotoSans"';
 	ctx.fillText(
 		`${globalThis.queue[guildId].index + 1} / ${
 			globalThis.queue[guildId].queue.length
@@ -76,6 +80,13 @@ function formatTitle(string) {
 function formatAuthor(string) {
 	if (string.length > 13) {
 		return string.slice(0, 13) + '...';
+	}
+	return string;
+}
+
+function formatRequester(string) {
+	if (string.length > 8) {
+		return string.slice(0, 8) + '...';
 	}
 	return string;
 }

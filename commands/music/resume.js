@@ -36,7 +36,6 @@ module.exports = {
 				return;
 			}
 		}
-		console.log(await globalThis.queue[guildId].player.get());
 		await globalThis.queue[guildId].player.resume();
 		const embed = createMessageEmbed(
 			getLocale(guilds[guildId].locale).vc.resumed,
