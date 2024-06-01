@@ -14,7 +14,10 @@
     "eslint": "^9.3.0"
   },
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.52",
+    "cropify": "^1.0.9",
     "discord.js": "^14.15.2",
+    "musicard": "^2.0.5",
     "targz": "^1.0.1",
     "tsumi": "github:Fyphen1223/TsumiLink"
   }

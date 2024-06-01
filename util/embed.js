@@ -1,12 +1,14 @@
 const config = require('../config.json');
 
 const { formatTime } = require('./time.js');
+const { generateMusicCard } = require('./card.js');
 
 const {
 	EmbedBuilder,
 	ButtonBuilder,
 	ButtonStyle,
 	ActionRowBuilder,
+	AttachmentBuilder,
 } = require('discord.js');
 
 function createMessageEmbed(content, interaction) {
@@ -33,6 +35,18 @@ async function createMusicEmbed(guildId, mode, type) {
 			globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user.id
 		}>`;
 	}
+
+	const position = globalThis.queue[guildId].player.position;
+	const length = current.length;
+	let ratio = 0;
+	if (position == 0) {
+		ratio = 1;
+	} else {
+		ratio = (position / length) * 100;
+	}
+	const file = new AttachmentBuilder(
+		await generateMusicCard(current, guildId)
+	);
 	const embed = new EmbedBuilder()
 		.setColor(config.config?.color?.info || '#000000')
 		.addFields(
@@ -71,8 +85,8 @@ async function createMusicEmbed(guildId, mode, type) {
 				inline: true,
 			}
 		)
-		.setImage(current.artworkUrl);
-	return embed;
+		.setImage('attachment://file.jpg');
+	return { embed, file };
 }
 
 function createButton(style) {
