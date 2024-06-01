@@ -48,8 +48,9 @@ module.exports = {
 		await interaction.editReply({ embeds: [embed] });
 		const panel = await createMusicEmbed(guildId);
 		await globalThis.queue[guildId].panel.edit({
-			embeds: [panel],
+			embeds: [panel.embed],
 			components: createButton('pause'),
+			files: [panel.file],
 		});
 		return;
 	},

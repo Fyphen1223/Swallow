@@ -32,14 +32,20 @@ async function generateMusicCard(current, guildId) {
 	ctx.fillStyle = '#26aed4';
 	ctx.fillText('by', 200 * 2, 90 * 2);
 
-    
+	let ratio;
+	if (queue[guildId].player.position == 0) {
+		ratio = 0;
+	} else {
+		ratio = queue[guildId].player.position / current.length / 1000;
+	}
 
 	ctx.fillStyle = '#646464';
 	ctx.fillRect(100, 575, canvas.width - 200, 10);
-
+	console.log(880 * ratio);
 	ctx.fillStyle = '#26aed4';
-	ctx.fillRect(100, 575, 200, 10);
-
+	ctx.fillRect(100, 575, 880 * ratio * 1000, 10);
+	//1080
+	//880
 	ctx.fillStyle = '#ffffff';
 	ctx.font = '35px "Jakarta", "FiraCode", "NotoSansJP", "Arial"';
 	ctx.fillText(formatTime(globalThis.queue[guildId].player.position / 1000), 100, 550);

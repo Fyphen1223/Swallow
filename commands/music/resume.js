@@ -36,8 +36,7 @@ module.exports = {
 				return;
 			}
 		}
-
-		await globalThis.queue[guildId].player.get();
+		console.log(await globalThis.queue[guildId].player.get());
 		await globalThis.queue[guildId].player.resume();
 		const embed = createMessageEmbed(
 			getLocale(guilds[guildId].locale).vc.resumed,
@@ -46,8 +45,9 @@ module.exports = {
 		await interaction.editReply({ embeds: [embed] });
 		const panel = await createMusicEmbed(guildId);
 		await globalThis.queue[guildId].panel.edit({
-			embeds: [panel],
+			embeds: [panel.embed],
 			components: createButton('resume'),
+			files: [panel.file],
 		});
 		return;
 	},
