@@ -22,11 +22,12 @@ async function generateMusicCard(current, guildId) {
 	});
 	const image = await loadImage(thumbnailImage);
 	ctx.drawImage(image, 10 * 2, 10 * 2);
+
+	//Title
 	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillStyle = '#ffffff';
-	//Title
-
 	ctx.fillText(formatTitle(current.title, canvas) || 'Title', 200 * 2, 45 * 2);
+
 	//Author
 	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillText(formatAuthor(current.author, canvas) || 'Author', 240 * 2, 90 * 2);
