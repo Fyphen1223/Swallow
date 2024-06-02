@@ -14,9 +14,6 @@ dependencies:
   discord.js:
     specifier: ^14.15.2
     version: 14.15.2
-  musicard:
-    specifier: ^2.0.5
-    version: 2.0.5
   targz:
     specifier: ^1.0.1
     version: 1.0.1
@@ -773,13 +770,6 @@ packages:
   /ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
-
-  /musicard@2.0.5:
-    resolution: {integrity: sha512-XaK2OsKZ/Jc+9F1Z2S2S/FDEk0n+/s0ZnBt4CvwLB4vNl6MudXZMJ/9HQ5bdfLrNn7BT+mRtYCETIKu2aMHnEQ==}
-    dependencies:
-      '@napi-rs/canvas': 0.1.52
-      cropify: 1.0.9
-    dev: false
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
