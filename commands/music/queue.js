@@ -69,8 +69,8 @@ module.exports = {
 					await interaction.editReply({ embeds: [embed] });
 				} else {
 					content += `📀 ${
-						globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data.info
-							.title
+						globalThis.queue[guildId].queue[globalThis.queue[guildId].index]
+							.data.info.title
 					}`;
 
 					globalThis.queue[guildId].queue.forEach((item, i) => {

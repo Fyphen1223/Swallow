@@ -22,25 +22,25 @@ async function generateMusicCard(current, guildId) {
 	});
 	const image = await loadImage(thumbnailImage);
 	ctx.drawImage(image, 10 * 2, 10 * 2);
-
 	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillStyle = '#ffffff';
 	//Title
-	ctx.fillText(formatTitle(current.title) || 'Title', 200 * 2, 45 * 2);
+
+	ctx.fillText(formatTitle(current.title, canvas) || 'Title', 200 * 2, 45 * 2);
 	//Author
-	ctx.fillText(formatAuthor(current.author) || 'Author', 240 * 2, 90 * 2);
+	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
+	ctx.fillText(formatAuthor(current.author, canvas) || 'Author', 240 * 2, 90 * 2);
 	ctx.fillStyle = '#26aed4';
 	//by
+	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillText('by', 200 * 2, 90 * 2);
 	//Requested by
-
 	const requester =
 		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user;
-
 	ctx.fillStyle = '#ffffff';
+	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillText(formatRequester(requester.displayName), 500, 290);
 	ctx.fillText(`${globalThis.queue[guildId].volume}%`, 400, 400);
-
 	const requesterImage = await cropImage({
 		imagePath: `https://cdn.discordapp.com/avatars/${requester.id}/${requester.avatar}.webp`,
 		width: 100,
@@ -56,7 +56,7 @@ async function generateMusicCard(current, guildId) {
 	} else {
 		ratio = queue[guildId].player.position / current.length;
 	}
-
+	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillStyle = '#646464';
 	ctx.fillRect(100, 575, canvas.width - 200, 10);
 	ctx.fillStyle = '#26aed4';
@@ -66,9 +66,12 @@ async function generateMusicCard(current, guildId) {
 	//Progress bar time
 	ctx.fillStyle = '#ffffff';
 	ctx.font = '35px "Jakarta", "NotoSans"';
-	ctx.fillText(formatTime(globalThis.queue[guildId].player.position / 1000), 100, 550);
+	ctx.fillText(
+		formatTime(Math.ceil(globalThis.queue[guildId].player.position / 1000)),
+		100,
+		550
+	);
 	ctx.fillText(formatTime(current.length / 1000), canvas.width - 220, 550);
-
 	//Position
 	ctx.font = '70px "Jakarta", "NotoSans"';
 	ctx.fillText(
@@ -78,23 +81,42 @@ async function generateMusicCard(current, guildId) {
 		canvas.width - 200,
 		300
 	);
-
+	// ボタンの背景を描画
+	ctx.fillStyle = '#e94560'; // ボタンの背景色を設定
+	ctx.fillRect(550, 360, 150, 50); // ボタンの背景の位置とサイズを設定
+	// ボタンのテキストを描画
+	ctx.font = '30px "Jakarta", "NotoSans"'; // フォントの大きさとフォントファミリーを設定
+	ctx.fillStyle = 'white'; // テキストの色を設定
+	ctx.fillText('ON AIR', 555, 395); // テキストの位置を設定
 	const buffer = canvas.toBuffer('image/png');
-
 	return buffer;
 }
 
-function formatTitle(string) {
-	if (string.length > 15) {
-		return string.slice(0, 15) + '...';
+function formatTitle(string, canvas) {
+	const ctx = canvas.getContext('2d');
+	let textWidth = ctx.measureText(string).width;
+	if (textWidth + 400 < 1210) {
+		return string;
 	}
+	do {
+		string = string.slice(0, -1);
+		textWidth = ctx.measureText(string).width;
+	} while (textWidth + 400 >= 1210);
+	string += '...';
 	return string;
 }
 
-function formatAuthor(string) {
-	if (string.length > 13) {
-		return string.slice(0, 13) + '...';
+function formatAuthor(string, canvas) {
+	const ctx = canvas.getContext('2d');
+	let textWidth = ctx.measureText(string).width;
+	if (textWidth + 700 < 1210) {
+		return string;
 	}
+	do {
+		string = string.slice(0, -1);
+		textWidth = ctx.measureText(string).width;
+	} while (textWidth + 700 >= 1210);
+	string += '...';
 	return string;
 }
 
@@ -106,21 +128,3 @@ function formatRequester(string) {
 }
 
 module.exports = { generateMusicCard };
-
-/*
-
-	return await Dynamic({
-		thumbnailImage:
-			options?.thumbnailImage ||
-			'https://www.sunloft.co.jp/dx/wp-content/uploads/2021/11/91d2b179414b6226db466fc3a8491c57.jpg',
-		backgroundColor: '#070707',
-		progress: options?.position || 0,
-		progressColor: '#26aed4',
-		progressBarColor: '#2458ab',
-		name: options?.title || 'Unknown',
-		nameColor: '#a4e3f5',
-		author: options?.author || 'Unknown',
-		authorColor: '#696969',
-	});
-
-*/

@@ -1,6 +1,5 @@
 const config = require('../config.json');
 
-const { formatTime } = require('./time.js');
 const { generateMusicCard } = require('./card.js');
 
 const {
@@ -35,7 +34,6 @@ async function createMusicEmbed(guildId, mode, type) {
 			globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user.id
 		}>`;
 	}
-
 	const position = globalThis.queue[guildId].player.position;
 	const length = current.length;
 	let ratio = 0;

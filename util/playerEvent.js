@@ -1,4 +1,3 @@
-const config = require('../config.json');
 const { getLocale } = require('../lang/lang.js');
 const guilds = require('../data/guilds.json');
 
@@ -8,20 +7,27 @@ const listenEvents = async (guildId) => {
 	globalThis.queue[guildId].player.on('start', async () => {
 		globalThis.queue[guildId].player.status = 'playing';
 		globalThis.queue[guildId].suppressEnd = false;
+		await globalThis.queue[guildId].player.get();
 		const embed = await createMusicEmbed(guildId, 'Start');
-		if (globalThis.queue[guildId].panel)
-			return await globalThis.queue[guildId].panel.edit({
+		if (globalThis.queue[guildId].panel) {
+			await globalThis.queue[guildId].panel.delete();
+			globalThis.queue[guildId].panel = await globalThis.queue[
+				guildId
+			].textChannel.send({
 				embeds: [embed.embed],
 				components: createButton(),
 				files: [embed.file],
 			});
-		globalThis.queue[guildId].panel = await globalThis.queue[
-			guildId
-		].textChannel.send({
-			embeds: [embed.embed],
-			components: createButton(),
-			files: [embed.file],
-		});
+			return;
+		} else {
+			globalThis.queue[guildId].panel = await globalThis.queue[
+				guildId
+			].textChannel.send({
+				embeds: [embed.embed],
+				components: createButton(),
+				files: [embed.file],
+			});
+		}
 	});
 	globalThis.queue[guildId].player.on('end', async (data) => {
 		if (queue[guildId].suppressEnd) return;

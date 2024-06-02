@@ -43,7 +43,6 @@ module.exports = {
 		const time = interaction.options.getString('time');
 
 		const seconds = parseTimeToSeconds(time);
-		console.log(seconds);
 		if (!seconds) {
 			const invalidTimeEmbed = createMessageEmbed(
 				getLocale(guilds[guildId].locale).vc.invalidFormat,
@@ -65,7 +64,7 @@ module.exports = {
 			await interaction.editReply({ embeds: [embed] });
 			return;
 		}
-		globalThis.queue[guildId].player.seek(seconds * 1000);
+		await globalThis.queue[guildId].player.seek(seconds * 1000);
 		const embed = createMessageEmbed(
 			getLocale(guilds[guildId].locale).vc.seeked.replace('{time}', time),
 			interaction
