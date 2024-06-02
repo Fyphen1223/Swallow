@@ -33,21 +33,35 @@ async function generateMusicCard(current, guildId) {
 	//by
 	ctx.fillText('by', 200 * 2, 90 * 2);
 	//Requested by
-	const requester =
-		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user.displayName;
 
+	const requester =
+		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user;
+
+	ctx.fillStyle = '#ffffff';
+	ctx.fillText(formatRequester(requester.displayName), 500, 290);
+	ctx.fillText(`${globalThis.queue[guildId].volume}%`, 400, 400);
+
+	const requesterImage = await cropImage({
+		imagePath: `https://cdn.discordapp.com/avatars/${requester.id}/${requester.avatar}.webp`,
+		width: 100,
+		height: 100,
+		cropCenter: true,
+		borderRadius: 50,
+	});
+	const requesterImageLoad = await loadImage(requesterImage);
+	ctx.drawImage(requesterImageLoad, 380, 225);
 	let ratio;
 	if (queue[guildId].player.position == 0) {
 		ratio = 0;
 	} else {
-		ratio = queue[guildId].player.position / current.length / 1000;
+		ratio = queue[guildId].player.position / current.length;
 	}
 
-	//Progress Bar
 	ctx.fillStyle = '#646464';
 	ctx.fillRect(100, 575, canvas.width - 200, 10);
 	ctx.fillStyle = '#26aed4';
-	ctx.fillRect(100, 575, 880 * ratio * 1000, 10);
+	ctx.fillRect(100, 575, 10.8 * (ratio * 100), 10);
+	ctx.fillRect(0, 465, canvas.width, 10);
 
 	//Progress bar time
 	ctx.fillStyle = '#ffffff';

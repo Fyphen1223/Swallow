@@ -44,47 +44,9 @@ async function createMusicEmbed(guildId, mode, type) {
 	} else {
 		ratio = (position / length) * 100;
 	}
-	const file = new AttachmentBuilder(
-		await generateMusicCard(current, guildId)
-	);
+	const file = new AttachmentBuilder(await generateMusicCard(current, guildId));
 	const embed = new EmbedBuilder()
 		.setColor(config.config?.color?.info || '#000000')
-		.addFields(
-			{
-				name: 'Author',
-				value: current.author,
-				inline: true,
-			},
-			{
-				name: 'Title',
-				value: current.title,
-				inline: true,
-			},
-			{
-				name: 'Duration',
-				value: `${formatTime(
-					Math.floor(globalThis.queue[guildId].player.position / 1000)
-				)}/${formatTime(Math.floor(current.length / 1000))}`,
-				inline: true,
-			},
-			{
-				name: 'Requested by',
-				value: requester,
-				inline: true,
-			},
-			{
-				name: 'Volume',
-				value: `${globalThis.queue[guildId].volume}%`,
-				inline: true,
-			},
-			{
-				name: 'Position',
-				value: `${globalThis.queue[guildId].index + 1}/${
-					globalThis.queue[guildId].queue.length
-				}`,
-				inline: true,
-			}
-		)
 		.setImage('attachment://file.jpg');
 	return { embed, file };
 }
