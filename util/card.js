@@ -83,11 +83,11 @@ async function generateMusicCard(current, guildId) {
 	);
 	// ボタンの背景を描画
 	ctx.fillStyle = '#e94560'; // ボタンの背景色を設定
-	ctx.fillRect(550, 360, 150, 50); // ボタンの背景の位置とサイズを設定
+	ctx.fillRect(550, 360, 200, 50); // ボタンの背景の位置とサイズを設定
 	// ボタンのテキストを描画
 	ctx.font = '30px "Jakarta", "NotoSans"'; // フォントの大きさとフォントファミリーを設定
 	ctx.fillStyle = 'white'; // テキストの色を設定
-	ctx.fillText('ON AIR', 555, 395); // テキストの位置を設定
+	ctx.fillText(formatSource(current.sourceName), 555, 395); // テキストの位置を設定
 	const buffer = canvas.toBuffer('image/png');
 	return buffer;
 }
@@ -125,6 +125,47 @@ function formatRequester(string) {
 		return string.slice(0, 8) + '...';
 	}
 	return string;
+}
+
+function formatSource(string) {
+	switch (string) {
+		case 'youtube':
+			return 'YouTube';
+		case 'soundcloud':
+			return 'SoundCloud';
+		case 'bandcamp':
+			return 'Bandcamp';
+		case 'spotify':
+			return 'Spotify';
+		case 'apple':
+			return 'Apple Music';
+		case 'twitch':
+			return 'Twitch';
+		case 'vimeo':
+			return 'Vimeo';
+		case 'facebook':
+			return 'Facebook';
+		case 'twitter':
+			return 'Twitter';
+		case 'instagram':
+			return 'Instagram';
+		case 'mixer':
+			return 'Mixer';
+		case 'picarto':
+			return 'Picarto';
+		case 'bilibili':
+			return 'Bilibili';
+		case 'niconico':
+			return 'Niconico';
+		case 'openrec':
+			return 'OpenRec';
+		case 'tiktok':
+			return 'TikTok';
+		case 'local':
+			return 'Local';
+		default:
+			return string;
+	}
 }
 
 module.exports = { generateMusicCard };
