@@ -1,4 +1,4 @@
-const { formatTime } = require('./time');
+const { formatTime } = require('./time.js');
 
 const { createCanvas, loadImage, GlobalFonts } = require('@napi-rs/canvas');
 GlobalFonts.registerFromPath('./assets/fonts/Jakarta.ttf', 'Jakarta');
