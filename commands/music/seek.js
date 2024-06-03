@@ -13,6 +13,9 @@ module.exports = {
 		.addStringOption((subcommand) =>
 			subcommand.setName('time').setDescription('Time to seek on').setRequired(true)
 		),
+	info: {
+		premium: false,
+	},
 	async execute(interaction) {
 		await interaction.deferReply();
 

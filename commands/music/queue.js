@@ -26,6 +26,9 @@ module.exports = {
 						.setRequired(true)
 				)
 		),
+	info: {
+		premium: false,
+	},
 	async autocomplete(interaction) {
 		// handle the autocompletion response (more on how to do that below)
 	},

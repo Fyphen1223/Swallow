@@ -6,9 +6,10 @@ const guilds = require('../../data/guilds.json');
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('ping')
-		.setDescription('Replies with Pong!'),
+	data: new SlashCommandBuilder().setName('ping').setDescription('Replies with Pong!'),
+	info: {
+		premium: false,
+	},
 	async execute(interaction) {
 		await interaction.deferReply();
 		const embed = createMessageEmbed(

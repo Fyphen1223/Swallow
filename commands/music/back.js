@@ -7,6 +7,9 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('back').setDescription('Play previous music'),
+	info: {
+		premium: false,
+	},
 	async execute(interaction) {
 		await interaction.deferReply();
 

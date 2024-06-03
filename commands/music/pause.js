@@ -13,6 +13,9 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('pause').setDescription('Pause music'),
+	info: {
+		premium: false,
+	},
 	async execute(interaction) {
 		await interaction.deferReply();
 		const guildId = interaction.guild.id;
