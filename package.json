@@ -1,23 +1,24 @@
 {
-  "name": "Swallow",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@eslint/js": "^9.4.0",
-    "eslint": "^9.4.0"
-  },
-  "dependencies": {
-    "@napi-rs/canvas": "^0.1.52",
-    "cropify": "^1.0.9",
-    "discord.js": "^14.15.3",
-    "targz": "^1.0.1",
-    "tsumi": "github:Fyphen1223/TsumiLink"
-  }
+	"name": "Swallow",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"bot": "node index.js",
+		"bun": "bun run index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@eslint/js": "^9.4.0",
+		"eslint": "^9.4.0"
+	},
+	"dependencies": {
+		"@napi-rs/canvas": "^0.1.52",
+		"cropify": "^1.0.9",
+		"discord.js": "^14.15.3",
+		"targz": "^1.0.1",
+		"tsumi": "github:Fyphen1223/TsumiLink"
+	}
 }
