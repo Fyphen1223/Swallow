@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"bot": "node index.js",
-		"bun": "bun run index.js"
+		"bun": "bun run index.js",
+		"clearlog": "node ./util/clearlog.js"
 	},
 	"keywords": [],
 	"author": "",
