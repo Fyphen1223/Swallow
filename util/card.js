@@ -82,13 +82,15 @@ async function generateMusicCard(current, guildId) {
 		canvas.width - 200,
 		300
 	);
-	// ボタンの背景を描画
-	ctx.fillStyle = '#e94560'; // ボタンの背景色を設定
-	ctx.fillRect(550, 360, 200, 50); // ボタンの背景の位置とサイズを設定
-	// ボタンのテキストを描画
-	ctx.font = '30px "Jakarta", "NotoSans"'; // フォントの大きさとフォントファミリーを設定
-	ctx.fillStyle = 'white'; // テキストの色を設定
-	ctx.fillText(formatSource(current.sourceName), 555, 395); // テキストの位置を設定
+
+	// Draw button background
+	ctx.fillStyle = '#e94560';
+	ctx.fillRect(550, 360, 200, 50);
+	// Draw button text
+	ctx.font = '30px "Jakarta", "NotoSans"';
+	ctx.fillStyle = 'white';
+	ctx.fillText(formatSource(current.sourceName), 555, 395);
+
 	const buffer = canvas.toBuffer('image/png');
 	return buffer;
 }
