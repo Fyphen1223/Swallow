@@ -11,9 +11,7 @@ module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
 		if (interaction.isChatInputCommand()) {
-			const command = interaction.client.commands.get(
-				interaction.commandName
-			);
+			const command = interaction.client.commands.get(interaction.commandName);
 
 			if (!command) {
 				console.error(
@@ -27,10 +25,7 @@ module.exports = {
 					locale: 'en',
 					config: {},
 				};
-				fs.writeFileSync(
-					'./data/guilds.json',
-					JSON.stringify(guilds, null, 4)
-				);
+				fs.writeFileSync('./data/guilds.json', JSON.stringify(guilds, null, 4));
 				log.info(
 					`Guild ${interaction.guildId} added to guilds.json`,
 					config.config.log.debug,
@@ -40,38 +35,36 @@ module.exports = {
 
 			try {
 				await command.execute(interaction);
-			} catch (error) {
-				console.error(error);
+			} catch (err) {
+				log.error(err.stack);
 				if (interaction.replied || interaction.deferred) {
 					await interaction.followUp({
-						content:
-							'There was an error while executing this command!',
+						content: 'There was an error while executing this command!',
 						ephemeral: true,
 					});
 				} else {
 					await interaction.reply({
-						content:
-							'There was an error while executing this command!',
+						content: 'There was an error while executing this command!',
 						ephemeral: true,
 					});
 				}
 			}
 		} else if (interaction.isAutocomplete()) {
-			const command = interaction.client.commands.get(
-				interaction.commandName
-			);
+			const command = interaction.client.commands.get(interaction.commandName);
 
 			if (!command) {
-				console.error(
-					`No command matching ${interaction.commandName} was found.`
+				log.error(
+					`No command matching ${interaction.commandName} was found.`,
+					true,
+					true
 				);
 				return;
 			}
 
 			try {
 				await command.autocomplete(interaction);
-			} catch (error) {
-				console.error(error);
+			} catch (err) {
+				log.error(err.stack, true, true);
 			}
 		}
 	},
