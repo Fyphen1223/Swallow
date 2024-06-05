@@ -89,5 +89,5 @@ Lastly, if you still have a problem, please create an issue and let me know!
 <h1 align="center">Showcase</h1>
 
 Music card example:
-<img src="https://media.discordapp.net/attachments/1078088507173646368/1247701616740663337/file.jpg?ex=6660fc2e&amp;is=665faaae&amp;hm=ed80e100e6e86c78cb3741b56b5a37550f9ec72b94e86acd0a9b1b6ae029376c&amp;=&amp;format=webp&amp;width=1440&amp;height=675" alt="画像"/>![image](https://github.com/Fyphen1223/Swallow/assets/89511960/042d6aaf-24cb-44cc-8d91-41addcf25f17)
+![image](https://github.com/Fyphen1223/Swallow/assets/89511960/042d6aaf-24cb-44cc-8d91-41addcf25f17)
 
