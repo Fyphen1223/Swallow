@@ -1,9 +1,12 @@
+const config = require('../config.json');
+
 const { formatTime } = require('./time.js');
 
 const { createCanvas, loadImage, GlobalFonts } = require('@napi-rs/canvas');
 GlobalFonts.registerFromPath('./assets/fonts/Jakarta.ttf', 'Jakarta');
 GlobalFonts.registerFromPath('./assets/fonts/NotoSansJP.ttf', 'NotoSansJP');
 const { cropImage } = require('cropify');
+const colorStealer = require('colorthief');
 
 async function generateMusicCard(current, guildId) {
 	const canvas = createCanvas(640 * 2, 600);
@@ -13,6 +16,16 @@ async function generateMusicCard(current, guildId) {
 	gradient.addColorStop(1, '#16213e');
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+	if (config.config.embed.decorate) {
+		colorStealer.getColor(current.artworkUrl).then((color) => {
+			ctx.fillStyle = rgbToHex(color);
+			ctx.fillRect(10, 10, 320, 440);
+		});
+	}
+
+	//320 440
+
 	const thumbnailImage = await cropImage({
 		imagePath: current.artworkUrl,
 		width: 160 * 2,
@@ -169,6 +182,18 @@ function formatSource(string) {
 		default:
 			return string;
 	}
+}
+
+function rgbToHex(rgb) {
+	return (
+		'#' +
+		rgb
+			.map((x) => {
+				const hex = x.toString(16);
+				return hex.length === 1 ? '0' + hex : hex;
+			})
+			.join('')
+	);
 }
 
 module.exports = { generateMusicCard };

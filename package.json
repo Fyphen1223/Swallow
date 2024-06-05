@@ -17,6 +17,7 @@
 	},
 	"dependencies": {
 		"@napi-rs/canvas": "^0.1.52",
+		"colorthief": "^2.4.0",
 		"cropify": "^1.0.9",
 		"discord.js": "^14.15.3",
 		"targz": "^1.0.1",
