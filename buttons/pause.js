@@ -55,12 +55,12 @@ module.exports = {
 			return;
 		}
 
-		await globalThis.queue[guildId].player.get();
 		await globalThis.queue[guildId].player.pause();
 		const embed = createMessageEmbed(
 			getLocale(guilds[guildId].locale).vc.paused,
 			interaction
 		);
+		await globalThis.queue[guildId].player.get();
 		await interaction.reply({ embeds: [embed] });
 		const panel = await createMusicEmbed(guildId);
 		await globalThis.queue[guildId].panel.edit({

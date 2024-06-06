@@ -40,8 +40,8 @@ module.exports = {
 			}
 		}
 
-		await globalThis.queue[guildId].player.get();
 		await globalThis.queue[guildId].player.pause();
+		await globalThis.queue[guildId].player.get();
 		const embed = createMessageEmbed(
 			getLocale(guilds[guildId].locale).vc.paused,
 			interaction
