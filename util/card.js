@@ -24,8 +24,6 @@ async function generateMusicCard(current, guildId) {
 		});
 	}
 
-	//320 440
-
 	const thumbnailImage = await cropImage({
 		imagePath: current.artworkUrl,
 		width: 160 * 2,

@@ -25,6 +25,11 @@ module.exports = {
 						.setDescription('The name of the song to remove')
 						.setRequired(true)
 				)
+		)
+		.addSubcommand((subcommand) =>
+			subcommand
+				.setName('artwork')
+				.setDescription('Show the artwork of the current song')
 		),
 	info: {
 		premium: false,
