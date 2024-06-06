@@ -7,7 +7,6 @@ const listenEvents = async (guildId) => {
 	globalThis.queue[guildId].player.on('start', async () => {
 		globalThis.queue[guildId].player.status = 'playing';
 		globalThis.queue[guildId].suppressEnd = false;
-		console.log('start');
 		await globalThis.queue[guildId].player.get();
 		const embed = await createMusicEmbed(guildId, 'Start');
 		if (globalThis.queue[guildId].panel) {
