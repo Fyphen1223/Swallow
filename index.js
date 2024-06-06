@@ -88,6 +88,7 @@ globalThis.Tsumi = new TsumiInstance({
 });
 
 client.commands = new discord.Collection();
+client.buttons = new discord.Collection();
 
 function createFolderIfNotExists(folderPath) {
 	if (!fs.existsSync(folderPath)) {
@@ -137,10 +138,6 @@ fs.writeFileSync(logFilePath, new Date().toISOString() + '\n');
 
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
-
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter((file) => file.endsWith('.js'));
-
 for (const folder of commandFolders) {
 	const commandsPath = path.join(foldersPath, folder);
 	const commandFiles = fs
@@ -161,6 +158,8 @@ for (const folder of commandFolders) {
 	}
 }
 
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter((file) => file.endsWith('.js'));
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
 	const event = require(filePath);
@@ -168,6 +167,22 @@ for (const file of eventFiles) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
 		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
+
+const buttonsPath = path.join(__dirname, 'buttons');
+const buttonFiles = fs.readdirSync(buttonsPath).filter((file) => file.endsWith('.js'));
+for (const file of buttonFiles) {
+	const filePath = path.join(buttonsPath, file);
+	const button = require(filePath);
+	if ('data' in button && 'execute' in button) {
+		client.buttons.set(button.data.customId, button);
+	} else {
+		log.warn(
+			`The button at ${filePath} is missing a required "data" or "execute" property.`,
+			true,
+			config.config.log.saveToFile
+		);
 	}
 }
 

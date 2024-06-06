@@ -66,6 +66,23 @@ module.exports = {
 			} catch (err) {
 				log.error(err.stack, true, true);
 			}
+		} else if (interaction.isButton()) {
+			const button = interaction.client.buttons.get(interaction.customId);
+
+			if (!button) {
+				log.error(
+					`No button matching ${interaction.customId} was found.`,
+					true,
+					true
+				);
+				return;
+			}
+
+			try {
+				await button.execute(interaction);
+			} catch (err) {
+				log.error(err.stack, true, true);
+			}
 		}
 	},
 };

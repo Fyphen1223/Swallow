@@ -1,5 +1,3 @@
-const config = require('../../config.json');
-
 const { getLocale } = require('../../lang/lang.js');
 const {
 	createMessageEmbed,

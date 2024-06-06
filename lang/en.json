@@ -15,7 +15,9 @@
 		"backed": "⏮️ - Went back to the previous song.",
 		"queueStarted": "⏯ - Queue has started.",
 		"paused": "⏸️ - Paused the music.",
-		"resumed": "▶️ - Resumed the music."
+		"resumed": "▶️ - Resumed the music.",
+		"alreadyPaused": "🚫 - The music is already paused.",
+		"alreadyResumed": "🚫 - The music is already playing."
 	},
 	"ping": "Pong! Current Ping is {ping}ms."
 }
