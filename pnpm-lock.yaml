@@ -25,7 +25,7 @@ importers:
         version: 1.0.1
       tsumi:
         specifier: github:Fyphen1223/TsumiLink
-        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/0a615e21c36968d2ae146f0eb3dc8e422d921027
+        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5f81cec8ff6494f277bf6fb26559f0fca579a86c
     devDependencies:
       '@eslint/js':
         specifier: ^9.4.0
@@ -736,8 +736,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/0a615e21c36968d2ae146f0eb3dc8e422d921027:
-    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/0a615e21c36968d2ae146f0eb3dc8e422d921027}
+  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5f81cec8ff6494f277bf6fb26559f0fca579a86c:
+    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5f81cec8ff6494f277bf6fb26559f0fca579a86c}
     version: 0.0.18
 
   tunnel-agent@0.6.0:
@@ -1541,7 +1541,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/0a615e21c36968d2ae146f0eb3dc8e422d921027:
+  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5f81cec8ff6494f277bf6fb26559f0fca579a86c:
     dependencies:
       ws: 8.17.0
     transitivePeerDependencies:

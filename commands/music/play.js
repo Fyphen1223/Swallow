@@ -143,7 +143,7 @@ module.exports = {
 			globalThis.queue[guildId].index = 0;
 			globalThis.queue[guildId].player.play({
 				track: {
-					encoded: globalThis.queue[guildId].queue[0],
+					encoded: globalThis.queue[guildId].queue[0].data.encoded,
 				},
 			});
 			interaction.reply({

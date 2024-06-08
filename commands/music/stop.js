@@ -40,6 +40,9 @@ module.exports = {
 		await globalThis.queue[guildId].player.stop();
 		await globalThis.queue[guildId].player.node.leaveVoiceChannel(guildId);
 
+		globalThis.queue[guildId].voiceChannel = null;
+		globalThis.queue[guildId].textChannel = null;
+
 		const embed = createMessageEmbed(getLocale(guilds[guildId].locale).vc.stop);
 
 		await interaction.editReply({ embeds: [embed] });

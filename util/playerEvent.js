@@ -4,29 +4,34 @@ const guilds = require('../data/guilds.json');
 const { createMusicEmbed, createMessageEmbed, createButton } = require('./embed.js');
 
 const listenEvents = async (guildId) => {
+	globalThis.queue[guildId].player.removeAllListeners();
 	globalThis.queue[guildId].player.on('start', async () => {
 		globalThis.queue[guildId].player.status = 'playing';
 		globalThis.queue[guildId].suppressEnd = false;
 		await globalThis.queue[guildId].player.get();
 		const embed = await createMusicEmbed(guildId, 'Start');
 		if (globalThis.queue[guildId].panel) {
-			await globalThis.queue[guildId].panel.delete();
-			globalThis.queue[guildId].panel = await globalThis.queue[
-				guildId
-			].textChannel.send({
-				embeds: [embed.embed],
-				components: createButton(),
-				files: [embed.file],
-			});
+			try {
+				await globalThis.queue[guildId].panel.delete();
+				globalThis.queue[guildId].panel = await globalThis.queue[
+					guildId
+				].textChannel.send({
+					embeds: [embed.embed],
+					components: createButton(),
+					files: [embed.file],
+				});
+			} catch (_) {}
 			return;
 		} else {
-			globalThis.queue[guildId].panel = await globalThis.queue[
-				guildId
-			].textChannel.send({
-				embeds: [embed.embed],
-				components: createButton(),
-				files: [embed.file],
-			});
+			try {
+				globalThis.queue[guildId].panel = await globalThis.queue[
+					guildId
+				].textChannel.send({
+					embeds: [embed.embed],
+					components: createButton(),
+					files: [embed.file],
+				});
+			} catch (_) {}
 		}
 	});
 	globalThis.queue[guildId].player.on('end', async (data) => {
