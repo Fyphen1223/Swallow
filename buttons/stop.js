@@ -50,7 +50,6 @@ module.exports = {
 
 		globalThis.queue[guildId].voiceChannel = null;
 		globalThis.queue[guildId].textChannel = null;
-		globalThis.queue[guildId].player.status = 'stopped';
 
 		const embed = createMessageEmbed(getLocale(guilds[guildId].locale).vc.stop);
 

@@ -47,7 +47,6 @@ module.exports = {
 		}
 
 		await globalThis.queue[guildId].player.stop();
-		globalThis.queue[guildId].player.status = 'stopped';
 		await globalThis.queue[guildId].player.node.leaveVoiceChannel(guildId);
 
 		globalThis.queue[guildId].voiceChannel = null;

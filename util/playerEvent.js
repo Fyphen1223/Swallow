@@ -6,7 +6,6 @@ const { createMusicEmbed, createMessageEmbed, createButton } = require('./embed.
 const listenEvents = async (guildId) => {
 	globalThis.queue[guildId].player.removeAllListeners();
 	globalThis.queue[guildId].player.on('start', async () => {
-		globalThis.queue[guildId].player.status = 'playing';
 		globalThis.queue[guildId].suppressEnd = false;
 		await globalThis.queue[guildId].player.get();
 		const embed = await createMusicEmbed(guildId, 'Start');
@@ -39,7 +38,6 @@ const listenEvents = async (guildId) => {
 		const index = globalThis.queue[guildId].index + 1;
 		globalThis.queue[guildId].previous =
 			globalThis.queue[guildId].queue[globalThis.queue[guildId].index];
-		globalThis.queue[guildId].player.status = 'finished';
 		if (index >= globalThis.queue[guildId].queue.length) {
 			if (globalThis.queue[guildId].autoReplay) {
 				globalThis.queue[guildId].index = 0;
