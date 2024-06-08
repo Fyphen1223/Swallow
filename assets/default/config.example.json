@@ -1,0 +1,23 @@
+{
+	"bot": {
+		"token": "YOUR TOKEN HERE",
+		"applicationId": "YOUR APPLICATION ID HERE",
+		"clientSecret": "YOUR CLIENT SECRET HERE",
+		"clientKey": "YOUR CLIENT KEY"
+	},
+	"nodes": [
+		{
+			"serverName": "YOUR SERVER NAME",
+			"secure": false,
+			"host": "YOUR HOST",
+			"pass": "YOUR PASSWORD",
+			"port": 2333
+		}
+	],
+	"config": {
+		"log": {
+			"saveToFile": true,
+			"debug": false
+		}
+	}
+}

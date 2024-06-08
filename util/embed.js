@@ -34,14 +34,6 @@ async function createMusicEmbed(guildId, mode, type) {
 			globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user.id
 		}>`;
 	}
-	const position = globalThis.queue[guildId].player.position;
-	const length = current.length;
-	let ratio = 0;
-	if (position == 0) {
-		ratio = 1;
-	} else {
-		ratio = (position / length) * 100;
-	}
 	const file = new AttachmentBuilder(await generateMusicCard(current, guildId));
 	const embed = new EmbedBuilder()
 		.setColor(config.config?.color?.info || '#000000')
@@ -54,7 +46,7 @@ function createButton(style) {
 		new ButtonBuilder()
 			.setCustomId(style === 'pause' ? 'resume' : 'pause')
 			.setLabel(style === 'pause' ? 'Resume' : 'Pause')
-			.setEmoji(style === 'pause' ? '1117306256781230191' : '1117306258077257791')
+			.setEmoji(style === 'pause' ? '1117306258077257791' : '1117306256781230191')
 			.setStyle(ButtonStyle.Secondary),
 		new ButtonBuilder()
 			.setCustomId('stop')

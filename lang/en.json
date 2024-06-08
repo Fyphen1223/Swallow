@@ -19,5 +19,8 @@
 		"alreadyPaused": "🚫 - The music is already paused.",
 		"alreadyResumed": "🚫 - The music is already playing."
 	},
-	"ping": "Pong! Current Ping is {ping}ms."
+	"ping": "Pong! Current Ping is {ping}ms.",
+	"config": {
+		"langChanged": "🌐 - Language has been changed to English."
+	}
 }

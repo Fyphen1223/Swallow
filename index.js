@@ -3,7 +3,7 @@ const log = require('./util/log.js');
 
 if (!fs.existsSync('./config.json')) {
 	log.warn(`No config file detected, creating...`, true, true);
-	fs.copyFileSync('./config.example.json', './config.json');
+	fs.copyFileSync('./assets/default/config.example.json', './config.json');
 	log.warn(`Config file created, please edit it and reboot.`, true, true);
 	process.exit(1);
 }
