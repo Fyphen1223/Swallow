@@ -37,7 +37,17 @@ module.exports = {
 			}
 		}
 
+		if (globalThis.queue[guildId].player.status !== 'playing') {
+			const embed = createMessageEmbed(
+				getLocale(guilds[guildId].locale).vc.notPlaying,
+				interaction
+			);
+			await interaction.editReply({ embeds: [embed] });
+			return;
+		}
+
 		await globalThis.queue[guildId].player.stop();
+		globalThis.queue[guildId].player.status = 'stopped';
 		await globalThis.queue[guildId].player.node.leaveVoiceChannel(guildId);
 
 		globalThis.queue[guildId].voiceChannel = null;

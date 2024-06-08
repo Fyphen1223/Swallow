@@ -55,6 +55,15 @@ module.exports = {
 			return;
 		}
 
+		if (globalThis.queue[guildId].player.status !== 'playing') {
+			const embed = createMessageEmbed(
+				getLocale(guilds[guildId].locale).vc.notPlaying,
+				interaction
+			);
+			await interaction.editReply({ embeds: [embed] });
+			return;
+		}
+
 		await globalThis.queue[guildId].player.pause();
 		const embed = createMessageEmbed(
 			getLocale(guilds[guildId].locale).vc.paused,

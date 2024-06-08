@@ -8,7 +8,7 @@ const guilds = require('../data/guilds.json');
 
 module.exports = {
 	data: {
-		customId: 'resume',
+		customId: 'stop',
 	},
 	execute: async (interaction) => {
 		await interaction.deferReply();
@@ -45,27 +45,15 @@ module.exports = {
 			return;
 		}
 
-		await globalThis.queue[guildId].player.resume();
+		await globalThis.queue[guildId].player.stop();
+		await globalThis.queue[guildId].player.node.leaveVoiceChannel(guildId);
 
-		const embed = createMessageEmbed(
-			getLocale(guilds[guildId].locale).vc.resumed,
-			interaction
-		);
+		globalThis.queue[guildId].voiceChannel = null;
+		globalThis.queue[guildId].textChannel = null;
+		globalThis.queue[guildId].player.status = 'stopped';
+
+		const embed = createMessageEmbed(getLocale(guilds[guildId].locale).vc.stop);
+
 		await interaction.editReply({ embeds: [embed] });
-		const panel = await createMusicEmbed(guildId);
-		try {
-			await globalThis.queue[guildId].panel.edit({
-				embeds: [panel.embed],
-				components: createButton('resume'),
-				files: [panel.file],
-			});
-		} catch (_) {
-			await globalThis.queue[guildId].textChannel.send({
-				embeds: [panel.embed],
-				components: createButton('resume'),
-				files: [panel.file],
-			});
-		}
-		return;
 	},
 };
