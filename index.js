@@ -49,19 +49,12 @@ const targz = require('targz');
 
 const client = new discord.Client({
 	intents: [
-		discord.GatewayIntentBits.DirectMessageReactions,
-		discord.GatewayIntentBits.DirectMessageTyping,
-		discord.GatewayIntentBits.DirectMessages,
-		discord.GatewayIntentBits.GuildBans,
 		discord.GatewayIntentBits.GuildEmojisAndStickers,
 		discord.GatewayIntentBits.GuildIntegrations,
-		discord.GatewayIntentBits.GuildInvites,
 		discord.GatewayIntentBits.GuildMembers,
 		discord.GatewayIntentBits.GuildMessageReactions,
 		discord.GatewayIntentBits.GuildMessageTyping,
 		discord.GatewayIntentBits.GuildMessages,
-		discord.GatewayIntentBits.GuildPresences,
-		discord.GatewayIntentBits.GuildScheduledEvents,
 		discord.GatewayIntentBits.GuildVoiceStates,
 		discord.GatewayIntentBits.GuildWebhooks,
 		discord.GatewayIntentBits.Guilds,

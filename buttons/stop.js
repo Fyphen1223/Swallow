@@ -1,8 +1,4 @@
-const {
-	createMessageEmbed,
-	createMusicEmbed,
-	createButton,
-} = require('../util/embed.js');
+const { createMessageEmbed } = require('../util/embed.js');
 const { getLocale } = require('../lang/lang.js');
 const guilds = require('../data/guilds.json');
 

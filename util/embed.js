@@ -45,44 +45,21 @@ function createButton(style) {
 	const main = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
 			.setCustomId(style === 'pause' ? 'resume' : 'pause')
-			.setLabel(style === 'pause' ? 'Resume' : 'Pause')
+			//.setLabel(style === 'pause' ? 'Resume' : 'Pause')
 			.setEmoji(style === 'pause' ? '1117306258077257791' : '1117306256781230191')
 			.setStyle(ButtonStyle.Secondary),
 		new ButtonBuilder()
 			.setCustomId('stop')
-			.setLabel('Stop')
+			//.setLabel('Stop')
 			.setEmoji('1100927733116186694')
 			.setStyle(ButtonStyle.Danger),
 		new ButtonBuilder()
 			.setCustomId('back')
-			.setLabel('Back')
 			.setEmoji('1117303043743039599')
 			.setStyle(ButtonStyle.Secondary),
 		new ButtonBuilder()
 			.setCustomId('skip')
-			.setLabel('Skip')
 			.setEmoji('1117303289365659648')
-			.setStyle(ButtonStyle.Secondary),
-		new ButtonBuilder()
-			.setCustomId('addR')
-			.setLabel('Add Relate')
-			.setStyle(ButtonStyle.Secondary)
-	);
-
-	const other = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-			.setCustomId('volumeDown')
-			.setLabel('Down')
-			.setEmoji('1117303628349313035')
-			.setStyle(ButtonStyle.Secondary),
-		new ButtonBuilder()
-			.setCustomId('volumeUp')
-			.setLabel('Up')
-			.setEmoji('1117304554216767558')
-			.setStyle(ButtonStyle.Secondary),
-		new ButtonBuilder()
-			.setCustomId('lyric')
-			.setLabel('Lyric')
 			.setStyle(ButtonStyle.Secondary),
 		new ButtonBuilder()
 			.setCustomId('queue')
@@ -91,7 +68,21 @@ function createButton(style) {
 			.setStyle(ButtonStyle.Secondary)
 	);
 
-	const seek = new ActionRowBuilder().addComponents(
+	const other = new ActionRowBuilder().addComponents(
+		new ButtonBuilder()
+			.setCustomId('volumeDown')
+			.setLabel('-')
+			.setEmoji('1117303628349313035')
+			.setStyle(ButtonStyle.Secondary),
+		new ButtonBuilder()
+			.setCustomId('volumeUp')
+			.setLabel('+')
+			.setEmoji('1117304554216767558')
+			.setStyle(ButtonStyle.Secondary),
+		new ButtonBuilder()
+			.setCustomId('lyric')
+			.setLabel('Lyric')
+			.setStyle(ButtonStyle.Secondary),
 		new ButtonBuilder()
 			.setCustomId('30m')
 			.setLabel('-30s')
@@ -101,7 +92,7 @@ function createButton(style) {
 			.setLabel('+30s')
 			.setStyle(ButtonStyle.Secondary)
 	);
-	return [main, other, seek];
+	return [main, other];
 }
 
 module.exports = { createMessageEmbed, createMusicEmbed, createButton };
