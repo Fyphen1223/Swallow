@@ -18,6 +18,9 @@
 		"log": {
 			"saveToFile": true,
 			"debug": false
+		},
+		"color": {
+			"info": "#000000"
 		}
 	}
 }
