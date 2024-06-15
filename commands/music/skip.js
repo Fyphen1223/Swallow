@@ -1,7 +1,6 @@
 const { getLocale } = require('../../lang/lang.js');
 const { createMessageEmbed } = require('../../util/embed.js');
-
-const guilds = require('../../data/guilds.json');
+const { checkVC } = require('../../util/check.js');
 
 const { SlashCommandBuilder } = require('discord.js');
 
@@ -14,32 +13,12 @@ module.exports = {
 		await interaction.deferReply();
 
 		const guildId = interaction.guild.id;
-		if (!interaction.member.voice.channelId || !globalThis.queue[guildId]) {
-			const noValidVCEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.noVC,
-				interaction
-			);
-			await interaction.editReply({ embeds: [noValidVCEmbed] });
-			return;
-		}
 
-		if (globalThis.queue[guildId].voiceChannel) {
-			if (
-				globalThis.queue[guildId].voiceChannel.id !==
-				interaction.member.voice.channelId
-			) {
-				const differentVCEmbed = createMessageEmbed(
-					getLocale(guilds[guildId].locale).vc.differentVC,
-					interaction
-				);
-				await interaction.editReply({ embeds: [differentVCEmbed] });
-				return;
-			}
-		}
+		if (!(await checkVC(interaction))) return;
 
 		if (globalThis.queue[guildId].queue.length === 0) {
 			const noMusicEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.noMusic,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.noMusic,
 				interaction
 			);
 			await interaction.editReply({ embeds: [noMusicEmbed] });
@@ -52,7 +31,8 @@ module.exports = {
 
 		if (index >= globalThis.queue[guildId].queue.length) {
 			const embed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.noMoreToSkip
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+					.noMoreToSkip
 			);
 			globalThis.queue[guildId].textChannel.send({ embeds: [embed] });
 			return;
@@ -70,7 +50,7 @@ module.exports = {
 		});
 
 		const skipEmbed = createMessageEmbed(
-			getLocale(guilds[guildId].locale).vc.skipped
+			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.skipped
 		);
 
 		await interaction.editReply({ embeds: [skipEmbed] });

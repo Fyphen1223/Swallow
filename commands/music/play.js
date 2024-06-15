@@ -3,13 +3,12 @@ const config = require('../../config.json');
 const { getLocale } = require('../../lang/lang.js');
 const { createMessageEmbed } = require('../../util/embed.js');
 
-const guilds = require('../../data/guilds.json');
-
 const discord = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const listenEvents = require('../../util/playerEvent.js');
 
 const log = require('../../util/log.js');
+const { checkVC } = require('../../util/check.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -83,34 +82,12 @@ module.exports = {
 	},
 	async execute(interaction) {
 		const guildId = interaction.guild.id;
-
 		if (!globalThis.queue[interaction.guild.id]) {
 			globalThis.queue.add(interaction.guild.id);
 			globalThis.queue[guildId].node = globalThis.Tsumi.getIdealNode();
 		}
 
-		if (!interaction.member.voice.channelId) {
-			const noValidVCEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.noVC,
-				interaction
-			);
-			await interaction.reply({ embeds: [noValidVCEmbed] });
-			return;
-		}
-
-		if (globalThis.queue[guildId].voiceChannel) {
-			if (
-				globalThis.queue[guildId].voiceChannel.id !==
-				interaction.member.voice.channelId
-			) {
-				const differentVCEmbed = createMessageEmbed(
-					getLocale(guilds[guildId].locale).vc.differentVC,
-					interaction
-				);
-				await interaction.reply({ embeds: [differentVCEmbed] });
-				return;
-			}
-		}
+		if (!(await checkVC(interaction))) return;
 
 		const query = interaction.options.getString('query');
 
@@ -132,7 +109,7 @@ module.exports = {
 
 		if (!query && globalThis.queue[guildId].isEmpty()) {
 			const noQueryEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.joined,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.joined,
 				interaction
 			);
 			await interaction.reply({ embeds: [noQueryEmbed] });
@@ -149,7 +126,8 @@ module.exports = {
 			interaction.reply({
 				embeds: [
 					createMessageEmbed(
-						getLocale(guilds[guildId].locale).vc.queueStarted,
+						getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+							.queueStarted,
 						interaction
 					),
 				],

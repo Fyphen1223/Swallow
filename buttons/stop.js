@@ -1,6 +1,5 @@
 const { createMessageEmbed } = require('../util/embed.js');
 const { getLocale } = require('../lang/lang.js');
-const guilds = require('../data/guilds.json');
 
 module.exports = {
 	data: {
@@ -11,7 +10,7 @@ module.exports = {
 		const guildId = interaction.guild.id;
 		if (!interaction.member.voice.channelId || !globalThis.queue[guildId]) {
 			const noValidVCEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.noVC,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.noVC,
 				interaction
 			);
 			await interaction.editReply({ embeds: [noValidVCEmbed] });
@@ -24,7 +23,8 @@ module.exports = {
 				interaction.member.voice.channelId
 			) {
 				const differentVCEmbed = createMessageEmbed(
-					getLocale(guilds[guildId].locale).vc.differentVC,
+					getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+						.differentVC,
 					interaction
 				);
 				await interaction.editReply({ embeds: [differentVCEmbed] });
@@ -34,7 +34,8 @@ module.exports = {
 
 		if (globalThis.queue[guildId].player.status !== 'playing') {
 			const embed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.notPlaying,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+					.notPlaying,
 				interaction
 			);
 			await interaction.editReply({ embeds: [embed] });
@@ -47,7 +48,9 @@ module.exports = {
 		globalThis.queue[guildId].voiceChannel = null;
 		globalThis.queue[guildId].textChannel = null;
 
-		const embed = createMessageEmbed(getLocale(guilds[guildId].locale).vc.stop);
+		const embed = createMessageEmbed(
+			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.stop
+		);
 
 		await interaction.editReply({ embeds: [embed] });
 	},

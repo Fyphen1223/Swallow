@@ -47,7 +47,7 @@ Node.js, npm, pnpm
 
 > [!IMPORTANT]
 > Install or update pnpm using this command below
-> 
+>
 > `npm i pnpm@latest -g`
 
 #### First, clone this repository using this command
@@ -90,4 +90,3 @@ Lastly, if you still have a problem, please create an issue and let me know!
 
 Music card example:
 ![image](https://github.com/Fyphen1223/Swallow/assets/89511960/042d6aaf-24cb-44cc-8d91-41addcf25f17)
-

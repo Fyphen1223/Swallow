@@ -5,7 +5,7 @@ const {
 	createButton,
 } = require('../../util/embed.js');
 
-const guilds = require('../../data/guilds.json');
+const { checkVC } = require('../../util/check.js');
 
 const { SlashCommandBuilder } = require('discord.js');
 
@@ -17,32 +17,13 @@ module.exports = {
 	async execute(interaction) {
 		await interaction.deferReply();
 		const guildId = interaction.guild.id;
-		if (!interaction.member.voice.channelId || !globalThis.queue[guildId]) {
-			const noValidVCEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.noVC,
-				interaction
-			);
-			await interaction.editReply({ embeds: [noValidVCEmbed] });
-			return;
-		}
 
-		if (globalThis.queue[guildId].voiceChannel) {
-			if (
-				globalThis.queue[guildId].voiceChannel.id !==
-				interaction.member.voice.channelId
-			) {
-				const differentVCEmbed = createMessageEmbed(
-					getLocale(guilds[guildId].locale).vc.differentVC,
-					interaction
-				);
-				await interaction.editReply({ embeds: [differentVCEmbed] });
-				return;
-			}
-		}
+		if (!(await checkVC(interaction))) return;
 
 		if (globalThis.queue[guildId].player.status !== 'playing') {
 			const embed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.notPlaying,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+					.notPlaying,
 				interaction
 			);
 			await interaction.editReply({ embeds: [embed] });
@@ -52,7 +33,7 @@ module.exports = {
 		await globalThis.queue[guildId].player.pause();
 		await globalThis.queue[guildId].player.get();
 		const embed = createMessageEmbed(
-			getLocale(guilds[guildId].locale).vc.paused,
+			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.paused,
 			interaction
 		);
 		await interaction.editReply({ embeds: [embed] });

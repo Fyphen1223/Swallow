@@ -39,8 +39,10 @@ if (!config.bot.token || !config.bot.applicationId) {
 const path = require('node:path');
 
 const { playerQueue } = require('./util/queue.js');
+const { database } = require('./util/database.js');
 
 globalThis.queue = new playerQueue();
+globalThis.guilds = new database({ database: 'local' });
 
 const discord = require('discord.js');
 const { TsumiInstance } = require('tsumi');

@@ -37,17 +37,18 @@ module.exports = {
 	},
 	async execute(interaction) {
 		await interaction.deferReply();
-		const guildId = interaction.guild.id;
 		const subcommand = interaction.options.getSubcommand();
 
 		if (subcommand === 'lang') {
 			const language = interaction.options.getString('language');
-			guilds[guildId].locale = language;
+			const current = globalThis.guilds.get(interaction.guildId);
+			current.locale = language;
+			globalThis.guilds.set(interaction.guildId, current);
 			const embed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).config.langChanged,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).config
+					.langChanged,
 				interaction
 			);
-			await fs.writeFileSync('./data/guilds.json', JSON.stringify(guilds, null, 2));
 			await interaction.editReply({ embeds: [embed] });
 			return;
 		}

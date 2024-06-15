@@ -5,8 +5,6 @@ const {
 	createButton,
 } = require('../util/embed.js');
 
-const guilds = require('../data/guilds.json');
-
 module.exports = {
 	data: {
 		customId: 'pause',
@@ -16,7 +14,7 @@ module.exports = {
 
 		if (!interaction.member.voice.channelId) {
 			const noValidVCEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.noVC,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.noVC,
 				interaction
 			);
 			await interaction.reply({ embeds: [noValidVCEmbed] });
@@ -29,7 +27,8 @@ module.exports = {
 				interaction.member.voice.channelId
 			) {
 				const differentVCEmbed = createMessageEmbed(
-					getLocale(guilds[guildId].locale).vc.differentVC,
+					getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+						.differentVC,
 					interaction
 				);
 				await interaction.reply({ embeds: [differentVCEmbed] });
@@ -39,7 +38,7 @@ module.exports = {
 
 		if (globalThis.queue[guildId].player.status !== 'playing') {
 			const notPlayingEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.noMusic,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.noMusic,
 				interaction
 			);
 			await interaction.reply({ embeds: [notPlayingEmbed] });
@@ -48,7 +47,8 @@ module.exports = {
 
 		if (globalThis.queue[guildId].player.paused) {
 			const alreadyPausedEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.alreadyPaused,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+					.alreadyPaused,
 				interaction
 			);
 			await interaction.reply({ embeds: [alreadyPausedEmbed] });
@@ -57,7 +57,8 @@ module.exports = {
 
 		if (globalThis.queue[guildId].player.status !== 'playing') {
 			const embed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.notPlaying,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+					.notPlaying,
 				interaction
 			);
 			await interaction.editReply({ embeds: [embed] });
@@ -66,7 +67,7 @@ module.exports = {
 
 		await globalThis.queue[guildId].player.pause();
 		const embed = createMessageEmbed(
-			getLocale(guilds[guildId].locale).vc.paused,
+			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.paused,
 			interaction
 		);
 		await globalThis.queue[guildId].player.get();

@@ -1,8 +1,3 @@
-const fs = require('fs');
-
-const config = require('../config.json');
-
-const guilds = require('../data/guilds.json');
 const log = require('../util/log');
 
 const { Events } = require('discord.js');
@@ -16,19 +11,6 @@ module.exports = {
 			if (!command) {
 				log.error('No command found', true, true);
 				return;
-			}
-
-			if (!guilds[interaction.guildId]) {
-				guilds[interaction.guildId] = {
-					locale: 'en',
-					config: {},
-				};
-				fs.writeFileSync('./data/guilds.json', JSON.stringify(guilds, null, 4));
-				log.info(
-					`Guild ${interaction.guildId} added to guilds.json`,
-					config.config.log.debug,
-					config.config.log.saveToFile
-				);
 			}
 
 			try {

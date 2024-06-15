@@ -1,8 +1,7 @@
 const { getLocale } = require('../../lang/lang.js');
 const { createMessageEmbed } = require('../../util/embed.js');
 const { parseTimeToSeconds } = require('../../util/time.js');
-
-const guilds = require('../../data/guilds.json');
+const { checkVC } = require('../../util/check.js');
 
 const { SlashCommandBuilder } = require('discord.js');
 
@@ -20,35 +19,16 @@ module.exports = {
 		await interaction.deferReply();
 
 		const guildId = interaction.guild.id;
-		if (!interaction.member.voice.channelId || !globalThis.queue[guildId]) {
-			const noValidVCEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.noVC,
-				interaction
-			);
-			await interaction.editReply({ embeds: [noValidVCEmbed] });
-			return;
-		}
 
-		if (globalThis.queue[guildId].voiceChannel) {
-			if (
-				globalThis.queue[guildId].voiceChannel.id !==
-				interaction.member.voice.channelId
-			) {
-				const differentVCEmbed = createMessageEmbed(
-					getLocale(guilds[guildId].locale).vc.differentVC,
-					interaction
-				);
-				await interaction.editReply({ embeds: [differentVCEmbed] });
-				return;
-			}
-		}
+		if (!(await checkVC(interaction))) return;
 
 		const time = interaction.options.getString('time');
 
 		const seconds = parseTimeToSeconds(time);
 		if (!seconds) {
 			const invalidTimeEmbed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.invalidFormat,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+					.invalidFormat,
 				interaction
 			);
 			await interaction.editReply({ embeds: [invalidTimeEmbed] });
@@ -61,7 +41,8 @@ module.exports = {
 				.length
 		) {
 			const embed = createMessageEmbed(
-				getLocale(guilds[guildId].locale).vc.outOfLength,
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+					.outOfLength,
 				interaction
 			);
 			await interaction.editReply({ embeds: [embed] });
@@ -69,7 +50,9 @@ module.exports = {
 		}
 		await globalThis.queue[guildId].player.seek(seconds * 1000);
 		const embed = createMessageEmbed(
-			getLocale(guilds[guildId].locale).vc.seeked.replace('{time}', time),
+			getLocale(
+				globalThis.guilds.get(interaction.guildId).locale
+			).vc.seeked.replace('{time}', time),
 			interaction
 		);
 		await interaction.editReply({ embeds: [embed] });
