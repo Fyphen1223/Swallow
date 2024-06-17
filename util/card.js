@@ -25,22 +25,19 @@ async function generateMusicCard(current, guildId) {
 	ctx.drawImage(image, 10 * 2, 10 * 2);
 
 	//Title
-	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
+	ctx.font = '50px "Jakarta", "NotoSans", "NotoSansJP"';
 	ctx.fillStyle = '#ffffff';
 	ctx.fillText(formatTitle(current.title, canvas) || 'Title', 200 * 2, 45 * 2);
 
 	//Author
-	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillText(formatAuthor(current.author, canvas) || 'Author', 240 * 2, 90 * 2);
 	ctx.fillStyle = '#26aed4';
 	//by
-	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillText('by', 200 * 2, 90 * 2);
 	//Requested by
 	const requester =
 		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user;
 	ctx.fillStyle = '#ffffff';
-	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillText(formatRequester(requester.displayName), 500, 290);
 	ctx.fillText(`${globalThis.queue[guildId].volume}%`, 400, 400);
 	const requesterImage = await cropImage({
@@ -58,7 +55,6 @@ async function generateMusicCard(current, guildId) {
 	} else {
 		ratio = queue[guildId].player.position / current.length;
 	}
-	ctx.font = '50px "Jakarta", "NotoSansJP", "NotoSans"';
 	ctx.fillStyle = '#646464';
 	ctx.fillRect(100, 575, canvas.width - 200, 10);
 	ctx.fillStyle = '#26aed4';
@@ -67,7 +63,7 @@ async function generateMusicCard(current, guildId) {
 
 	//Progress bar time
 	ctx.fillStyle = '#ffffff';
-	ctx.font = '35px "Jakarta", "NotoSans"';
+	ctx.font = '35px "Jakarta", "NotoSans", "NotoSansJP"';
 	ctx.fillText(
 		formatTime(Math.ceil(globalThis.queue[guildId].player.position / 1000)),
 		100,
@@ -75,7 +71,7 @@ async function generateMusicCard(current, guildId) {
 	);
 	ctx.fillText(formatTime(current.length / 1000), canvas.width - 220, 550);
 	//Position
-	ctx.font = '70px "Jakarta", "NotoSans"';
+	ctx.font = '70px "Jakarta", "NotoSans", "NotoSansJP"';
 	ctx.fillText(
 		`${globalThis.queue[guildId].index + 1} / ${
 			globalThis.queue[guildId].queue.length
@@ -88,7 +84,7 @@ async function generateMusicCard(current, guildId) {
 	ctx.fillStyle = '#e94560';
 	ctx.fillRect(550, 360, 200, 50);
 	// Draw button text
-	ctx.font = '30px "Jakarta", "NotoSans"';
+	ctx.font = '30px "Jakarta", "NotoSans", "NotoSansJP"';
 	ctx.fillStyle = 'white';
 	ctx.fillText(formatSource(current.sourceName), 555, 395);
 
