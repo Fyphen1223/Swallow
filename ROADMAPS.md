@@ -2,7 +2,7 @@
 
 <h2 align="center">v0.2</h2>
 
-Has not yet to come, we will release v0.1 as soon as it is possible.
+Has not yet to come, we will release it after throughly testing it.
 
 Stability: Stable ✅
 
