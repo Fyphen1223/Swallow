@@ -22,11 +22,11 @@ importers:
         version: 1.0.1
       tsumi:
         specifier: github:Fyphen1223/TsumiLink
-        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/8818f4c0869f72c4d68d57ad7587b72e3a4dd900
+        version: git+https://git@github.com:Fyphen1223/TsumiLink.git#515d16384c0e520abcf50499471799311bcac431
     devDependencies:
       '@eslint/js':
-        specifier: ^9.5.0
-        version: 9.5.0
+        specifier: ^9.6.0
+        version: 9.6.0
       eslint:
         specifier: ^9.5.0
         version: 9.5.0
@@ -81,6 +81,10 @@ packages:
 
   '@eslint/js@9.5.0':
     resolution: {integrity: sha512-A7+AOT2ICkodvtsWnxZP4Xxk3NbZ3VMHd8oihydLRGrJgqqdEz1qSeEgXYyT/Cu8h1TWWsQRejIx48mtjZ5y1w==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.6.0':
+    resolution: {integrity: sha512-D9B0/3vNg44ZeWbYMpBoXqNP4j6eQD5vNwIlGAuFRRzK/WtT/jvDQW3Bi9kkf3PMDMlM7Yi+73VLUsn5bJcl8A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.4':
@@ -559,8 +563,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/8818f4c0869f72c4d68d57ad7587b72e3a4dd900:
-    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/8818f4c0869f72c4d68d57ad7587b72e3a4dd900}
+  tsumi@git+https://git@github.com:Fyphen1223/TsumiLink.git#515d16384c0e520abcf50499471799311bcac431:
+    resolution: {commit: 515d16384c0e520abcf50499471799311bcac431, repo: git@github.com:Fyphen1223/TsumiLink.git, type: git}
     version: 0.0.18
 
   type-check@0.4.0:
@@ -691,6 +695,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@9.5.0': {}
+
+  '@eslint/js@9.6.0': {}
 
   '@eslint/object-schema@2.1.4': {}
 
@@ -1154,7 +1160,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/8818f4c0869f72c4d68d57ad7587b72e3a4dd900:
+  tsumi@git+https://git@github.com:Fyphen1223/TsumiLink.git#515d16384c0e520abcf50499471799311bcac431:
     dependencies:
       ws: 8.17.1
     transitivePeerDependencies:
