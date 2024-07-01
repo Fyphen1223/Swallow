@@ -23,3 +23,5 @@ Features:
 - Basic music playing features
 
 Target release date: 31/7/2024
+
+Development progress: 30% done
