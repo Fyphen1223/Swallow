@@ -11,6 +11,8 @@
 
 Swallow is a versatile yet easy-to-use and fast Discord music bot written in Node.js
 
+[Roadmaps](./ROADMAPS.md), [Change log](./CHANGELOG.md)
+
 <h1 align="center">What you expect for Swallow</h1>
 
 #### ⚡ Insanely fast
