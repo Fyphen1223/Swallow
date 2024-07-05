@@ -47,8 +47,6 @@ globalThis.guilds = new database({ database: 'local' });
 const discord = require('discord.js');
 const { TsumiInstance } = require('tsumi');
 
-const targz = require('targz');
-
 const client = new discord.Client({
 	intents: [
 		discord.GatewayIntentBits.GuildEmojisAndStickers,
@@ -112,23 +110,9 @@ file.forEach((filePath) => {
 
 const logFilePath = './log/log.txt';
 const logContent = fs.readFileSync(logFilePath, 'utf8').trim().split('\n')[0];
-const compressedFileName = logContent + '.tar.gz';
+const compressedFileName = logContent + '.txt';
 const compressedFilePath = './log/' + compressedFileName;
-
-targz.compress(
-	{
-		src: logFilePath,
-		dest: compressedFilePath,
-	},
-	(err) => {
-		if (err) {
-			log.error(`Failed to compress log file: ${err}`, true, true);
-			process.exit(1);
-		}
-		log.info(`Log file compressed to ${compressedFileName}`, true, true);
-	}
-);
-
+fs.renameSync(logFilePath, compressedFilePath);
 fs.writeFileSync(logFilePath, new Date().toISOString() + '\n');
 
 const foldersPath = path.join(__dirname, 'commands');

@@ -1,5 +1,4 @@
 const { getLocale } = require('../lang/lang.js');
-const guilds = require('../data/guilds.json');
 
 const { createMusicEmbed, createMessageEmbed, createButton } = require('./embed.js');
 
@@ -53,7 +52,8 @@ const listenEvents = async (guildId) => {
 				//Do auto play stuff here
 			} else {
 				const embed = createMessageEmbed(
-					getLocale(guilds[guildId].locale).vc.queueEnded
+					getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+						.queueEnded
 				);
 				globalThis.queue[guildId].textChannel.send({ embeds: [embed] });
 			}

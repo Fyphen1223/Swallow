@@ -1,7 +1,4 @@
-const { getLocale } = require('../../lang/lang.js');
 const { createMessageEmbed } = require('../../util/embed.js');
-
-const guilds = require('../../data/guilds.json');
 
 const { SlashCommandBuilder } = require('discord.js');
 
