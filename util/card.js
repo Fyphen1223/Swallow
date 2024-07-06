@@ -1,3 +1,5 @@
+const config = require('../config.json');
+
 const { formatTime } = require('./time.js');
 
 const { createCanvas, loadImage, GlobalFonts } = require('@napi-rs/canvas');
@@ -14,13 +16,24 @@ async function generateMusicCard(current, guildId) {
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-	const thumbnailImage = await cropImage({
-		imagePath: current.artworkUrl,
-		width: 160 * 2,
-		height: 220 * 2,
-		cropCenter: true,
-		borderRadius: 10,
-	});
+	let thumbnailImage = null;
+	try {
+		thumbnailImage = await cropImage({
+			imagePath: current.artworkUrl,
+			width: 160 * 2,
+			height: 220 * 2,
+			cropCenter: true,
+			borderRadius: 10,
+		});
+	} catch (e) {
+		thumbnailImage = await cropImage({
+			imagePath: config.config.music.defaultThumbnail,
+			width: 160 * 2,
+			height: 220 * 2,
+			cropCenter: true,
+			borderRadius: 10,
+		});
+	}
 	const image = await loadImage(thumbnailImage);
 	ctx.drawImage(image, 10 * 2, 10 * 2);
 
@@ -50,10 +63,11 @@ async function generateMusicCard(current, guildId) {
 	const requesterImageLoad = await loadImage(requesterImage);
 	ctx.drawImage(requesterImageLoad, 380, 225);
 	let ratio;
-	if (queue[guildId].player.position == 0) {
+	await globalThis.queue[guildId].player.get();
+	if (globalThis.queue[guildId].player.position == 0) {
 		ratio = 0;
 	} else {
-		ratio = queue[guildId].player.position / current.length;
+		ratio = globalThis.queue[guildId].player.position / current.length;
 	}
 	ctx.fillStyle = '#646464';
 	ctx.fillRect(100, 575, canvas.width - 200, 10);

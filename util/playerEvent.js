@@ -6,6 +6,7 @@ const listenEvents = async (guildId) => {
 	globalThis.queue[guildId].player.removeAllListeners();
 	globalThis.queue[guildId].player.on('start', async () => {
 		globalThis.queue[guildId].suppressEnd = false;
+		await globalThis.queue[guildId].player.resume();
 		await globalThis.queue[guildId].player.get();
 		const embed = await createMusicEmbed(guildId, 'Start');
 		if (globalThis.queue[guildId].panel) {
@@ -15,7 +16,10 @@ const listenEvents = async (guildId) => {
 					guildId
 				].textChannel.send({
 					embeds: [embed.embed],
-					components: createButton(),
+					components: await createButton(
+						globalThis.queue[guildId].player.paused ? 'pause' : 'resume',
+						guildId
+					),
 					files: [embed.file],
 				});
 			} catch (_) {}
@@ -26,7 +30,10 @@ const listenEvents = async (guildId) => {
 					guildId
 				].textChannel.send({
 					embeds: [embed.embed],
-					components: createButton(),
+					components: await createButton(
+						globalThis.queue[guildId].player.paused ? 'pause' : 'resume',
+						guildId
+					),
 					files: [embed.file],
 				});
 			} catch (_) {}

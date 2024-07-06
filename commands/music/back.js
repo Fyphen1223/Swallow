@@ -34,7 +34,7 @@ module.exports = {
 				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
 					.noMoreToBack
 			);
-			globalThis.queue[guildId].textChannel.send({ embeds: [embed] });
+			await interaction.editReply({ embeds: [embed] });
 			return;
 		}
 

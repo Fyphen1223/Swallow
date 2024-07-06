@@ -41,25 +41,28 @@ async function createMusicEmbed(guildId, mode, type) {
 	return { embed, file };
 }
 
-function createButton(style) {
+function createButton(style, guildId) {
 	const main = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
 			.setCustomId(style === 'pause' ? 'resume' : 'pause')
-			//.setLabel(style === 'pause' ? 'Resume' : 'Pause')
 			.setEmoji(style === 'pause' ? '1117306258077257791' : '1117306256781230191')
 			.setStyle(ButtonStyle.Secondary),
 		new ButtonBuilder()
 			.setCustomId('stop')
-			//.setLabel('Stop')
 			.setEmoji('1100927733116186694')
 			.setStyle(ButtonStyle.Danger),
 		new ButtonBuilder()
 			.setCustomId('back')
 			.setEmoji('1117303043743039599')
+			.setDisabled(globalThis.queue[guildId].index === 0)
 			.setStyle(ButtonStyle.Secondary),
 		new ButtonBuilder()
 			.setCustomId('skip')
 			.setEmoji('1117303289365659648')
+			.setDisabled(
+				globalThis.queue[guildId].index ===
+					globalThis.queue[guildId].queue.length - 1
+			)
 			.setStyle(ButtonStyle.Secondary),
 		new ButtonBuilder()
 			.setCustomId('queue')
