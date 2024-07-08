@@ -26,4 +26,4 @@ Features:
 
 Target release date: 31/7/2024
 
-Development progress: 30% done
+Development progress: 35% done
