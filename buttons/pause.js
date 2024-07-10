@@ -4,56 +4,17 @@ const {
 	createMusicEmbed,
 	createButton,
 } = require('../util/embed.js');
+const { checkVC } = require('../util/check.js');
 
 module.exports = {
 	data: {
 		customId: 'pause',
 	},
 	execute: async (interaction) => {
+		await interaction.deferReply();
 		const guildId = interaction.guild.id;
 
-		if (!interaction.member.voice.channelId) {
-			const noValidVCEmbed = createMessageEmbed(
-				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.noVC,
-				interaction
-			);
-			await interaction.reply({ embeds: [noValidVCEmbed] });
-			return;
-		}
-
-		if (globalThis.queue[guildId].voiceChannel) {
-			if (
-				globalThis.queue[guildId].voiceChannel.id !==
-				interaction.member.voice.channelId
-			) {
-				const differentVCEmbed = createMessageEmbed(
-					getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
-						.differentVC,
-					interaction
-				);
-				await interaction.reply({ embeds: [differentVCEmbed] });
-				return;
-			}
-		}
-
-		if (globalThis.queue[guildId].player.status !== 'playing') {
-			const notPlayingEmbed = createMessageEmbed(
-				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.noMusic,
-				interaction
-			);
-			await interaction.reply({ embeds: [notPlayingEmbed] });
-			return;
-		}
-
-		if (globalThis.queue[guildId].player.paused) {
-			const alreadyPausedEmbed = createMessageEmbed(
-				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
-					.alreadyPaused,
-				interaction
-			);
-			await interaction.reply({ embeds: [alreadyPausedEmbed] });
-			return;
-		}
+		if (!(await checkVC(interaction))) return;
 
 		if (globalThis.queue[guildId].player.status !== 'playing') {
 			const embed = createMessageEmbed(
@@ -65,24 +26,26 @@ module.exports = {
 			return;
 		}
 
+		await globalThis.queue[guildId].player.get();
 		await globalThis.queue[guildId].player.pause();
+		console.log(globalThis.queue[guildId]);
+
 		const embed = createMessageEmbed(
 			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.paused,
 			interaction
 		);
-		await globalThis.queue[guildId].player.get();
-		await interaction.reply({ embeds: [embed] });
+		await interaction.editReply({ embeds: [embed] });
 		const panel = await createMusicEmbed(guildId);
 		try {
 			await globalThis.queue[guildId].panel.edit({
 				embeds: [panel.embed],
-				components: createButton('pause', guildId),
+				components: createButton(guildId),
 				files: [panel.file],
 			});
 		} catch (_) {
 			await globalThis.queue[guildId].textChannel.send({
 				embeds: [panel.embed],
-				components: createButton('pause', guildId),
+				components: createButton(guildId),
 				files: [panel.file],
 			});
 		}

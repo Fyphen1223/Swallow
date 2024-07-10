@@ -41,13 +41,13 @@ module.exports = {
 		try {
 			await globalThis.queue[guildId].panel.edit({
 				embeds: [panel.embed],
-				components: createButton('pause', guildId),
+				components: createButton(guildId),
 				files: [panel.file],
 			});
 		} catch (_) {
 			await globalThis.queue[guildId].textChannel.send({
 				embeds: [panel.embed],
-				components: createButton('pause', guildId),
+				components: createButton(guildId),
 				files: [panel.file],
 			});
 		}
