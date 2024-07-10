@@ -26,9 +26,8 @@ module.exports = {
 			return;
 		}
 
-		await globalThis.queue[guildId].player.get();
 		await globalThis.queue[guildId].player.pause();
-		console.log(globalThis.queue[guildId]);
+		await globalThis.queue[guildId].player.get();
 
 		const embed = createMessageEmbed(
 			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.paused,

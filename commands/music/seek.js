@@ -55,6 +55,7 @@ module.exports = {
 			).vc.seeked.replace('{time}', time),
 			interaction
 		);
+		console.log(await globalThis.queue[guildId].player.get());
 		await interaction.editReply({ embeds: [embed] });
 		return;
 	},

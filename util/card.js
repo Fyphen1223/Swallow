@@ -10,10 +10,7 @@ const { cropImage } = require('cropify');
 async function generateMusicCard(current, guildId) {
 	const canvas = createCanvas(640 * 2, 600);
 	const ctx = canvas.getContext('2d');
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#1a1a2e');
-	gradient.addColorStop(1, '#16213e');
-	ctx.fillStyle = gradient;
+	ctx.fillStyle = '#16213e';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 	let thumbnailImage = null;
@@ -40,10 +37,10 @@ async function generateMusicCard(current, guildId) {
 	//Title
 	ctx.font = '50px "Jakarta", "NotoSans", "NotoSansJP"';
 	ctx.fillStyle = '#ffffff';
-	ctx.fillText(formatTitle(current.title, canvas) || 'Title', 200 * 2, 45 * 2);
+	ctx.fillText(formatTitle(current.title, ctx) || 'Title', 200 * 2, 45 * 2);
 
 	//Author
-	ctx.fillText(formatAuthor(current.author, canvas) || 'Author', 240 * 2, 90 * 2);
+	ctx.fillText(formatAuthor(current.author, ctx) || 'Author', 240 * 2, 90 * 2);
 	ctx.fillStyle = '#26aed4';
 	//by
 	ctx.fillText('by', 200 * 2, 90 * 2);
@@ -51,7 +48,7 @@ async function generateMusicCard(current, guildId) {
 	const requester =
 		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].user;
 	ctx.fillStyle = '#ffffff';
-	ctx.fillText(formatRequester(requester.displayName), 500, 290);
+	ctx.fillText(formatRequester(requester.displayName, ctx), 500, 290);
 	ctx.fillText(`${globalThis.queue[guildId].volume}%`, 400, 400);
 	const requesterImage = await cropImage({
 		imagePath: `https://cdn.discordapp.com/avatars/${requester.id}/${requester.avatar}.webp`,
@@ -73,7 +70,6 @@ async function generateMusicCard(current, guildId) {
 	ctx.fillRect(100, 575, canvas.width - 200, 10);
 	ctx.fillStyle = '#26aed4';
 	ctx.fillRect(100, 575, 10.8 * (ratio * 100), 10);
-	ctx.fillRect(0, 465, canvas.width, 10);
 
 	//Progress bar time
 	ctx.fillStyle = '#ffffff';
@@ -83,7 +79,7 @@ async function generateMusicCard(current, guildId) {
 		100,
 		550
 	);
-	ctx.fillText(formatTime(current.length / 1000), canvas.width - 220, 550);
+	ctx.fillText(formatTime(current.length / 1000, ctx), canvas.width - 220, 550);
 	//Position
 	ctx.font = '70px "Jakarta", "NotoSans", "NotoSansJP"';
 	ctx.fillText(
@@ -106,8 +102,7 @@ async function generateMusicCard(current, guildId) {
 	return buffer;
 }
 
-function formatTitle(string, canvas) {
-	const ctx = canvas.getContext('2d');
+function formatTitle(string, ctx) {
 	let textWidth = ctx.measureText(string).width;
 	if (textWidth + 400 < 1210) {
 		return string;
@@ -120,8 +115,7 @@ function formatTitle(string, canvas) {
 	return string;
 }
 
-function formatAuthor(string, canvas) {
-	const ctx = canvas.getContext('2d');
+function formatAuthor(string, ctx) {
 	let textWidth = ctx.measureText(string).width;
 	if (textWidth + 700 < 1210) {
 		return string;
@@ -134,10 +128,16 @@ function formatAuthor(string, canvas) {
 	return string;
 }
 
-function formatRequester(string) {
-	if (string.length > 8) {
-		return string.slice(0, 8) + '...';
+function formatRequester(string, ctx) {
+	let textWidth = ctx.measureText(string).width;
+	if (textWidth + 700 < 1210) {
+		return string;
 	}
+	do {
+		string = string.slice(0, -1);
+		textWidth = ctx.measureText(string).width;
+	} while (textWidth + 700 >= 1210);
+	string += '...';
 	return string;
 }
 
