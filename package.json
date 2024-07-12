@@ -16,9 +16,12 @@
 		"eslint": "^9.6.0"
 	},
 	"dependencies": {
+		"@discord/embedded-app-sdk": "^1.4.0",
 		"@napi-rs/canvas": "^0.1.53",
 		"cropify": "^1.0.9",
 		"discord.js": "^14.15.3",
+		"express": "^4.19.2",
+		"express-session": "^1.18.0",
 		"tsumi": "github:Fyphen1223/TsumiLink"
 	}
 }
