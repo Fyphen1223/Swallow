@@ -8,8 +8,10 @@ async function checkVC(interaction) {
 			getLocale(globalThis.guilds.get(guildId).locale).vc.noVC,
 			interaction
 		);
-		if (!interaction.isReplied())
+		if (!interaction.isReplied) {
 			await interaction.reply({ embeds: [noValidVCEmbed] });
+			return false;
+		}
 		await interaction.editReply({ embeds: [noValidVCEmbed] });
 		return false;
 	}
@@ -23,8 +25,10 @@ async function checkVC(interaction) {
 				getLocale(globalThis.guilds[guildId].locale).vc.differentVC,
 				interaction
 			);
-			if (!interaction.isReplied())
+			if (!interaction.isReplied) {
 				await interaction.reply({ embeds: [differentVCEmbed] });
+				return false;
+			}
 			await interaction.editReply({ embeds: [differentVCEmbed] });
 			return false;
 		}
