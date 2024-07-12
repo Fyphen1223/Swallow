@@ -35,7 +35,7 @@ Swallow is a versatile yet easy-to-use and fast Discord music bot written in Nod
 
 <h1 align="center">What not to expect for Swallow</h1>
 
-#### 🤮 Insanely laggy audio streaming from only limited sources
+#### 🤮 Insanely laggy audio streaming with limited sources
 
 #### 🫠 Takes too much time for local setup, takes up a lot of disk space like a blackhole
 
