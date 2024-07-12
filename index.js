@@ -1,6 +1,8 @@
 const fs = require('node:fs');
 const log = require('./util/log.js');
 
+const { bootServer } = require('./server/server.js');
+
 if (!fs.existsSync('./config.json')) {
 	log.warn(`No config file detected, creating...`, true, true);
 	fs.copyFileSync('./assets/default/config.example.json', './config.json');
@@ -35,6 +37,8 @@ if (!config.bot.token || !config.bot.applicationId) {
 	);
 	process.exit(1);
 }
+
+if (config.dashboard.enabled) bootServer();
 
 const path = require('node:path');
 
