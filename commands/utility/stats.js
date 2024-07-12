@@ -1,8 +1,5 @@
 const os = require('os');
 
-const { getLocale } = require('../../lang/lang.js');
-const { createMessageEmbed } = require('../../util/embed.js');
-
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
