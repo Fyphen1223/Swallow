@@ -46,7 +46,6 @@ const { playerQueue } = require('./util/queue.js');
 const { database } = require('./util/database.js');
 
 globalThis.queue = new playerQueue();
-globalThis.guilds = new database({ database: 'local' });
 
 const discord = require('discord.js');
 const { TsumiInstance } = require('tsumi');
@@ -98,24 +97,43 @@ folders.forEach((folderPath) => {
 	createFolderIfNotExists(folderPath);
 });
 
+function sanitizeFileName(filename) {
+	return filename.replace(/:/g, '-');
+}
+
 function createFileIfNotExists(filePath) {
 	if (!fs.existsSync(filePath)) {
 		fs.writeFileSync(
 			filePath,
-			filePath.match('log') ? new Date().toISOString() + '\n' : JSON.stringify({})
+			filePath.match('log')
+				? sanitizeFileName(new Date().toISOString() + '\n')
+				: JSON.stringify({})
 		);
 	}
 }
 
-const file = ['./data/guilds.json', './log/log.txt', './data/premium.json'];
+const file = [
+	path.join(__dirname, 'data', 'guilds.json'),
+	path.join(__dirname, 'log', 'log.txt'),
+	path.join(__dirname, 'data', 'premium.json'),
+];
 file.forEach((filePath) => {
 	createFileIfNotExists(filePath);
 });
 
-const logFilePath = './log/log.txt';
+globalThis.guilds = new database({ database: 'local' });
+
+const logFilePath = path.join(__dirname, 'log', 'log.txt');
 const logContent = fs.readFileSync(logFilePath, 'utf8').trim().split('\n')[0];
 const compressedFileName = logContent + '.txt';
-const compressedFilePath = './log/' + compressedFileName;
+const compressedFilePath = path.join(
+	__dirname,
+	'log',
+	sanitizeFileName(compressedFileName)
+);
+
+fs.writeFileSync(logFilePath, new Date().toISOString() + '\n');
+
 fs.renameSync(logFilePath, compressedFilePath);
 fs.writeFileSync(logFilePath, new Date().toISOString() + '\n');
 

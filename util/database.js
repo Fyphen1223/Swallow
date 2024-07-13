@@ -1,4 +1,5 @@
 const fs = require('node:fs');
+const path = require('node:path');
 
 const config = require('../config.json');
 const log = require('./log.js');
@@ -9,7 +10,9 @@ class database {
 		if (options?.database === 'local') {
 			this.type = 0;
 			this.database = {};
-			this.database = JSON.parse(fs.readFileSync('./data/guilds.json'));
+			this.database = JSON.parse(
+				fs.readFileSync(path.join(__dirname, '..', 'data', 'guilds.json'))
+			);
 		}
 	}
 
@@ -41,7 +44,7 @@ class database {
 		if (this.type === 0) {
 			this.database[guildId] = data;
 			fs.writeFileSync(
-				'./data/guilds.json',
+				path.join(__dirname, '..', 'data', 'guilds.json'),
 				JSON.stringify(this.database, null, 2)
 			);
 		}
