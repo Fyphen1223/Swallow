@@ -1,11 +1,7 @@
 const config = require('../../config.json');
 
 const { getLocale } = require('../../lang/lang.js');
-const {
-	createMessageEmbed,
-	createMusicEmbed,
-	createButton,
-} = require('../../util/embed.js');
+const { createMessageEmbed, updateEmbed } = require('../../util/embed.js');
 
 const discord = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
@@ -208,20 +204,7 @@ module.exports = {
 
 		await interaction.reply({ embeds: [resultEmbed] });
 		if (globalThis.queue[guildId].player.status === 'playing') {
-			const panel = await createMusicEmbed(guildId);
-			try {
-				await globalThis.queue[guildId].panel.edit({
-					embeds: [panel.embed],
-					components: createButton(guildId),
-					files: [panel.file],
-				});
-			} catch (_) {
-				await globalThis.queue[guildId].textChannel.send({
-					embeds: [panel.embed],
-					components: createButton(guildId),
-					files: [panel.file],
-				});
-			}
+			await updateEmbed(guildId);
 			return;
 		}
 		await globalThis.queue[guildId].player.play({

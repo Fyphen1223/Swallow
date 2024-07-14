@@ -22,7 +22,7 @@ async function checkVC(interaction) {
 			interaction.member.voice.channelId
 		) {
 			const differentVCEmbed = createMessageEmbed(
-				getLocale(globalThis.guilds[guildId].locale).vc.differentVC,
+				getLocale(globalThis.guilds.get(guildId).locale).vc.differentVC,
 				interaction
 			);
 			if (!interaction.isReplied) {

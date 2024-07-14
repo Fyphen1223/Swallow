@@ -1,5 +1,5 @@
 const { getLocale } = require('../../lang/lang.js');
-const { createMessageEmbed } = require('../../util/embed.js');
+const { createMessageEmbed, updateEmbed } = require('../../util/embed.js');
 const { parseTimeToSeconds } = require('../../util/time.js');
 const { checkVC } = require('../../util/check.js');
 
@@ -55,8 +55,8 @@ module.exports = {
 			).vc.seeked.replace('{time}', time),
 			interaction
 		);
-		console.log(await globalThis.queue[guildId].player.get());
 		await interaction.editReply({ embeds: [embed] });
+		await updateEmbed(guildId);
 		return;
 	},
 };

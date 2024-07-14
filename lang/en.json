@@ -19,7 +19,10 @@
 		"alreadyPaused": "🚫 - The music is already paused.",
 		"alreadyResumed": "🚫 - The music is already playing.",
 		"stop": "⏹️ - Stopped the music.",
-		"notPlaying": "🚫 - The music is not playing."
+		"notPlaying": "🚫 - The music is not playing.",
+		"notFound": "🚫 - No music found.",
+		"removed": "🗑️ - Removed the song.",
+		"currentlyPlaying": "🚫 - The song is being played."
 	},
 	"ping": "Pong! Current Ping is {ping}ms.",
 	"config": {

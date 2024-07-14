@@ -112,4 +112,21 @@ function createButton(guildId) {
 	return [m, o];
 }
 
-module.exports = { createMessageEmbed, createMusicEmbed, createButton };
+async function updateEmbed(guildId) {
+	const panel = await createMusicEmbed(guildId);
+	try {
+		await globalThis.queue[guildId].panel.edit({
+			embeds: [panel.embed],
+			components: createButton(guildId),
+			files: [panel.file],
+		});
+	} catch (_) {
+		await globalThis.queue[guildId].textChannel.send({
+			embeds: [panel.embed],
+			components: createButton(guildId),
+			files: [panel.file],
+		});
+	}
+}
+
+module.exports = { createMessageEmbed, createMusicEmbed, createButton, updateEmbed };

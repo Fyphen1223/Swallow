@@ -34,7 +34,15 @@ module.exports = {
 		premium: false,
 	},
 	async autocomplete(interaction) {
-		// handle the autocompletion response (more on how to do that below)
+		const focusedValue = interaction.options.getFocused();
+		if (!globalThis.queue[interaction.guild.id]) return;
+		if (!globalThis.queue[interaction.guild.id].voiceChannel) return;
+		const list = globalThis.queue[interaction.guild.id].getTitles();
+		const result = list.filter((item) => item.includes(focusedValue));
+		if (result.length > 24) result.length = 24;
+		await interaction.respond(
+			result.map((choice) => ({ name: choice, value: choice }))
+		);
 	},
 	async execute(interaction) {
 		await interaction.deferReply();
@@ -72,8 +80,64 @@ module.exports = {
 				}
 				break;
 			case 'remove':
-				// Remove a song from the queue
+				const list = globalThis.queue[guildId].getTitles();
+				const query = interaction.options.getString('name');
+				const index = list.indexOf(query);
+
+				if (index === -1) {
+					const embed = createMessageEmbed(
+						getLocale(globalThis.guilds.get(guildId).locale).vc.notFound,
+						interaction
+					);
+					await interaction.editReply({ embeds: [embed] });
+					break;
+				}
+
+				if (globalThis.queue[guildId].index === index) {
+					const embed = createMessageEmbed(
+						getLocale(globalThis.guilds.get(guildId).locale).vc
+							.currentlyPlaying,
+						interaction
+					);
+					await interaction.editReply({ embeds: [embed] });
+					break;
+				}
+
+				globalThis.queue[guildId].remove(index);
+				const removeEmbed = createMessageEmbed(
+					getLocale(globalThis.guilds.get(interaction.guild.id).locale).vc
+						.removed,
+					interaction
+				);
+
+				if (globalThis.queue[guildId].index >= index) {
+					globalThis.queue[guildId].index--;
+				}
+
+				await interaction.editReply({ embeds: [removeEmbed] });
+				break;
+			case 'artwork':
+				const artWork = new EmbedBuilder()
+					.setColor(config.config.color.info)
+					.setImage(
+						globalThis.queue[guildId].queue[globalThis.queue[guildId].index]
+							.data.info.artworkUrl
+					);
+				/*
+				const urlButton = new ButtonBuilder()
+					.setURL(
+						globalThis.queue[guildId].queue[globalThis.queue[guildId].index]
+							.data.info.uri
+					)
+					.setLabel('Open')
+					.setStyle(ButtonStyle.Link);
+				*/
+				await interaction.editReply({
+					embeds: [artWork],
+					//	components: [urlButton],
+				});
 				break;
 		}
+		return;
 	},
 };

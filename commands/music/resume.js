@@ -1,9 +1,5 @@
 const { getLocale } = require('../../lang/lang.js');
-const {
-	createMessageEmbed,
-	createMusicEmbed,
-	createButton,
-} = require('../../util/embed.js');
+const { createMessageEmbed, updateEmbed } = require('../../util/embed.js');
 
 const { checkVC } = require('../../util/check.js');
 
@@ -36,20 +32,7 @@ module.exports = {
 			interaction
 		);
 		await interaction.editReply({ embeds: [embed] });
-		const panel = await createMusicEmbed(guildId);
-		try {
-			await globalThis.queue[guildId].panel.edit({
-				embeds: [panel.embed],
-				components: createButton(guildId),
-				files: [panel.file],
-			});
-		} catch (_) {
-			await globalThis.queue[guildId].textChannel.send({
-				embeds: [panel.embed],
-				components: createButton(guildId),
-				files: [panel.file],
-			});
-		}
+		await updateEmbed(guildId);
 		return;
 	},
 };

@@ -80,7 +80,7 @@ globalThis.Tsumi = new TsumiInstance({
 	sendPayload: (guildId, payload) => {
 		globalThis.discordClient.guilds.cache.get(guildId).shard.send(payload);
 	},
-	userAgent: 'Swallow/0.0.2',
+	userAgent: 'Swallow/0.0.1',
 });
 
 client.commands = new discord.Collection();
@@ -92,7 +92,7 @@ function createFolderIfNotExists(folderPath) {
 	}
 }
 
-const folders = ['./data', './log'];
+const folders = [path.join(__dirname, 'data'), path.join(__dirname, 'log')];
 folders.forEach((folderPath) => {
 	createFolderIfNotExists(folderPath);
 });
