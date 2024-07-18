@@ -58,15 +58,18 @@ module.exports = {
 			await interaction.editReply({ embeds: [embed] });
 			return;
 		}
-		await globalThis.queue[guildId].player.seek(seconds * 1000);
 		const embed = createMessageEmbed(
 			getLocale(
 				globalThis.guilds.get(interaction.guildId).locale
 			).vc.seeked.replace('{time}', time),
 			interaction
 		);
-		await interaction.editReply({ embeds: [embed] });
-		await updateEmbed(guildId);
+
+		Promise.all([
+			globalThis.queue[guildId].player.seek(seconds * 1000),
+			updateEmbed(guildId),
+			interaction.editReply({ embeds: [embed] }),
+		]);
 		return;
 	},
 };

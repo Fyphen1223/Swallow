@@ -26,15 +26,16 @@ module.exports = {
 			return;
 		}
 
-		await globalThis.queue[guildId].player.pause();
-		await globalThis.queue[guildId].player.get();
 		const embed = createMessageEmbed(
 			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.paused,
 			interaction
 		);
-		await interaction.editReply({ embeds: [embed] });
 
-		await updateEmbed(guildId);
+		Promise.all([
+			globalThis.queue[guildId].player.pause(),
+			updateEmbed(guildId),
+			interaction.editReply({ embeds: [embed] }),
+		]);
 		return;
 	},
 };

@@ -42,14 +42,16 @@ module.exports = {
 			return;
 		}
 
-		await globalThis.queue[guildId].player.resume();
-
 		const embed = createMessageEmbed(
 			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.resumed,
 			interaction
 		);
-		await interaction.editReply({ embeds: [embed] });
-		await updateEmbed(guildId);
+
+		Promise.all([
+			globalThis.queue[guildId].player.resume(),
+			updateEmbed(guildId),
+			interaction.editReply({ embeds: [embed] }),
+		]);
 		return;
 	},
 };

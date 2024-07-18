@@ -50,17 +50,19 @@ async function generateMusicCard(current, guildId) {
 	ctx.fillStyle = '#ffffff';
 	ctx.fillText(formatRequester(requester.displayName, ctx), 500, 290);
 	ctx.fillText(`${globalThis.queue[guildId].volume}%`, 400, 400);
-	const requesterImage = await cropImage({
-		imagePath: `https://cdn.discordapp.com/avatars/${requester.id}/${requester.avatar}.webp`,
-		width: 100,
-		height: 100,
-		cropCenter: true,
-		borderRadius: 50,
-	});
-	const requesterImageLoad = await loadImage(requesterImage);
+	await globalThis.queue[guildId].player.get();
+	const requesterImageLoad = await loadImage(
+		await cropImage({
+			imagePath: `https://cdn.discordapp.com/avatars/${requester.id}/${requester.avatar}.webp`,
+			width: 100,
+			height: 100,
+			cropCenter: true,
+			borderRadius: 50,
+		})
+	);
 	ctx.drawImage(requesterImageLoad, 380, 225);
 	let ratio;
-	await globalThis.queue[guildId].player.get();
+
 	if (globalThis.queue[guildId].player.position == 0) {
 		ratio = 0;
 	} else {

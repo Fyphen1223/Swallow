@@ -2,15 +2,17 @@ const config = require('../config.json');
 
 const { generateMusicCard } = require('./card.js');
 
-const { EmbedBuilder, AttachmentBuilder } = require('discord.js');
+const { AttachmentBuilder } = require('discord.js');
 
 function createMessageEmbed(content, interaction) {
-	const embed = new EmbedBuilder()
-		.setColor(config.config?.color?.info || '#000000')
-		.setAuthor({
+	const embed = {
+		color: parseInt(config.config?.color?.info || '#000000'.replace('#', ''), 16),
+		author: {
 			name: ` | ${content}`,
-			iconURL: interaction ? interaction.user.avatarURL() : null,
-		});
+			icon_url: interaction ? interaction.user.avatarURL() : null,
+			url: undefined,
+		},
+	};
 	return embed;
 }
 
@@ -18,9 +20,10 @@ async function createMusicEmbed(guildId, mode, type) {
 	const current =
 		globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data.info;
 	const file = new AttachmentBuilder(await generateMusicCard(current, guildId));
-	const embed = new EmbedBuilder()
-		.setColor(config.config?.color?.info || '#000000')
-		.setImage('attachment://file.jpg');
+	const embed = {
+		color: parseInt(config.config?.color?.info || '#000000'.replace('#', ''), 16),
+		image: { url: 'attachment://file.jpg' },
+	};
 	return { embed, file };
 }
 

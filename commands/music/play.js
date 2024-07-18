@@ -3,7 +3,6 @@ const config = require('../../config.json');
 const { getLocale } = require('../../lang/lang.js');
 const { createMessageEmbed, updateEmbed } = require('../../util/embed.js');
 
-const discord = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const listenEvents = require('../../util/playerEvent.js');
 
@@ -118,20 +117,22 @@ module.exports = {
 
 		if (!query && !globalThis.queue[guildId].isEmpty()) {
 			globalThis.queue[guildId].index = 0;
-			globalThis.queue[guildId].player.play({
-				track: {
-					encoded: globalThis.queue[guildId].queue[0].data.encoded,
-				},
-			});
-			interaction.reply({
-				embeds: [
-					createMessageEmbed(
-						getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
-							.queueStarted,
-						interaction
-					),
-				],
-			});
+			Promise.all([
+				globalThis.queue[guildId].player.play({
+					track: {
+						encoded: globalThis.queue[guildId].queue[0].data.encoded,
+					},
+				}),
+				interaction.reply({
+					embeds: [
+						createMessageEmbed(
+							getLocale(globalThis.guilds.get(interaction.guildId).locale)
+								.vc.queueStarted,
+							interaction
+						),
+					],
+				}),
+			]);
 			return;
 		}
 
@@ -158,12 +159,17 @@ module.exports = {
 				result.data.tracks.forEach((track) => {
 					globalThis.queue[guildId].add(track, interaction.user);
 				});
-				const resultEmbed = new discord.EmbedBuilder()
-					.setColor(config.config?.color?.info || '#000000')
-					.setAuthor({
-						name: ` | 🔍 Added ${result.data.info.name} to the queue.`,
-						iconURL: interaction.user.avatarURL(),
-					});
+				const resultEmbed = {
+					color: parseInt(
+						config.config?.color?.info || '#000000'.replace('#', ''),
+						16
+					),
+					author: {
+						name: ` | 🔍 Added ${res.info.title} to the queue.`,
+						url: undefined,
+						icon_url: interaction.user.avatarURL(),
+					},
+				};
 
 				await interaction.reply({ embeds: [resultEmbed] });
 				if (globalThis.queue[guildId].player.track) return;
@@ -190,29 +196,42 @@ module.exports = {
 				return;
 			}
 		}
+
 		globalThis.queue[guildId].queue.push({
 			data: res,
 			user: interaction.user,
 		});
-
-		const resultEmbed = new discord.EmbedBuilder()
-			.setColor(config.config?.color?.info || '#000000')
-			.setAuthor({
+		const resultEmbed = {
+			color: parseInt(config.config?.color?.info || '#000000'.replace('#', ''), 16),
+			author: {
 				name: ` | 🔍 Added ${res.info.title} to the queue.`,
-				iconURL: interaction.user.avatarURL(),
-			});
-
-		await interaction.reply({ embeds: [resultEmbed] });
-		if (globalThis.queue[guildId].player.track) {
-			await updateEmbed(guildId);
-			return;
-		}
-		await globalThis.queue[guildId].player.play({
-			track: {
-				encoded:
-					globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data
-						.encoded,
+				url: undefined,
+				icon_url: interaction.user.avatarURL(),
 			},
-		});
+		};
+
+		if (globalThis.queue[guildId].player.track) {
+			Promise.all([
+				updateEmbed(guildId),
+				interaction.reply({
+					embeds: [resultEmbed],
+				}),
+			]);
+		} else {
+			Promise.all([
+				interaction.reply({
+					embeds: [resultEmbed],
+				}),
+				await globalThis.queue[guildId].player.play({
+					track: {
+						encoded:
+							globalThis.queue[guildId].queue[
+								globalThis.queue[guildId].index
+							].data.encoded,
+					},
+				}),
+			]);
+		}
+		return;
 	},
 };
