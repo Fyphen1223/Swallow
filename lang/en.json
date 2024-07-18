@@ -22,7 +22,8 @@
 		"notPlaying": "🚫 - The music is not playing.",
 		"notFound": "🚫 - No music found.",
 		"removed": "🗑️ - Removed the song.",
-		"currentlyPlaying": "🚫 - The song is being played."
+		"currentlyPlaying": "🚫 - The song is being played.",
+		"noPlayer": "🚫 - There is no player."
 	},
 	"ping": "Pong! Current Ping is {ping}ms.",
 	"config": {

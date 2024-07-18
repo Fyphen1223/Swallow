@@ -82,8 +82,8 @@ module.exports = {
 	},
 	async execute(interaction) {
 		const guildId = interaction.guild.id;
-		if (!globalThis.queue[interaction.guild.id]) {
-			globalThis.queue.add(interaction.guild.id);
+		if (!globalThis.queue[guildId]) {
+			globalThis.queue.add(guildId);
 			globalThis.queue[guildId].node = globalThis.Tsumi.getIdealNode();
 		}
 
@@ -166,7 +166,7 @@ module.exports = {
 					});
 
 				await interaction.reply({ embeds: [resultEmbed] });
-				if (globalThis.queue[guildId].player.status === 'playing') return;
+				if (globalThis.queue[guildId].player.track) return;
 				await globalThis.queue[guildId].player.play({
 					track: {
 						encoded:
@@ -203,7 +203,7 @@ module.exports = {
 			});
 
 		await interaction.reply({ embeds: [resultEmbed] });
-		if (globalThis.queue[guildId].player.status === 'playing') {
+		if (globalThis.queue[guildId].player.track) {
 			await updateEmbed(guildId);
 			return;
 		}

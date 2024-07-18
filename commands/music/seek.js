@@ -22,6 +22,16 @@ module.exports = {
 
 		if (!(await checkVC(interaction))) return;
 
+		if (!globalThis.queue[guildId].player.track) {
+			const embed = createMessageEmbed(
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+					.notPlaying,
+				interaction
+			);
+			await interaction.editReply({ embeds: [embed] });
+			return;
+		}
+
 		const time = interaction.options.getString('time');
 
 		const seconds = parseTimeToSeconds(time);

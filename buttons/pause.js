@@ -12,7 +12,7 @@ module.exports = {
 
 		if (!(await checkVC(interaction))) return;
 
-		if (globalThis.queue[guildId].player.status !== 'playing') {
+		if (!globalThis.queue[guildId].player.track) {
 			const embed = createMessageEmbed(
 				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
 					.notPlaying,

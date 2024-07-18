@@ -22,7 +22,8 @@
 		"notPlaying": "🚫 - 音楽は再生されていません。",
 		"notFound": "🚫 - 音楽が見つかりませんでした。",
 		"removed": "🗑️ - 曲を削除しました。",
-		"currentlyPlaying": "🚫 - その曲は現在再生中です。"
+		"currentlyPlaying": "🚫 - その曲は現在再生中です。",
+		"noPlayer": "🚫 - プレイヤーがありません。"
 	},
 	"ping": "Pong! 現在のpingは {ping}ms です。",
 	"config": {
