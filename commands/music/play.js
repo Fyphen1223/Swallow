@@ -80,7 +80,6 @@ module.exports = {
 		}
 	},
 	async execute(interaction) {
-		console.time('play');
 		const guildId = interaction.guild.id;
 		if (!globalThis.queue[guildId]) {
 			globalThis.queue.add(guildId);
@@ -241,7 +240,6 @@ module.exports = {
 				}),
 			]);
 		}
-		console.timeEnd('play');
 		return;
 	},
 };
