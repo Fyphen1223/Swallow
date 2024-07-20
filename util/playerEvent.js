@@ -1,4 +1,5 @@
 const { getLocale } = require('../lang/lang.js');
+const log = require('./log.js');
 
 const { createMusicEmbed, createMessageEmbed, createButton } = require('./embed.js');
 
@@ -10,14 +11,15 @@ const listenEvents = async (guildId) => {
 		const embed = await createMusicEmbed(guildId, 'Start');
 		if (globalThis.queue[guildId].panel) {
 			try {
-				await globalThis.queue[guildId].panel.delete();
-				globalThis.queue[guildId].panel = await globalThis.queue[
-					guildId
-				].textChannel.send({
-					embeds: [embed.embed],
-					components: await createButton(guildId),
-					files: [embed.file],
-				});
+				const d = await Promise.all([
+					globalThis.queue[guildId].panel.delete(),
+					globalThis.queue[guildId].textChannel.send({
+						embeds: [embed.embed],
+						components: createButton(guildId),
+						files: [embed.file],
+					}),
+				]);
+				globalThis.queue[guildId].panel = d[1];
 			} catch (_) {}
 			return;
 		} else {
@@ -30,7 +32,7 @@ const listenEvents = async (guildId) => {
 					files: [embed.file],
 				});
 			} catch (err) {
-				console.log(err.stack);
+				log.error(err.stack);
 			}
 		}
 	});

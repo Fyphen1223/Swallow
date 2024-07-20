@@ -11,7 +11,6 @@ module.exports = {
 		premium: false,
 	},
 	async execute(interaction) {
-		await interaction.deferReply();
 		const guildId = interaction.guild.id;
 
 		if (!(await checkVC(interaction))) return;
@@ -22,7 +21,7 @@ module.exports = {
 					.notPlaying,
 				interaction
 			);
-			await interaction.editReply({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 			return;
 		}
 
@@ -33,7 +32,7 @@ module.exports = {
 		Promise.all([
 			globalThis.queue[guildId].player.resume(),
 			updateEmbed(guildId),
-			interaction.editReply({ embeds: [embed] }),
+			interaction.reply({ embeds: [embed] }),
 		]);
 		return;
 	},

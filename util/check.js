@@ -41,7 +41,7 @@ async function checkVC(interaction) {
 				getLocale(globalThis.guilds.get(guildId).locale).vc.differentVC,
 				interaction
 			);
-			if (!interaction.isReplied) {
+			if (!interaction.isReplied && !interaction.deferred) {
 				await interaction.reply({ embeds: [differentVCEmbed] });
 				return false;
 			} else {
