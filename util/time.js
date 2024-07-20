@@ -33,7 +33,12 @@ function parseTimeToSeconds(timeString) {
 	return hours * 3600 + minutes * 60 + seconds;
 }
 
+function wait(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 module.exports = {
 	formatTime,
 	parseTimeToSeconds,
+	wait,
 };

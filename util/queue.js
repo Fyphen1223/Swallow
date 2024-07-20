@@ -47,6 +47,7 @@ class queue extends EventEmitter {
 	autoPlay = false;
 	previous = null;
 	index = 0;
+	pending = false;
 }
 
 class playerQueue extends EventEmitter {

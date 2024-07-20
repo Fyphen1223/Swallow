@@ -1,6 +1,7 @@
 const config = require('../config.json');
 
 const { generateMusicCard } = require('./card.js');
+const { wait } = require('./time.js');
 
 const { AttachmentBuilder } = require('discord.js');
 
@@ -117,18 +118,39 @@ function createButton(guildId) {
 
 async function updateEmbed(guildId) {
 	const panel = await createMusicEmbed(guildId);
-	try {
-		await globalThis.queue[guildId].panel.edit({
-			embeds: [panel.embed],
-			components: createButton(guildId),
-			files: [panel.file],
-		});
-	} catch (_) {
-		await globalThis.queue[guildId].textChannel.send({
-			embeds: [panel.embed],
-			components: createButton(guildId),
-			files: [panel.file],
-		});
+	if (globalThis.queue[guildId].panel) {
+		try {
+			await globalThis.queue[guildId].panel.edit({
+				embeds: [panel.embed],
+				components: createButton(guildId),
+				files: [panel.file],
+			});
+		} catch (_) {
+			globalThis.queue[guildId].panel = await globalThis.queue[
+				guildId
+			].textChannel.send({
+				embeds: [panel.embed],
+				components: createButton(guildId),
+				files: [panel.file],
+			});
+		}
+	} else {
+		if (!globalThis.queue[guildId].pending) {
+			await globalThis.queue[guildId].textChannel.send({
+				embeds: [panel.embed],
+				components: createButton(guildId),
+				files: [panel.file],
+			});
+		} else {
+			do {
+				await wait(100);
+			} while (globalThis.queue[guildId].pending);
+			await globalThis.queue[guildId].panel.edit({
+				embeds: [panel.embed],
+				components: createButton(guildId),
+				files: [panel.file],
+			});
+		}
 	}
 }
 

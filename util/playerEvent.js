@@ -7,6 +7,7 @@ const listenEvents = async (guildId) => {
 	globalThis.queue[guildId].player.removeAllListeners();
 	globalThis.queue[guildId].player.on('start', async () => {
 		globalThis.queue[guildId].suppressEnd = false;
+		globalThis.queue[guildId].pending = true;
 		await globalThis.queue[guildId].player.get();
 		const embed = await createMusicEmbed(guildId, 'Start');
 		if (globalThis.queue[guildId].panel) {
@@ -35,6 +36,7 @@ const listenEvents = async (guildId) => {
 				log.error(err.stack);
 			}
 		}
+		globalThis.queue[guildId].pending = false;
 	});
 	globalThis.queue[guildId].player.on('end', async (data) => {
 		if (queue[guildId].suppressEnd) return;
