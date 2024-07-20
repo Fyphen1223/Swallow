@@ -24,7 +24,7 @@ module.exports = {
 		premium: false,
 	},
 	async autocomplete(interaction) {
-		const focusedValue = interaction.options.getFocused();
+		let focusedValue = interaction.options.getFocused();
 		log.info(`${focusedValue} is focused.`, false, true);
 		const node = globalThis.Tsumi.getIdealNode();
 		const result = await node.loadTracks(focusedValue);
@@ -44,14 +44,20 @@ module.exports = {
 				);
 				break;
 			}
-			case 'track' || 'short': {
+			case 'track':
+			case 'short': {
 				const list = [result.data.info.title];
 				await interaction.respond(
 					list.map((choice) => ({ name: choice, value: choice }))
 				);
 				break;
 			}
-			case 'playlist' || 'album' || 'artist' || 'station' || 'podcast' || 'show': {
+			case 'playlist':
+			case 'album':
+			case 'artist':
+			case 'station':
+			case 'podcast':
+			case 'show': {
 				const list = [];
 				for (let i = 0; i < 25 && i < result.data.tracks.length; i++) {
 					list.push(result.data.tracks[i].info.title);
