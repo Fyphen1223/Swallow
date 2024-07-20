@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { getLocale } = require('../lang/lang.js');
 const log = require('./log.js');
 

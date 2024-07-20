@@ -44,14 +44,14 @@ module.exports = {
 				);
 				break;
 			}
-			case 'track': {
+			case 'track' || 'short': {
 				const list = [result.data.info.title];
 				await interaction.respond(
 					list.map((choice) => ({ name: choice, value: choice }))
 				);
 				break;
 			}
-			case 'playlist': {
+			case 'playlist' || 'album' || 'artist' || 'station' || 'podcast' || 'show': {
 				const list = [];
 				for (let i = 0; i < 25 && i < result.data.tracks.length; i++) {
 					list.push(result.data.tracks[i].info.title);
@@ -141,9 +141,9 @@ module.exports = {
 			globalThis.queue[guildId].node.loadTracks(query),
 			globalThis.queue[guildId].node.loadTracks(`ytsearch:${query}`),
 		]);
-
 		switch (results[0].loadType) {
-			case 'track': {
+			case 'track':
+			case 'short': {
 				res = results[0].data;
 				break;
 			}
@@ -155,7 +155,12 @@ module.exports = {
 				res = results[1].data.shift();
 				break;
 			}
-			case 'playlist': {
+			case 'playlist':
+			case 'album':
+			case 'artist':
+			case 'station':
+			case 'podcast':
+			case 'show': {
 				results[0].data.tracks.forEach((track) => {
 					globalThis.queue[guildId].add(track, interaction.user);
 				});
@@ -209,6 +214,7 @@ module.exports = {
 			data: res,
 			user: interaction.user,
 		});
+
 		const resultEmbed = {
 			color: parseInt(config.config?.color?.info || '#000000'.replace('#', ''), 16),
 			author: {
