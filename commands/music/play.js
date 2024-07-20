@@ -80,6 +80,7 @@ module.exports = {
 		}
 	},
 	async execute(interaction) {
+		console.time('play');
 		const guildId = interaction.guild.id;
 		if (!globalThis.queue[guildId]) {
 			globalThis.queue.add(guildId);
@@ -136,27 +137,27 @@ module.exports = {
 			return;
 		}
 
-		const result = await globalThis.queue[guildId].node.loadTracks(query);
+		let res = {};
+		const results = await Promise.all([
+			globalThis.queue[guildId].node.loadTracks(query),
+			globalThis.queue[guildId].node.loadTracks(`ytsearch:${query}`),
+		]);
 
-		let res = null;
-		switch (result.loadType) {
+		switch (results[0].loadType) {
 			case 'track': {
-				res = result.data;
+				res = results[0].data;
 				break;
 			}
 			case 'empty': {
-				const searchResult = await globalThis.queue[guildId].node.loadTracks(
-					`ytsearch:${query}`
-				);
-				if (!searchResult?.data.length) {
-					await interaction.reply('Sorry, I could not find any data.');
+				if (!results[1]?.data.length) {
+					await interaction.editReply('Sorry, I could not find any data.');
 					return;
 				}
-				res = searchResult.data.shift();
+				res = results[1].data.shift();
 				break;
 			}
 			case 'playlist': {
-				result.data.tracks.forEach((track) => {
+				results[0].data.tracks.forEach((track) => {
 					globalThis.queue[guildId].add(track, interaction.user);
 				});
 				const resultEmbed = {
@@ -165,30 +166,38 @@ module.exports = {
 						16
 					),
 					author: {
-						name: ` | 🔍 Added ${res.info.title} to the queue.`,
+						name: ` | 🔍 Added ${results[0].data.info.name} to the queue.`,
 						url: undefined,
 						icon_url: interaction.user.avatarURL(),
 					},
 				};
 
-				await interaction.reply({ embeds: [resultEmbed] });
-				if (globalThis.queue[guildId].player.track) return;
-				await globalThis.queue[guildId].player.play({
-					track: {
-						encoded:
-							globalThis.queue[guildId].queue[
-								globalThis.queue[guildId].index
-							].data.encoded,
-					},
-				});
+				if (globalThis.queue[guildId].player.track) {
+					Promise.all([
+						updateEmbed(guildId),
+						interaction.editReply({ embeds: [resultEmbed] }),
+					]);
+				} else {
+					Promise.all([
+						interaction.reply({ embeds: [resultEmbed] }),
+						globalThis.queue[guildId].player.play({
+							track: {
+								encoded:
+									globalThis.queue[guildId].queue[
+										globalThis.queue[guildId].index
+									].data.encoded,
+							},
+						}),
+					]);
+				}
 				return;
 			}
 			case 'search': {
-				if (!result?.data.length) {
+				if (!results[0]?.data.length) {
 					await interaction.editReply('Sorry, I could not find any data.');
 					return;
 				}
-				res = result.data.shift();
+				res = results[0].data.shift();
 				break;
 			}
 			case 'error': {
@@ -232,6 +241,7 @@ module.exports = {
 				}),
 			]);
 		}
+		console.timeEnd('play');
 		return;
 	},
 };

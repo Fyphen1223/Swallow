@@ -38,19 +38,21 @@ module.exports = {
 		globalThis.queue[guildId].index--;
 		globalThis.queue[guildId].suppressEnd = true;
 		globalThis.queue[guildId].player.position = 0;
-		globalThis.queue[guildId].player.play({
-			track: {
-				encoded:
-					globalThis.queue[guildId].queue[globalThis.queue[guildId].index].data
-						.encoded,
-			},
-		});
 
 		const backEmbed = createMessageEmbed(
 			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.backed
 		);
 
-		await interaction.editReply({ embeds: [backEmbed] });
+		Promise.all([
+			globalThis.queue[guildId].player.play({
+				track: {
+					encoded:
+						globalThis.queue[guildId].queue[globalThis.queue[guildId].index]
+							.data.encoded,
+				},
+			}),
+			interaction.editReply({ embeds: [backEmbed] }),
+		]);
 		return;
 	},
 };
