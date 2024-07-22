@@ -122,6 +122,7 @@ file.forEach((filePath) => {
 });
 
 globalThis.guilds = new database({ database: 'local' });
+globalThis.premium = new database({ database: 'local' });
 
 const logFilePath = path.join(__dirname, 'log', 'log.txt');
 const logContent = fs.readFileSync(logFilePath, 'utf8').trim().split('\n')[0];
