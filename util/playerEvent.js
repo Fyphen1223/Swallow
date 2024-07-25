@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 const { getLocale } = require('../lang/lang.js');
 const log = require('./log.js');
 
@@ -40,7 +38,7 @@ const listenEvents = async (guildId) => {
 		}
 		globalThis.queue[guildId].pending = false;
 	});
-	globalThis.queue[guildId].player.on('end', async (data) => {
+	globalThis.queue[guildId].player.on('end', async () => {
 		if (queue[guildId].suppressEnd) return;
 		const index = globalThis.queue[guildId].index + 1;
 		globalThis.queue[guildId].previous =

@@ -97,6 +97,12 @@ folders.forEach((folderPath) => {
 	createFolderIfNotExists(folderPath);
 });
 
+/*
+ * @param {String} filename
+ * @return {String}
+ * @description Sanitize the filename to prevent illegal characters.
+ * @example sanitizeFileName('2021-09-01T00:00:00.000Z.txt') => '2021-09-01T00-00-00.000Z.txt'
+ */
 function sanitizeFileName(filename) {
 	return filename.replace(/:/g, '-');
 }

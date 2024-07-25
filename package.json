@@ -20,6 +20,7 @@
 		"cropify": "^1.0.9",
 		"discord.js": "^14.15.3",
 		"minimatch": "^10.0.1",
+		"redis": "^4.6.15",
 		"tsumi": "github:Fyphen1223/TsumiLink"
 	}
 }
