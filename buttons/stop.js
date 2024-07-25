@@ -42,14 +42,17 @@ module.exports = {
 			return;
 		}
 
-		await globalThis.queue[guildId].player.stop();
-		await globalThis.queue[guildId].player.node.leaveVoiceChannel(guildId);
 		globalThis.queue[guildId].voiceChannel = null;
 		globalThis.queue[guildId].textChannel = null;
 
 		const embed = createMessageEmbed(
 			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.stop
 		);
-		await interaction.editReply({ embeds: [embed] });
+
+		Promise.all([
+			globalThis.queue[guildId].player.stop(),
+			globalThis.queue[guildId].player.node.leaveVoiceChannel(guildId),
+			interaction.editReply({ embeds: [embed] }),
+		]);
 	},
 };

@@ -107,6 +107,10 @@ function sanitizeFileName(filename) {
 	return filename.replace(/:/g, '-');
 }
 
+/*
+ * @param {String} filePath
+ * @description Create a file if it does not exist.
+ */
 function createFileIfNotExists(filePath) {
 	if (!fs.existsSync(filePath)) {
 		fs.writeFileSync(

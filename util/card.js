@@ -8,31 +8,11 @@ GlobalFonts.registerFromPath('./assets/fonts/NotoSansJP.ttf', 'NotoSansJP');
 const { cropImage } = require('cropify');
 
 async function generateMusicCard(current, guildId) {
+	console.time('cropImage');
 	const canvas = createCanvas(640 * 2, 600);
 	const ctx = canvas.getContext('2d');
 	ctx.fillStyle = '#16213e';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	let thumbnailImage = null;
-	try {
-		thumbnailImage = await cropImage({
-			imagePath: current.artworkUrl,
-			width: 160 * 2,
-			height: 220 * 2,
-			cropCenter: true,
-			borderRadius: 10,
-		});
-	} catch (e) {
-		thumbnailImage = await cropImage({
-			imagePath: config.config.music.defaultThumbnail,
-			width: 160 * 2,
-			height: 220 * 2,
-			cropCenter: true,
-			borderRadius: 10,
-		});
-	}
-	const image = await loadImage(thumbnailImage);
-	ctx.drawImage(image, 10 * 2, 10 * 2);
 
 	//Title
 	ctx.font = '50px "Jakarta", "NotoSans", "NotoSansJP"';
@@ -50,8 +30,7 @@ async function generateMusicCard(current, guildId) {
 	ctx.fillStyle = '#ffffff';
 	ctx.fillText(formatRequester(requester.displayName, ctx), 500, 290);
 	ctx.fillText(`${globalThis.queue[guildId].volume}%`, 400, 400);
-	await globalThis.queue[guildId].player.get();
-	const requesterImageLoad = await loadImage(
+	/*await loadImage(
 		await cropImage({
 			imagePath: `https://cdn.discordapp.com/avatars/${requester.id}/${requester.avatar}.webp`,
 			width: 100,
@@ -60,7 +39,8 @@ async function generateMusicCard(current, guildId) {
 			borderRadius: 50,
 		})
 	);
-	ctx.drawImage(requesterImageLoad, 380, 225);
+	*/
+
 	let ratio;
 
 	if (globalThis.queue[guildId].player.position == 0) {
@@ -100,7 +80,60 @@ async function generateMusicCard(current, guildId) {
 	ctx.fillStyle = 'white';
 	ctx.fillText(formatSource(current.sourceName), 555, 395);
 
+	let thumbnailImage = null;
+	/*
+	try {
+		thumbnailImage = await cropImage({
+			imagePath: current.artworkUrl,
+			width: 160 * 2,
+			height: 220 * 2,
+			cropCenter: true,
+			borderRadius: 10,
+		});
+	} catch (e) {
+		thumbnailImage = await cropImage({
+			imagePath: config.config.music.defaultThumbnail,
+			width: 160 * 2,
+			height: 220 * 2,
+			cropCenter: true,
+			borderRadius: 10,
+		});
+	}
+
+	const croppedImage = await cropImage({
+		imagePath: `https://cdn.discordapp.com/avatars/${requester.id}/${requester.avatar}.webp`,
+		width: 100,
+		height: 100,
+		cropCenter: true,
+		borderRadius: 50,
+	});
+	*/
+	const images = await Promise.all([
+		cropImage({
+			imagePath: current.artworkUrl,
+			width: 160 * 2,
+			height: 220 * 2,
+			cropCenter: true,
+			borderRadius: 10,
+		}),
+		cropImage({
+			imagePath: `https://cdn.discordapp.com/avatars/${requester.id}/${requester.avatar}.webp`,
+			width: 100,
+			height: 100,
+			cropCenter: true,
+			borderRadius: 50,
+		}),
+	]);
+	const d = await Promise.all([
+		globalThis.queue[guildId].player.get(),
+		loadImage(images[1]),
+		loadImage(images[0]),
+	]);
+	ctx.drawImage(d[1], 380, 225);
+	ctx.drawImage(d[2], 10 * 2, 10 * 2);
+
 	const buffer = canvas.toBuffer('image/png');
+	console.timeEnd('cropImage');
 	return buffer;
 }
 
