@@ -8,7 +8,6 @@ GlobalFonts.registerFromPath('./assets/fonts/NotoSansJP.ttf', 'NotoSansJP');
 const { cropImage } = require('cropify');
 
 async function generateMusicCard(current, guildId) {
-	console.time('cropImage');
 	const canvas = createCanvas(640 * 2, 600);
 	const ctx = canvas.getContext('2d');
 	ctx.fillStyle = '#16213e';
@@ -133,7 +132,6 @@ async function generateMusicCard(current, guildId) {
 	ctx.drawImage(d[2], 10 * 2, 10 * 2);
 
 	const buffer = canvas.toBuffer('image/png');
-	console.timeEnd('cropImage');
 	return buffer;
 }
 

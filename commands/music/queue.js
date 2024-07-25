@@ -57,24 +57,37 @@ module.exports = {
 				// Show the current queue
 				let content = '';
 				if (globalThis.queue[guildId].queue.length === 0) {
-					const embed = new EmbedBuilder()
-						.setColor(config.config.color.info)
-						.setTitle('Queue')
-						.setDescription('No music added to the queue.');
+					const embed = {
+						title: 'Queue',
+						description: 'No music added to the queue.',
+						color: parseInt(
+							config.config?.color?.info || '#000000'.replace('#', ''),
+							16
+						),
+					};
 					await interaction.editReply({ embeds: [embed] });
 				} else {
 					content += `📀 ${
 						globalThis.queue[guildId].queue[globalThis.queue[guildId].index]
 							.data.info.title
+					} by ${
+						globalThis.queue[guildId].queue[globalThis.queue[guildId].index]
+							.data.info.author
 					}`;
 
 					globalThis.queue[guildId].queue.forEach((item, i) => {
-						content += `\n${i + 1}: ${item.data.info.title}`;
+						content += `\n${i + 1}: ${item.data.info.title} by ${
+							item.data.info.author
+						}`;
 					});
-					const embed = new EmbedBuilder()
-						.setColor(config.config?.color?.info || '#000000')
-						.setTitle('Queue')
-						.setDescription(codeBlock(content));
+					const embed = {
+						title: 'Queue',
+						description: '```' + content + '```',
+						color: parseInt(
+							config.config?.color?.info || '#000000'.replace('#', ''),
+							16
+						),
+					};
 
 					await interaction.editReply({ embeds: [embed] });
 				}
