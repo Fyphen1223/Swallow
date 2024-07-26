@@ -25,7 +25,7 @@ importers:
         version: 4.6.15
       tsumi:
         specifier: github:Fyphen1223/TsumiLink
-        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/d975134e43722ba7550f1ed286374fcfa791d39c
+        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1b1bd547bb1afdebc2761f07e3c755613d0a34ed
     devDependencies:
       '@eslint/js':
         specifier: ^9.7.0
@@ -538,8 +538,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/d975134e43722ba7550f1ed286374fcfa791d39c:
-    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/d975134e43722ba7550f1ed286374fcfa791d39c}
+  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1b1bd547bb1afdebc2761f07e3c755613d0a34ed:
+    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1b1bd547bb1afdebc2761f07e3c755613d0a34ed}
     version: 0.0.18
 
   type-check@0.4.0:
@@ -1087,7 +1087,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/d975134e43722ba7550f1ed286374fcfa791d39c:
+  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1b1bd547bb1afdebc2761f07e3c755613d0a34ed:
     dependencies:
       ws: 8.18.0
     transitivePeerDependencies:

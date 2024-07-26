@@ -1,4 +1,5 @@
 const log = require('../util/log');
+const { createMessageEmbed } = require('../util/embed');
 
 const { Events } = require('discord.js');
 
@@ -17,14 +18,18 @@ module.exports = {
 				await command.execute(interaction);
 			} catch (err) {
 				log.error(err.stack, true, true);
+				const em = createMessageEmbed(
+					'There was an error while executing this command!',
+					interaction
+				);
 				if (interaction.replied || interaction.deferred) {
 					await interaction.followUp({
-						content: 'There was an error while executing this command!',
+						embeds: [em],
 						ephemeral: true,
 					});
 				} else {
 					await interaction.reply({
-						content: 'There was an error while executing this command!',
+						embeds: [em],
 						ephemeral: true,
 					});
 				}
