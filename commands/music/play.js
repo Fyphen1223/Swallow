@@ -230,25 +230,25 @@ module.exports = {
 			},
 		};
 
-		if (globalThis.queue[guildId].player.track) {
-			Promise.all([
-				updateEmbed(guildId),
+		if (!globalThis.queue[guildId].player.track) {
+			await Promise.all([
 				interaction.reply({
 					embeds: [resultEmbed],
 				}),
-			]);
-		} else {
-			Promise.all([
-				interaction.reply({
-					embeds: [resultEmbed],
-				}),
-				await globalThis.queue[guildId].player.play({
+				globalThis.queue[guildId].player.play({
 					track: {
 						encoded:
 							globalThis.queue[guildId].queue[
 								globalThis.queue[guildId].index
 							].data.encoded,
 					},
+				}),
+			]);
+		} else {
+			await Promise.all([
+				updateEmbed(guildId),
+				interaction.reply({
+					embeds: [resultEmbed],
 				}),
 			]);
 		}

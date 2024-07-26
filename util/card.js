@@ -13,6 +13,7 @@ async function generateMusicCard(current, guildId) {
 	ctx.fillStyle = '#16213e';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+	await globalThis.queue[guildId].player.get();
 	//Title
 	ctx.font = '50px "Jakarta", "NotoSans", "NotoSansJP"';
 	ctx.fillStyle = '#ffffff';
@@ -123,11 +124,7 @@ async function generateMusicCard(current, guildId) {
 			borderRadius: 50,
 		}),
 	]);
-	const d = await Promise.all([
-		globalThis.queue[guildId].player.get(),
-		loadImage(images[1]),
-		loadImage(images[0]),
-	]);
+	const d = await Promise.all([loadImage(images[1]), loadImage(images[0])]);
 	ctx.drawImage(d[1], 380, 225);
 	ctx.drawImage(d[2], 10 * 2, 10 * 2);
 
