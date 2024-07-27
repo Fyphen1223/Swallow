@@ -110,7 +110,7 @@ async function generateMusicCard(current, guildId) {
 	*/
 	const images = await Promise.all([
 		cropImage({
-			imagePath: current.artworkUrl,
+			imagePath: current.artworkUrl || config.config.music.defaultThumbnail,
 			width: 160 * 2,
 			height: 220 * 2,
 			cropCenter: true,
