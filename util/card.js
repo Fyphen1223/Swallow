@@ -125,8 +125,8 @@ async function generateMusicCard(current, guildId) {
 		}),
 	]);
 	const d = await Promise.all([loadImage(images[1]), loadImage(images[0])]);
-	ctx.drawImage(d[1], 380, 225);
-	ctx.drawImage(d[2], 10 * 2, 10 * 2);
+	ctx.drawImage(d[0], 380, 225);
+	ctx.drawImage(d[1], 10 * 2, 10 * 2);
 
 	const buffer = canvas.toBuffer('image/png');
 	return buffer;

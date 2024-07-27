@@ -207,8 +207,10 @@ client.on('raw', (data) => {
 	globalThis.Tsumi.handleRaw(data);
 });
 
+/*
 process.on('uncaughtException', (err) => {
 	log.error(`Uncaught Exception: ${err}`, true, true);
 });
+*/
 
 client.login(config.bot.token);
