@@ -25,14 +25,14 @@ importers:
         version: 4.6.15
       tsumi:
         specifier: github:Fyphen1223/TsumiLink
-        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1b1bd547bb1afdebc2761f07e3c755613d0a34ed
+        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5772e005dc7dfafab24d2f8e13223dd22cf92547
     devDependencies:
       '@eslint/js':
-        specifier: ^9.7.0
-        version: 9.7.0
+        specifier: ^9.8.0
+        version: 9.8.0
       eslint:
-        specifier: ^9.7.0
-        version: 9.7.0
+        specifier: ^9.8.0
+        version: 9.8.0
 
 packages:
 
@@ -82,8 +82,8 @@ packages:
     resolution: {integrity: sha512-4Bfj15dVJdoy3RfZmmo86RK1Fwzn6SstsvK9JS+BaVKqC6QQQQyXekNaC+g+LKNgkQ+2VhGAzm6hO40AhMR3zQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/js@9.7.0':
-    resolution: {integrity: sha512-ChuWDQenef8OSFnvuxv0TCVxEwmu3+hPNKvM9B34qpM0rDRbjL8t5QkQeHHeAfsKQjuH9wS82WeCi1J/owatng==}
+  '@eslint/js@9.8.0':
+    resolution: {integrity: sha512-MfluB7EUfxXtv3i/++oh89uzAr4PDI4nn201hsp+qaXqsjAWzinlZEHEfPgAX4doIlKvPG/i0A9dpKxOLII8yA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.4':
@@ -316,8 +316,8 @@ packages:
     resolution: {integrity: sha512-OtIRv/2GyiF6o/d8K7MYKKbXrOUBIK6SfkIRM4Z0dY3w+LiQ0vy3F57m0Z71bjbyeiWFiHJ8brqnmE6H6/jEuw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  eslint@9.7.0:
-    resolution: {integrity: sha512-FzJ9D/0nGiCGBf8UXO/IGLTgLVzIxze1zpfA8Ton2mjLovXdAPlYDv+MQDcqj3TmrhAGYfOpz9RfR+ent0AgAw==}
+  eslint@9.8.0:
+    resolution: {integrity: sha512-K8qnZ/QJzT2dLKdZJVX6W4XOwBzutMYmt0lqUS+JdXgd+HTYFlonFgkJ8s44d/zMPPCnOOk0kMWCApCPhiOy9A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
 
@@ -538,8 +538,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1b1bd547bb1afdebc2761f07e3c755613d0a34ed:
-    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1b1bd547bb1afdebc2761f07e3c755613d0a34ed}
+  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5772e005dc7dfafab24d2f8e13223dd22cf92547:
+    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5772e005dc7dfafab24d2f8e13223dd22cf92547}
     version: 0.0.18
 
   type-check@0.4.0:
@@ -633,9 +633,9 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@eslint-community/eslint-utils@4.4.0(eslint@9.7.0)':
+  '@eslint-community/eslint-utils@4.4.0(eslint@9.8.0)':
     dependencies:
-      eslint: 9.7.0
+      eslint: 9.8.0
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.11.0': {}
@@ -662,7 +662,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/js@9.7.0': {}
+  '@eslint/js@9.8.0': {}
 
   '@eslint/object-schema@2.1.4': {}
 
@@ -862,13 +862,13 @@ snapshots:
 
   eslint-visitor-keys@4.0.0: {}
 
-  eslint@9.7.0:
+  eslint@9.8.0:
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@9.7.0)
+      '@eslint-community/eslint-utils': 4.4.0(eslint@9.8.0)
       '@eslint-community/regexpp': 4.11.0
       '@eslint/config-array': 0.17.1
       '@eslint/eslintrc': 3.1.0
-      '@eslint/js': 9.7.0
+      '@eslint/js': 9.8.0
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.3.0
       '@nodelib/fs.walk': 1.2.8
@@ -1087,7 +1087,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1b1bd547bb1afdebc2761f07e3c755613d0a34ed:
+  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/5772e005dc7dfafab24d2f8e13223dd22cf92547:
     dependencies:
       ws: 8.18.0
     transitivePeerDependencies:
