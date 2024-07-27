@@ -92,6 +92,7 @@ const listenEvents = async (guildId) => {
 		if (!globalThis.guilds.get(guildId).stt) return;
 		fs.writeFileSync('./records/temp.pcm', Buffer.from(voice.data, 'base64'));
 		globalThis.queue[guildId].textChannel.send('You stopped speaking!');
+		//ffmpeg -f s16le -ar 44100 -ac 2 -i output.pcm output.wav
 	});
 };
 
