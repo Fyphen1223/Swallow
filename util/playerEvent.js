@@ -3,9 +3,6 @@ const fs = require('node:fs');
 const { getLocale } = require('../lang/lang.js');
 const log = require('./log.js');
 
-const prism = require('prism-media');
-const wav = require('wav');
-
 const { createMusicEmbed, createMessageEmbed, createButton } = require('./embed.js');
 
 const listenEvents = async (guildId) => {
@@ -93,17 +90,9 @@ const listenEvents = async (guildId) => {
 	});
 	globalThis.queue[guildId].player.on('endSpeaking', async (voice) => {
 		if (!globalThis.guilds.get(guildId).stt) return;
-		console.log(voice.data);
-		fs.writeFileSync('./records/temp.wav', pcmToWav(Buffer.from(voice.data)));
+		fs.writeFileSync('./records/temp.pcm', Buffer.from(voice.data, 'base64'));
 		globalThis.queue[guildId].textChannel.send('You stopped speaking!');
 	});
 };
-
-function pcmToWav(pcmData) {
-	const wfReader = new wav.Reader();
-	const wfReadable = new Readable().wrap(wfReader);
-
-	wavStream.pipe(wfReader);
-}
 
 module.exports = listenEvents;
