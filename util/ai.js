@@ -25,4 +25,12 @@ async function gen(prompt, messages) {
 	return response.gpt;
 }
 
-module.exports = { generateAI };
+class TextChannelAI {
+	constructor(options) {
+		this.guildId = options.guildId;
+		this.textChannel = options.textChannel;
+		this.history = [];
+	}
+}
+
+module.exports = { generateAI, TextChannelAI };

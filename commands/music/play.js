@@ -105,7 +105,7 @@ module.exports = {
 				guildId: guildId,
 				channelId: interaction.member.voice.channelId,
 				options: {
-					deaf: true,
+					deaf: false,
 					mute: false,
 				},
 			});

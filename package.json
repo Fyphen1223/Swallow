@@ -16,11 +16,13 @@
 		"eslint": "^9.8.0"
 	},
 	"dependencies": {
+		"@discordjs/opus": "^0.9.0",
 		"@napi-rs/canvas": "^0.1.53",
 		"cropify": "^1.0.9",
 		"discord.js": "^14.15.3",
-		"minimatch": "^10.0.1",
+		"prism-media": "^1.3.5",
 		"redis": "^4.6.15",
-		"tsumi": "github:Fyphen1223/TsumiLink"
+		"tsumi": "github:Fyphen1223/TsumiLink",
+		"wav": "^1.0.2"
 	}
 }

@@ -27,6 +27,9 @@ module.exports = {
 							}
 						)
 				)
+		)
+		.addSubcommand((subcommand) =>
+			subcommand.setName('stt').setDescription('Enable or Disable Speech To Text')
 		),
 	info: {
 		premium: false,
@@ -46,6 +49,30 @@ module.exports = {
 				interaction
 			);
 			await interaction.editReply({ embeds: [embed] });
+			return;
+		}
+
+		if (subcommand === 'stt') {
+			const current = globalThis.guilds.get(interaction.guildId);
+			current.stt = !current.stt;
+			globalThis.guilds.set(interaction.guildId, current);
+			if (!current.stt) {
+				const embed = createMessageEmbed(
+					getLocale(globalThis.guilds.get(interaction.guildId).locale).config
+						.sttDisabled,
+					interaction
+				);
+				await globalThis.queue[interaction.guildId].player.stopListen();
+				await interaction.editReply({ embeds: [embed] });
+			} else {
+				const embed = createMessageEmbed(
+					getLocale(globalThis.guilds.get(interaction.guildId).locale).config
+						.sttEnabled,
+					interaction
+				);
+				await globalThis.queue[interaction.guildId].player.startListen();
+				await interaction.editReply({ embeds: [embed] });
+			}
 			return;
 		}
 	},

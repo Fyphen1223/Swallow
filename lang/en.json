@@ -27,6 +27,8 @@
 	},
 	"ping": "Pong! Current Ping is {ping}ms.",
 	"config": {
-		"langChanged": "🌐 - Language has been changed to English."
+		"langChanged": "🌐 - Language has been changed to English.",
+		"sttEnabled": "🔊 - Speech-to-Text has been enabled.",
+		"sttDisabled": "🔇 - Speech-to-Text has been disabled."
 	}
 }

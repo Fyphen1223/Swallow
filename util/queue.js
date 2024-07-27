@@ -13,6 +13,21 @@ class queue extends EventEmitter {
 		 * @type {Array}
 		 */
 		this.queue = [];
+
+		/*
+		 * @type {Boolean}
+		 */
+		this.isTTS = false;
+
+		/*
+		 * @type {Boolean}
+		 */
+		this.isSTT = false;
+
+		/*
+		 * @type {Object}
+		 */
+		this.listeningWebSocket = null;
 	}
 
 	/*

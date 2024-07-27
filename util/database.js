@@ -34,6 +34,7 @@ class database {
 			this.database[guildId] = {
 				locale: 'en',
 				config: {},
+				stt: false,
 			};
 			log.info(
 				`Guild ${guildId} added to guilds.json`,

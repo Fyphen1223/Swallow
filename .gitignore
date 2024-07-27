@@ -141,3 +141,6 @@ cache/*
 
 LavaLink
 cf
+
+models/*
+records/*

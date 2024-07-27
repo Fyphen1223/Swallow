@@ -1,11 +1,23 @@
+const fs = require('node:fs');
+
 const { getLocale } = require('../lang/lang.js');
 const log = require('./log.js');
+
+const prism = require('prism-media');
+const wav = require('wav');
 
 const { createMusicEmbed, createMessageEmbed, createButton } = require('./embed.js');
 
 const listenEvents = async (guildId) => {
 	globalThis.queue[guildId].player.removeAllListeners();
+	if (globalThis.guilds.get(guildId).stt) {
+		await globalThis.queue[guildId].player.startListen();
+	} else {
+		await globalThis.queue[guildId].player.stopListen();
+	}
+
 	globalThis.queue[guildId].player.on('start', async () => {
+		if (globalThis.queue[guildId].isTTS) return;
 		globalThis.queue[guildId].suppressEnd = false;
 		globalThis.queue[guildId].pending = true;
 		await globalThis.queue[guildId].player.get();
@@ -39,7 +51,7 @@ const listenEvents = async (guildId) => {
 		globalThis.queue[guildId].pending = false;
 	});
 	globalThis.queue[guildId].player.on('end', async () => {
-		if (queue[guildId].suppressEnd) return;
+		if (queue[guildId].suppressEnd || queue[guildId].isTTS) return;
 		const index = globalThis.queue[guildId].index + 1;
 		globalThis.queue[guildId].previous =
 			globalThis.queue[guildId].queue[globalThis.queue[guildId].index];
@@ -74,6 +86,24 @@ const listenEvents = async (guildId) => {
 			});
 		}
 	});
+
+	globalThis.queue[guildId].player.on('startSpeaking', async (voice) => {
+		if (!globalThis.guilds.get(guildId).stt) return;
+		globalThis.queue[guildId].textChannel.send('Listening to your voice...');
+	});
+	globalThis.queue[guildId].player.on('endSpeaking', async (voice) => {
+		if (!globalThis.guilds.get(guildId).stt) return;
+		console.log(voice.data);
+		fs.writeFileSync('./records/temp.wav', pcmToWav(Buffer.from(voice.data)));
+		globalThis.queue[guildId].textChannel.send('You stopped speaking!');
+	});
 };
+
+function pcmToWav(pcmData) {
+	const wfReader = new wav.Reader();
+	const wfReadable = new Readable().wrap(wfReader);
+
+	wavStream.pipe(wfReader);
+}
 
 module.exports = listenEvents;
