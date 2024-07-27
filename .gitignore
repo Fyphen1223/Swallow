@@ -144,3 +144,6 @@ cf
 
 models/*
 records/*
+
+!models
+!records

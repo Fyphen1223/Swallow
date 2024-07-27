@@ -3,6 +3,12 @@ const fs = require('node:fs');
 const { getLocale } = require('../lang/lang.js');
 const log = require('./log.js');
 
+const vosk = require('vosk');
+
+vosk.setLogLevel(2);
+
+const model = new vosk.Model('./models/vosk-model-small-en-us-0.15');
+
 const { createMusicEmbed, createMessageEmbed, createButton } = require('./embed.js');
 
 const listenEvents = async (guildId) => {
