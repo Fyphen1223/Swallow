@@ -1,13 +1,16 @@
 const fs = require('node:fs');
+const { Readable } = require('stream');
 
 const { getLocale } = require('../lang/lang.js');
 const log = require('./log.js');
 
 const vosk = require('vosk');
 
-vosk.setLogLevel(2);
+vosk.setLogLevel(-1);
 
-const model = new vosk.Model('./models/vosk-model-small-en-us-0.15');
+const models = {
+	en: new vosk.Model('./models/en'),
+};
 
 const { createMusicEmbed, createMessageEmbed, createButton } = require('./embed.js');
 
@@ -96,10 +99,52 @@ const listenEvents = async (guildId) => {
 	});
 	globalThis.queue[guildId].player.on('endSpeaking', async (voice) => {
 		if (!globalThis.guilds.get(guildId).stt) return;
-		fs.writeFileSync('./records/temp.pcm', Buffer.from(voice.data, 'base64'));
+		const audioStream = new Readable();
+		audioStream.push(Buffer.from(voice.data, 'base64'));
+		audioStream.push(null);
+
+		pcmToWav(Buffer.from(voice.data, 'base64'), './records/output.wav');
+
+		const en = new vosk.Recognizer({ model: models.en, sampleRate: 48000 });
+		en.setMaxAlternatives(2);
+		en.setWords(true);
+		audioStream.on('data', (chunk) => {
+			if (en.acceptWaveform(chunk)) {
+				return;
+			} else {
+				return;
+			}
+		});
+
+		audioStream.on('end', () => {
+			console.log(en.finalResult());
+			en.free();
+		});
+
 		globalThis.queue[guildId].textChannel.send('You stopped speaking!');
 		//ffmpeg -f s16le -ar 44100 -ac 2 -i output.pcm output.wav
 	});
 };
 
 module.exports = listenEvents;
+
+const wav = require('wav');
+
+function pcmToWav(pcmData, outputPath) {
+	if (!Buffer.isBuffer(pcmData)) {
+		throw new Error('pcmData must be a Buffer');
+	}
+
+	const numChannels = 2; // Mono
+	const sampleRate = 48000; // 48kHz
+	const bitsPerSample = 16; // 16-bit
+
+	const writer = new wav.FileWriter(outputPath, {
+		channels: numChannels,
+		sampleRate: sampleRate,
+		bitDepth: bitsPerSample,
+	});
+
+	writer.write(pcmData);
+	writer.end();
+}
