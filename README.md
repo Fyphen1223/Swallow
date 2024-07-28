@@ -66,6 +66,19 @@ pnpm i
 
 #### Third, create config.json according to config.example.json file
 
+<details>
+
+<summary>If you want to use voice recognizer</summary>
+
+Create a new folder and cd into it, then use nvm or something like that to use older Node.js version to install vosk (as 18< version of Node.js is not copmatible with it)
+
+Second, copy everything in that `node_modules` folder and paste it into the original `node_modules`.
+
+Third, download models and then put them in models directory, naming them as their capable language name.
+
+</details>
+
+
 #### Lastly, run the bot by just executing this command
 
 ```bash
