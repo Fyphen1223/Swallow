@@ -76,6 +76,8 @@ Second, copy everything in that `node_modules` folder and paste it into the orig
 
 Third, download models and then put them in models directory, naming them as their capable language name.
 
+I will soon release compressed `node_modules` folder.
+
 </details>
 
 
