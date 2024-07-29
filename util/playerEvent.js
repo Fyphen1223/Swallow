@@ -1,4 +1,3 @@
-const fs = require('node:fs');
 const { Readable } = require('stream');
 
 const { getLocale } = require('../lang/lang.js');
@@ -6,10 +5,11 @@ const log = require('./log.js');
 
 const vosk = require('vosk');
 
-vosk.setLogLevel(-1);
+vosk.setLogLevel(1);
 
 const models = {
 	en: new vosk.Model('./models/en'),
+	//ja: new vosk.Model('./models/ja'),
 };
 
 const { createMusicEmbed, createMessageEmbed, createButton } = require('./embed.js');
