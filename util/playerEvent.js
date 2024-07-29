@@ -103,8 +103,6 @@ const listenEvents = async (guildId) => {
 		audioStream.push(Buffer.from(voice.data, 'base64'));
 		audioStream.push(null);
 
-		pcmToWav(Buffer.from(voice.data, 'base64'), './records/output.wav');
-
 		const en = new vosk.Recognizer({ model: models.en, sampleRate: 48000 });
 		en.setMaxAlternatives(2);
 		en.setWords(true);
@@ -128,8 +126,7 @@ const listenEvents = async (guildId) => {
 
 module.exports = listenEvents;
 
-const wav = require('wav');
-
+/*
 function pcmToWav(pcmData, outputPath) {
 	if (!Buffer.isBuffer(pcmData)) {
 		throw new Error('pcmData must be a Buffer');
@@ -148,3 +145,4 @@ function pcmToWav(pcmData, outputPath) {
 	writer.write(pcmData);
 	writer.end();
 }
+*/
