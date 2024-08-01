@@ -22,7 +22,7 @@ importers:
         version: 4.7.0
       tsumi:
         specifier: github:Fyphen1223/TsumiLink
-        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/dc3eb54cd29b1b29982a65b6b246c923839638eb
+        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1f323fff0121bebc9e31fdd49e2eb3ed038920f4
       wav:
         specifier: ^1.0.2
         version: 1.0.2
@@ -209,14 +209,14 @@ packages:
     resolution: {integrity: sha512-jjmJywLAFoWeBi1W7994zZyiNWPIiqRRNAmSERxyg93xRGzNYvGjlZ0gR6x0F4gPRi2+0O6S71kOZYyr3cxaIQ==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
-  '@types/node@22.0.0':
-    resolution: {integrity: sha512-VT7KSYudcPOzP5Q0wfbowyNLaVR8QWUdw+088uFWwfvpY6uCWaXpqV6ieLAu9WBcnTa7H4Z5RLK8I5t2FuOcqw==}
+  '@types/node@22.0.2':
+    resolution: {integrity: sha512-yPL6DyFwY5PiMVEwymNeqUTKsDczQBJ/5T7W/46RwLU/VH+AA8aT5TZkvBviLKLbbm0hlfftEkGrNzfRk/fofQ==}
 
   '@types/ws@8.5.12':
     resolution: {integrity: sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==}
 
-  '@vladfrangu/async_event_emitter@2.4.4':
-    resolution: {integrity: sha512-ZL62PFXEIeGUI8btfJ5S8Flc286eU1ZUSjwyFQtIGXfRUDPZKO+CDJMYb1R71LjGWRZ4n202O+a6FGjsgTw58g==}
+  '@vladfrangu/async_event_emitter@2.4.5':
+    resolution: {integrity: sha512-J7T3gUr3Wz0l7Ni1f9upgBZ7+J22/Q1B7dl0X6fG+fTsD+H+31DIosMHj4Um1dWQwqbcQ3oQf+YS2foYkDc9cQ==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
   acorn-jsx@5.3.2:
@@ -572,8 +572,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/dc3eb54cd29b1b29982a65b6b246c923839638eb:
-    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/dc3eb54cd29b1b29982a65b6b246c923839638eb}
+  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1f323fff0121bebc9e31fdd49e2eb3ed038920f4:
+    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1f323fff0121bebc9e31fdd49e2eb3ed038920f4}
     version: 0.0.18
 
   type-check@0.4.0:
@@ -647,7 +647,7 @@ snapshots:
       '@discordjs/util': 1.1.0
       '@sapphire/async-queue': 1.5.3
       '@sapphire/snowflake': 3.5.3
-      '@vladfrangu/async_event_emitter': 2.4.4
+      '@vladfrangu/async_event_emitter': 2.4.5
       discord-api-types: 0.37.83
       magic-bytes.js: 1.10.0
       tslib: 2.6.2
@@ -662,7 +662,7 @@ snapshots:
       '@discordjs/util': 1.1.0
       '@sapphire/async-queue': 1.5.3
       '@types/ws': 8.5.12
-      '@vladfrangu/async_event_emitter': 2.4.4
+      '@vladfrangu/async_event_emitter': 2.4.5
       discord-api-types: 0.37.83
       tslib: 2.6.2
       ws: 8.18.0
@@ -793,15 +793,15 @@ snapshots:
 
   '@sapphire/snowflake@3.5.3': {}
 
-  '@types/node@22.0.0':
+  '@types/node@22.0.2':
     dependencies:
       undici-types: 6.11.1
 
   '@types/ws@8.5.12':
     dependencies:
-      '@types/node': 22.0.0
+      '@types/node': 22.0.2
 
-  '@vladfrangu/async_event_emitter@2.4.4': {}
+  '@vladfrangu/async_event_emitter@2.4.5': {}
 
   acorn-jsx@5.3.2(acorn@8.12.1):
     dependencies:
@@ -1154,7 +1154,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/dc3eb54cd29b1b29982a65b6b246c923839638eb:
+  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1f323fff0121bebc9e31fdd49e2eb3ed038920f4:
     dependencies:
       ws: 8.18.0
     transitivePeerDependencies:

@@ -5,6 +5,7 @@ const { createMessageEmbed } = require('../../util/embed.js');
 const { checkVC } = require('../../util/check.js');
 
 const { SlashCommandBuilder, EmbedBuilder, codeBlock } = require('discord.js');
+const { wait } = require('../../util/time.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -29,6 +30,9 @@ module.exports = {
 			subcommand
 				.setName('artwork')
 				.setDescription('Show the artwork of the current song')
+		)
+		.addSubcommand((subcommand) =>
+			subcommand.setName('purge').setDescription('Purge the queue')
 		),
 	info: {
 		premium: false,
@@ -47,16 +51,16 @@ module.exports = {
 	async execute(interaction) {
 		await interaction.deferReply();
 
-		const guildId = interaction.guild.id;
-
 		if (!(await checkVC(interaction))) return;
 
 		const subcommand = interaction.options.getSubcommand();
+		const guildId = interaction.guild.id;
+
 		switch (subcommand) {
 			case 'show':
 				// Show the current queue
 				let content = '';
-				if (globalThis.queue[guildId].queue.length === 0) {
+				if (globalThis.queue[interaction.guild.id].queue.length === 0) {
 					const embed = {
 						title: 'Queue',
 						description: 'No music added to the queue.',
@@ -149,6 +153,37 @@ module.exports = {
 					embeds: [artWork],
 					//	components: [urlButton],
 				});
+				break;
+			case 'purge':
+				const guildId = interaction.guild.id;
+				if (!globalThis.queue[guildId].player.track) {
+					const embed = createMessageEmbed(
+						getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+							.notPlaying,
+						interaction
+					);
+					await interaction.editReply({ embeds: [embed] });
+					return;
+				}
+
+				do {
+					await wait(100);
+				} while (globalThis.queue[guildId].pending);
+				globalThis.queue[guildId].suppressEnd = true;
+				const embed = createMessageEmbed(
+					getLocale(globalThis.guilds.get(interaction.guild.id).locale).vc
+						.purged,
+					interaction
+				);
+				Promise.all([
+					interaction.editReply({ embeds: [embed] }),
+					globalThis.queue[guildId].player.stop(),
+				]);
+				globalThis.queue[guildId].queue = [];
+				globalThis.queue[guildId].index = 0;
+
+				globalThis.queue[guildId].panel.delete();
+				globalThis.queue[guildId].panel = null;
 				break;
 		}
 		return;

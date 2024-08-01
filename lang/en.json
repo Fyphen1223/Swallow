@@ -23,7 +23,8 @@
 		"notFound": "🚫 - No music found.",
 		"removed": "🗑️ - Removed the song.",
 		"currentlyPlaying": "🚫 - The song is being played.",
-		"noPlayer": "🚫 - There is no player."
+		"noPlayer": "🚫 - There is no player.",
+		"purged": "🗑️ - Cleared the queue."
 	},
 	"ping": "Pong! Current Ping is {ping}ms.",
 	"config": {
