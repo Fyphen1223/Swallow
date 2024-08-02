@@ -36,7 +36,7 @@ const listenEvents = async (guildId) => {
 					guildId
 				].textChannel.send({
 					embeds: [embed.embed],
-					components: await createButton(guildId),
+					components: createButton(guildId),
 					files: [embed.file],
 				});
 			} catch (err) {
