@@ -57,7 +57,7 @@ module.exports = {
 		const guildId = interaction.guild.id;
 
 		switch (subcommand) {
-			case 'show':
+			case 'show': {
 				let content = '';
 				if (globalThis.queue[guildId].queue.length === 0) {
 					let embed = {
@@ -95,7 +95,8 @@ module.exports = {
 					await interaction.editReply({ embeds: [embed] });
 				}
 				break;
-			case 'remove':
+			}
+			case 'remove': {
 				let list = globalThis.queue[guildId].getTitles();
 				let query = interaction.options.getString('name');
 				let index = list.indexOf(query);
@@ -131,7 +132,8 @@ module.exports = {
 
 				await interaction.editReply({ embeds: [removeEmbed] });
 				break;
-			case 'artwork':
+			}
+			case 'artwork': {
 				let artWork = new EmbedBuilder()
 					.setColor(config.config.color.info)
 					.setImage(
@@ -142,7 +144,8 @@ module.exports = {
 					embeds: [artWork],
 				});
 				break;
-			case 'purge':
+			}
+			case 'purge': {
 				if (!globalThis.queue[guildId].player.track) {
 					let embed = createMessageEmbed(
 						getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
@@ -172,6 +175,7 @@ module.exports = {
 				globalThis.queue[guildId].panel.delete();
 				globalThis.queue[guildId].panel = null;
 				break;
+			}
 		}
 		return;
 	},
