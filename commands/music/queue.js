@@ -4,7 +4,7 @@ const { getLocale } = require('../../lang/lang.js');
 const { createMessageEmbed } = require('../../util/embed.js');
 const { checkVC } = require('../../util/check.js');
 
-const { SlashCommandBuilder, EmbedBuilder, codeBlock } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { wait } = require('../../util/time.js');
 
 module.exports = {
@@ -58,10 +58,9 @@ module.exports = {
 
 		switch (subcommand) {
 			case 'show':
-				// Show the current queue
 				let content = '';
-				if (globalThis.queue[interaction.guild.id].queue.length === 0) {
-					const embed = {
+				if (globalThis.queue[guildId].queue.length === 0) {
+					let embed = {
 						title: 'Queue',
 						description: 'No music added to the queue.',
 						color: parseInt(
@@ -84,7 +83,7 @@ module.exports = {
 							item.data.info.author
 						}`;
 					});
-					const embed = {
+					let embed = {
 						title: 'Queue',
 						description: '```' + content + '```',
 						color: parseInt(
@@ -97,12 +96,12 @@ module.exports = {
 				}
 				break;
 			case 'remove':
-				const list = globalThis.queue[guildId].getTitles();
-				const query = interaction.options.getString('name');
-				const index = list.indexOf(query);
+				let list = globalThis.queue[guildId].getTitles();
+				let query = interaction.options.getString('name');
+				let index = list.indexOf(query);
 
 				if (index === -1) {
-					const embed = createMessageEmbed(
+					let embed = createMessageEmbed(
 						getLocale(globalThis.guilds.get(guildId).locale).vc.notFound,
 						interaction
 					);
@@ -111,7 +110,7 @@ module.exports = {
 				}
 
 				if (globalThis.queue[guildId].index === index) {
-					const embed = createMessageEmbed(
+					let embed = createMessageEmbed(
 						getLocale(globalThis.guilds.get(guildId).locale).vc
 							.currentlyPlaying,
 						interaction
@@ -121,9 +120,8 @@ module.exports = {
 				}
 
 				globalThis.queue[guildId].remove(index);
-				const removeEmbed = createMessageEmbed(
-					getLocale(globalThis.guilds.get(interaction.guild.id).locale).vc
-						.removed,
+				let removeEmbed = createMessageEmbed(
+					getLocale(globalThis.guilds.get(guildId).locale).vc.removed,
 					interaction
 				);
 
@@ -134,30 +132,19 @@ module.exports = {
 				await interaction.editReply({ embeds: [removeEmbed] });
 				break;
 			case 'artwork':
-				const artWork = new EmbedBuilder()
+				let artWork = new EmbedBuilder()
 					.setColor(config.config.color.info)
 					.setImage(
 						globalThis.queue[guildId].queue[globalThis.queue[guildId].index]
 							.data.info.artworkUrl
 					);
-				/*
-				const urlButton = new ButtonBuilder()
-					.setURL(
-						globalThis.queue[guildId].queue[globalThis.queue[guildId].index]
-							.data.info.uri
-					)
-					.setLabel('Open')
-					.setStyle(ButtonStyle.Link);
-				*/
 				await interaction.editReply({
 					embeds: [artWork],
-					//	components: [urlButton],
 				});
 				break;
 			case 'purge':
-				const guildId = interaction.guild.id;
 				if (!globalThis.queue[guildId].player.track) {
-					const embed = createMessageEmbed(
+					let embed = createMessageEmbed(
 						getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
 							.notPlaying,
 						interaction
@@ -170,7 +157,7 @@ module.exports = {
 					await wait(100);
 				} while (globalThis.queue[guildId].pending);
 				globalThis.queue[guildId].suppressEnd = true;
-				const embed = createMessageEmbed(
+				let embed = createMessageEmbed(
 					getLocale(globalThis.guilds.get(interaction.guild.id).locale).vc
 						.purged,
 					interaction
