@@ -6,21 +6,27 @@
 	"scripts": {
 		"bot": "node index.js",
 		"bun": "bun run index.js",
-		"clearlog": "node ./util/clearlog.js"
+		"clearlog": "node ./util/clearlog.js",
+		"build": "cd server && npx webpack && cd .. && node index.js" 
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
 		"@eslint/js": "^9.8.0",
-		"eslint": "^9.8.0"
+		"eslint": "^9.8.0",
+		"webpack-cli": "^5.1.4"
 	},
 	"dependencies": {
+		"@discord/embedded-app-sdk": "^1.4.1",
 		"@napi-rs/canvas": "^0.1.53",
 		"cropify": "^1.0.9",
 		"discord.js": "^14.15.3",
+		"express": "^4.19.2",
+		"express-session": "^1.18.0",
 		"redis": "^4.7.0",
 		"tsumi": "github:Fyphen1223/TsumiLink",
-		"wav": "^1.0.2"
+		"wav": "^1.0.2",
+		"webpack": "^5.93.0"
 	}
 }
