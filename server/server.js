@@ -17,12 +17,12 @@ function bootServer() {
 			cert: fs.readFileSync('./ssl/cert.pem'),
 			ca: fs.readFileSync('./ssl/chain.pem'),
 		},
-		app
+		globalThis.app
 	);
 	globalThis.app.use(express.json());
 	globalThis.app.post('/api/token', async (req, res) => {
-		code = req.body.code;
-		params = new URLSearchParams({
+		let code = req.body.code;
+		let params = new URLSearchParams({
 			client_id: config.bot.applicationId,
 			client_secret: config.bot.clientSecret,
 			grant_type: 'authorization_code',

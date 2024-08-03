@@ -12,7 +12,7 @@ const listenEvents = async (guildId) => {
 		await globalThis.queue[guildId].player.stopListen();
 	}
 
-	globalThis.queue[guildId].player.on('start', async (d) => {
+	globalThis.queue[guildId].player.on('start', async () => {
 		globalThis.queue[guildId].pending = true;
 		globalThis.queue[guildId].suppressEnd = false;
 		await globalThis.queue[guildId].player.get();
@@ -46,7 +46,8 @@ const listenEvents = async (guildId) => {
 		globalThis.queue[guildId].pending = false;
 	});
 	globalThis.queue[guildId].player.on('end', async () => {
-		if (queue[guildId].suppressEnd || queue[guildId].isTTS) return;
+		if (globalThis.queue[guildId].suppressEnd || globalThis.queue[guildId].isTTS)
+			return;
 		const index = globalThis.queue[guildId].index + 1;
 		globalThis.queue[guildId].previous =
 			globalThis.queue[guildId].queue[globalThis.queue[guildId].index];
@@ -65,8 +66,7 @@ const listenEvents = async (guildId) => {
 				//Do auto play stuff here
 			} else {
 				const embed = createMessageEmbed(
-					getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
-						.queueEnded
+					getLocale(globalThis.guilds.get(guildId).locale).vc.queueEnded
 				);
 				globalThis.queue[guildId].textChannel.send({ embeds: [embed] });
 			}

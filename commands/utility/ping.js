@@ -10,7 +10,7 @@ module.exports = {
 	async execute(interaction) {
 		await interaction.deferReply();
 		const embed = createMessageEmbed(
-			`🏓 - Pong! Current ping is ${discordClient.ws.ping}ms`,
+			`🏓 - Pong! Current ping is ${globalThis.discordClient.ws.ping}ms`,
 			interaction
 		);
 		await interaction.editReply({ embeds: [embed] });

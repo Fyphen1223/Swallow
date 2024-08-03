@@ -80,7 +80,6 @@ async function generateMusicCard(current, guildId) {
 	ctx.fillStyle = 'white';
 	ctx.fillText(formatSource(current.sourceName), 555, 395);
 
-	let thumbnailImage = null;
 	/*
 	try {
 		thumbnailImage = await cropImage({

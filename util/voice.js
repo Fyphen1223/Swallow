@@ -32,7 +32,7 @@ async function handleSpeak(voice, guildId) {
 	const wfReader = new wav.Reader();
 	const wfReadable = new Readable().wrap(wfReader);
 
-	wfReader.on('format', async ({ audioFormat, sampleRate, channels }) => {
+	wfReader.on('format', async ({ audioFormat, _, channels }) => {
 		if (audioFormat != 1 || channels != 1) {
 			log.error('Audio file must be WAV format mono PCM.');
 		}

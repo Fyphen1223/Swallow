@@ -9,6 +9,8 @@
 </p>
 <div align="center">
 
+[![CodeFactor](https://www.codefactor.io/repository/github/fyphen1223/swallow/badge)](https://www.codefactor.io/repository/github/fyphen1223/swallow)
+
 Swallow is a versatile yet easy-to-use and fast Discord music bot written in Node.js
 
 [Roadmaps](./ROADMAPS.md), [Change log](./CHANGELOG.md)
@@ -79,7 +81,6 @@ Third, download models and then put them in models directory, naming them as the
 I will soon release compressed `node_modules` folder.
 
 </details>
-
 
 #### Lastly, run the bot by just executing this command
 

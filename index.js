@@ -12,7 +12,7 @@ if (!fs.existsSync('./config.json')) {
 
 try {
 	require('./config.json');
-} catch (_) {
+} catch (err) {
 	log.error(
 		`Config file is broken, please try deleting it and rebooting to fix this issue. : ${err}`,
 		true,
