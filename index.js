@@ -149,6 +149,17 @@ fs.writeFileSync(logFilePath, new Date().toISOString() + '\n');
 fs.renameSync(logFilePath, compressedFilePath);
 fs.writeFileSync(logFilePath, new Date().toISOString() + '\n');
 
+let logFiles = fs.readdirSync(path.join(__dirname, 'log'));
+logFiles.splice(logFiles.indexOf('log.txt'), 1);
+if (logFiles.length >= config.config.log.maxFiles + 1) {
+	do {
+		const oldestFile = logFiles.sort((a, b) => a.localeCompare(b))[0];
+		fs.unlinkSync(path.join(__dirname, 'log', oldestFile));
+		logFiles = fs.readdirSync(path.join(__dirname, 'log'));
+		logFiles.splice(logFiles.indexOf('log.txt'), 1);
+	} while (logFiles.length >= config.config.log.maxFiles);
+}
+
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 for (const folder of commandFolders) {
