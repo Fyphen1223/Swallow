@@ -1,5 +1,6 @@
 const { createMessageEmbed, updateEmbed } = require('../util/embed.js');
 const { getLocale } = require('../lang/lang.js');
+const { handleNotPlaying } = require('../util/check.js');
 
 module.exports = {
 	data: {
@@ -31,15 +32,7 @@ module.exports = {
 			}
 		}
 
-		if (!globalThis.queue[guildId].player.track) {
-			const embed = createMessageEmbed(
-				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
-					.notPlaying,
-				interaction
-			);
-			await interaction.reply({ embeds: [embed] });
-			return;
-		}
+		if (await handleNotPlaying(interaction)) return;
 
 		const embed = createMessageEmbed(
 			getLocale(globalThis.guilds.get(interaction.guildId).locale).vc.resumed,

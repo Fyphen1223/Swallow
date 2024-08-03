@@ -38,5 +38,6 @@ module.exports = {
 			globalThis.queue[guildId].player.node.leaveVoiceChannel(guildId),
 			interaction.editReply({ embeds: [embed] }),
 		]);
+		globalThis.queue[guildId].player = null;
 	},
 };

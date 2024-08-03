@@ -96,7 +96,7 @@ module.exports = {
 
 		const query = interaction.options.getString('query');
 
-		if (!globalThis.queue[guildId].voiceChannel) {
+		if (!globalThis.queue[guildId].player) {
 			globalThis.queue[guildId].textChannel = interaction.channel;
 			globalThis.queue[guildId].voiceChannel = interaction.member.voice.channel;
 			globalThis.queue[guildId].player = await globalThis.queue[

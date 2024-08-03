@@ -1,6 +1,6 @@
 const { getLocale } = require('../lang/lang.js');
 const { createMessageEmbed } = require('../util/embed.js');
-const { checkVC } = require('../util/check.js');
+const { checkVC, handleNotPlaying } = require('../util/check.js');
 
 module.exports = {
 	data: {
@@ -12,6 +12,7 @@ module.exports = {
 		const guildId = interaction.guild.id;
 
 		if (!(await checkVC(interaction))) return;
+		if (await handleNotPlaying(interaction)) return;
 
 		if (globalThis.queue[guildId].queue.length === 0) {
 			const noMusicEmbed = createMessageEmbed(

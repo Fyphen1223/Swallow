@@ -47,6 +47,8 @@ const { database } = require('./util/database.js');
 
 globalThis.queue = new playerQueue();
 
+globalThis.aiQueue = new Map();
+
 const discord = require('discord.js');
 const { TsumiInstance } = require('tsumi');
 

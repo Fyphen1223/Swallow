@@ -28,6 +28,16 @@ module.exports = {
 
 		if (!(await checkVC(interaction))) return;
 
+		if (globalThis.queue[guildId].player.track) {
+			const embed = createMessageEmbed(
+				getLocale(globalThis.guilds.get(interaction.guildId).locale).vc
+					.alreadyPlaying,
+				interaction
+			);
+			await interaction.reply({ embeds: [embed] });
+			return;
+		}
+
 		const query = interaction.options.getString('query');
 
 		if (!globalThis.queue[guildId].voiceChannel) {

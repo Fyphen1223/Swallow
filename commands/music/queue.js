@@ -2,7 +2,7 @@ const config = require('../../config.json');
 
 const { getLocale } = require('../../lang/lang.js');
 const { createMessageEmbed } = require('../../util/embed.js');
-const { checkVC } = require('../../util/check.js');
+const { checkVC, handleNotPlaying } = require('../../util/check.js');
 
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { wait } = require('../../util/time.js');
@@ -52,6 +52,7 @@ module.exports = {
 		await interaction.deferReply();
 
 		if (!(await checkVC(interaction))) return;
+		if (await handleNotPlaying(interaction)) return;
 
 		const subcommand = interaction.options.getSubcommand();
 		const guildId = interaction.guild.id;

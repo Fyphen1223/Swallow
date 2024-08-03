@@ -24,12 +24,15 @@
 		"removed": "🗑️ - Removed the song.",
 		"currentlyPlaying": "🚫 - The song is being played.",
 		"noPlayer": "🚫 - There is no player.",
-		"purged": "🗑️ - Cleared the queue."
+		"purged": "🗑️ - Cleared the queue.",
+		"alreadyPlaying": "🚫 - Music is already playing."
 	},
 	"ping": "Pong! Current Ping is {ping}ms.",
 	"config": {
 		"langChanged": "🌐 - Language has been changed to English.",
 		"sttEnabled": "🔊 - Speech-to-Text has been enabled.",
-		"sttDisabled": "🔇 - Speech-to-Text has been disabled."
+		"sttDisabled": "🔇 - Speech-to-Text has been disabled.",
+		"aiEnabled": "🧠 - AI has been enabled.",
+		"aiDisabled": "🧠 - AI has been disabled."
 	}
 }
