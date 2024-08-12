@@ -31,7 +31,7 @@ importers:
         version: 4.7.0
       tsumi:
         specifier: github:Fyphen1223/TsumiLink
-        version: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1f323fff0121bebc9e31fdd49e2eb3ed038920f4
+        version: git+https://git@github.com:Fyphen1223/TsumiLink.git#1f323fff0121bebc9e31fdd49e2eb3ed038920f4
       wav:
         specifier: ^1.0.2
         version: 1.0.2
@@ -40,8 +40,8 @@ importers:
         version: 5.93.0(webpack-cli@5.1.4)
     devDependencies:
       '@eslint/js':
-        specifier: ^9.8.0
-        version: 9.8.0
+        specifier: ^9.9.0
+        version: 9.9.0
       eslint:
         specifier: ^9.8.0
         version: 9.8.0
@@ -106,6 +106,10 @@ packages:
 
   '@eslint/js@9.8.0':
     resolution: {integrity: sha512-MfluB7EUfxXtv3i/++oh89uzAr4PDI4nn201hsp+qaXqsjAWzinlZEHEfPgAX4doIlKvPG/i0A9dpKxOLII8yA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.9.0':
+    resolution: {integrity: sha512-hhetes6ZHP3BlXLxmd8K2SNgkhNSi+UcecbnwWKwpP7kyi/uC75DJ1lOOBO3xrC4jyojtGE3YxKZPHfk4yrgug==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.4':
@@ -1182,8 +1186,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1f323fff0121bebc9e31fdd49e2eb3ed038920f4:
-    resolution: {tarball: https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1f323fff0121bebc9e31fdd49e2eb3ed038920f4}
+  tsumi@git+https://git@github.com:Fyphen1223/TsumiLink.git#1f323fff0121bebc9e31fdd49e2eb3ed038920f4:
+    resolution: {commit: 1f323fff0121bebc9e31fdd49e2eb3ed038920f4, repo: git@github.com:Fyphen1223/TsumiLink.git, type: git}
     version: 0.0.18
 
   type-check@0.4.0:
@@ -1398,6 +1402,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@9.8.0': {}
+
+  '@eslint/js@9.9.0': {}
 
   '@eslint/object-schema@2.1.4': {}
 
@@ -2465,7 +2471,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsumi@https://codeload.github.com/Fyphen1223/TsumiLink/tar.gz/1f323fff0121bebc9e31fdd49e2eb3ed038920f4:
+  tsumi@git+https://git@github.com:Fyphen1223/TsumiLink.git#1f323fff0121bebc9e31fdd49e2eb3ed038920f4:
     dependencies:
       ws: 8.18.0
     transitivePeerDependencies:
