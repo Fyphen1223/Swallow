@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@discord/embedded-app-sdk':
-        specifier: ^1.4.1
-        version: 1.4.1
+        specifier: ^1.4.2
+        version: 1.4.2
       '@napi-rs/canvas':
         specifier: ^0.1.53
         version: 0.1.53
@@ -51,8 +51,8 @@ importers:
 
 packages:
 
-  '@discord/embedded-app-sdk@1.4.1':
-    resolution: {integrity: sha512-xZA55Xqm0GakMJ0nXKfDNijFxqP6J5mNsa4RQfstRvklFToumKUmOLmjoW+Okkcq6Ff51oAgGTVGT4jGBjk/kQ==}
+  '@discord/embedded-app-sdk@1.4.2':
+    resolution: {integrity: sha512-nNeXQ61gT4OGv8fPLG/WEDuzynVLueb9El8yYGNiaTAOWnuuVjrVv0DpU16ixn+d1sgmNnfhW2mG6SBZGrK+Pw==}
 
   '@discordjs/builders@1.8.2':
     resolution: {integrity: sha512-6wvG3QaCjtMu0xnle4SoOIeFB4y6fKMN6WZfy3BMKJdQQtPLik8KGzDwBVL/+wTtcE/ZlFjgEk74GublyEVZ7g==}
@@ -1313,7 +1313,7 @@ packages:
 
 snapshots:
 
-  '@discord/embedded-app-sdk@1.4.1':
+  '@discord/embedded-app-sdk@1.4.2':
     dependencies:
       '@types/lodash.transform': 4.6.9
       '@types/uuid': 10.0.0
