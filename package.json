@@ -27,6 +27,6 @@
 		"redis": "^4.7.0",
 		"tsumi": "github:Fyphen1223/TsumiLink",
 		"wav": "^1.0.2",
-		"webpack": "^5.93.0"
+		"webpack": "^5.94.0"
 	}
 }
