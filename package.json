@@ -19,7 +19,7 @@
 	},
 	"dependencies": {
 		"@discord/embedded-app-sdk": "^1.4.2",
-		"@napi-rs/canvas": "^0.1.54",
+		"@napi-rs/canvas": "^0.1.55",
 		"cropify": "^1.0.9",
 		"discord.js": "^14.15.3",
 		"express": "^4.19.2",
