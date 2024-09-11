@@ -22,7 +22,7 @@
 		"@napi-rs/canvas": "^0.1.55",
 		"cropify": "^1.0.9",
 		"discord.js": "^14.16.1",
-		"express": "^4.19.2",
+		"express": "^4.20.0",
 		"express-session": "^1.18.0",
 		"redis": "^4.7.0",
 		"tsumi": "github:Fyphen1223/TsumiLink",
