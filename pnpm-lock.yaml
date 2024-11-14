@@ -12,8 +12,8 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2
       '@napi-rs/canvas':
-        specifier: ^0.1.55
-        version: 0.1.55
+        specifier: ^0.1.61
+        version: 0.1.61
       cropify:
         specifier: ^1.0.9
         version: 1.0.9
@@ -31,7 +31,7 @@ importers:
         version: 4.7.0
       tsumi:
         specifier: github:Fyphen1223/TsumiLink
-        version: git+https://git@github.com:Fyphen1223/TsumiLink.git#1f323fff0121bebc9e31fdd49e2eb3ed038920f4
+        version: git+https://git@github.com:Fyphen1223/TsumiLink.git#66b4814c732927555f05ec643cb2a6758b2b7411
       wav:
         specifier: ^1.0.2
         version: 1.0.2
@@ -145,62 +145,62 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@napi-rs/canvas-android-arm64@0.1.55':
-    resolution: {integrity: sha512-zsc170uSA+mGTXiSpnXaTsBKzi/f2NATKLrCt5qp0ihR0YLSIGsNhNpYLQYSF6qvi2Uzjd9CyKEs+TKdj8oj3w==}
+  '@napi-rs/canvas-android-arm64@0.1.61':
+    resolution: {integrity: sha512-vnQobU4n2oTMXtDW0EHwdDIpUs4PqtAAK6vvYr9I9w984xrKe+NzFypmtGy/NkFrLoXn/i8WuCHAd1jLDGO3eA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [android]
 
-  '@napi-rs/canvas-darwin-arm64@0.1.55':
-    resolution: {integrity: sha512-KMlL+O7viWsZ+c4qDoXUXyVEVXDcGrWuHuvt1VvUBcRjfsz/2of7i2rfClTzltX0nMKxU8JVKVrFSZOpPOZn4g==}
+  '@napi-rs/canvas-darwin-arm64@0.1.61':
+    resolution: {integrity: sha512-zH44Bs7SoaTMJ5TEuTwE4MQuijWNdvvleJacnclapKYSWywc4X5YResFmlDieHLESS0C0EwxpqyX0JT07IKKnQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@napi-rs/canvas-darwin-x64@0.1.55':
-    resolution: {integrity: sha512-ZiiK+tOGHD7GxAhq7F+gVYpWDQJ9Lr/eOI9gMXlnavmR14nVf3a8eYk3CX32yelurf6hMaMTjWISO9uAZDyRbA==}
+  '@napi-rs/canvas-darwin-x64@0.1.61':
+    resolution: {integrity: sha512-pTNL/peBGHUZxECDXPw9IbL3aQdn+7UBjzqM1xo+L4rwBkFLewpst5aWsMDpYyjVGvKZHbNj3J1PMmlbu6XgzA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-  '@napi-rs/canvas-linux-arm-gnueabihf@0.1.55':
-    resolution: {integrity: sha512-HxthhRQoayfjG3Z7bAJ7r9Zq/L0gAxj26xjZTcjBYokr14/gtjL+Q+tsvW5PvH3SuL2sqnNXHy/TqvXcI+iyIw==}
+  '@napi-rs/canvas-linux-arm-gnueabihf@0.1.61':
+    resolution: {integrity: sha512-sXrPJ+HvX3H58/uHP3QGe2Nafk1cUBfnErfQ8PtO464lEnhvCHdGsdml48dqhnQHErFkPYhHYobHDXfYT6Kq0w==}
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [linux]
 
-  '@napi-rs/canvas-linux-arm64-gnu@0.1.55':
-    resolution: {integrity: sha512-b6PSk6923c6kyHMiluPUJVVHc7CJI7SfYb5MZetyeINtYGNIVj8a80pWgiMs3LJDrUePh+WC00zgDCRkFttKlg==}
+  '@napi-rs/canvas-linux-arm64-gnu@0.1.61':
+    resolution: {integrity: sha512-HtLV2lWc3VIJ1XpXqoGJo596UCSYVbHIoFAO9Apj/BdNteBGUfUq1gDALrgM+WPhNM8XLMaU+HBphUVWRvgwBw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@napi-rs/canvas-linux-arm64-musl@0.1.55':
-    resolution: {integrity: sha512-DHPR7F7Th9x0qkfSBojAgh7mPqInrj+IEJHvrKEsq8p0YTLBY8OUw8Va4OI7Z2zpiDsb2HVXq78Ws7KaekouFw==}
+  '@napi-rs/canvas-linux-arm64-musl@0.1.61':
+    resolution: {integrity: sha512-W3jYZhDLghJauKQWl8lvA7ISElWzlkdUIM+bwQqlDzYtpD4wEgi/vICiMuUbJz73fKGgYwFLgKL6dF2H3bpVYg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@napi-rs/canvas-linux-x64-gnu@0.1.55':
-    resolution: {integrity: sha512-znEwyWCHtoAIQerxEQ30DRnVJQ1X8a0zQqOuylEPI1AKCH57ZiWQzFam4IUiFNoYhQyzron5v5cEteVbBkYGpg==}
+  '@napi-rs/canvas-linux-x64-gnu@0.1.61':
+    resolution: {integrity: sha512-tfMIZukLG+Q9mg+1LJFa852GhSlwg29pZaZ/UrLRdLRG0AJ1lckyHxOhNf9z+srMsEsryaQAIYHFIoOGYGhweA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@napi-rs/canvas-linux-x64-musl@0.1.55':
-    resolution: {integrity: sha512-mNWBiILhykehKlOzmbdTp8Fr25pnkHiC/01Ck9YjNWfV6Z3kBgJPWvG5J+WvkNnsPPu/K0JxTCryngj4h9Denw==}
+  '@napi-rs/canvas-linux-x64-musl@0.1.61':
+    resolution: {integrity: sha512-Go7zAENKdoDELf4X55pCbt4IrbrNOL+BarxO8A3MdDKF+isBioG4lNXpnAdswrDx8iJu+o1rzaGupQsF9YWxFg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@napi-rs/canvas-win32-x64-msvc@0.1.55':
-    resolution: {integrity: sha512-e6K83IchwQUbG9JSS4QK88qWJpwDbDC+tm1ugjVwSRWBdnicB5TwbUruOGjc1umgfGUq3qnQBs3yO1ZLB6N2uA==}
+  '@napi-rs/canvas-win32-x64-msvc@0.1.61':
+    resolution: {integrity: sha512-awGSMk4PlCV7SWC9ZxREkZvtiY+NWkramwYoQIEUJ+0KatLCbFnAaoxT7B7QE25ZUrjd1c3ZeV/Ae4Sggt276A==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
 
-  '@napi-rs/canvas@0.1.55':
-    resolution: {integrity: sha512-Jw5ewjXboNSrEVXbUrj/l6800Stn1hHeMV4R/HbDkRGSMW3DLMOZAFGbd+d0174OpsjYFqc5SB3Q3wcatWsuMQ==}
+  '@napi-rs/canvas@0.1.61':
+    resolution: {integrity: sha512-IJDok7OsGQ+Wd9QOWaOnFszw1mxNtJuynD+tBAhWMV6QJr7fWZx83eYS9xSl+3XR2tUa9oiHc44APcHBgdErmA==}
     engines: {node: '>= 10'}
 
   '@nodelib/fs.scandir@2.1.5':
@@ -1192,8 +1192,8 @@ packages:
   tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
 
-  tsumi@git+https://git@github.com:Fyphen1223/TsumiLink.git#1f323fff0121bebc9e31fdd49e2eb3ed038920f4:
-    resolution: {commit: 1f323fff0121bebc9e31fdd49e2eb3ed038920f4, repo: git@github.com:Fyphen1223/TsumiLink.git, type: git}
+  tsumi@git+https://git@github.com:Fyphen1223/TsumiLink.git#66b4814c732927555f05ec643cb2a6758b2b7411:
+    resolution: {commit: 66b4814c732927555f05ec643cb2a6758b2b7411, repo: git@github.com:Fyphen1223/TsumiLink.git, type: git}
     version: 0.0.18
 
   type-check@0.4.0:
@@ -1439,44 +1439,44 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@napi-rs/canvas-android-arm64@0.1.55':
+  '@napi-rs/canvas-android-arm64@0.1.61':
     optional: true
 
-  '@napi-rs/canvas-darwin-arm64@0.1.55':
+  '@napi-rs/canvas-darwin-arm64@0.1.61':
     optional: true
 
-  '@napi-rs/canvas-darwin-x64@0.1.55':
+  '@napi-rs/canvas-darwin-x64@0.1.61':
     optional: true
 
-  '@napi-rs/canvas-linux-arm-gnueabihf@0.1.55':
+  '@napi-rs/canvas-linux-arm-gnueabihf@0.1.61':
     optional: true
 
-  '@napi-rs/canvas-linux-arm64-gnu@0.1.55':
+  '@napi-rs/canvas-linux-arm64-gnu@0.1.61':
     optional: true
 
-  '@napi-rs/canvas-linux-arm64-musl@0.1.55':
+  '@napi-rs/canvas-linux-arm64-musl@0.1.61':
     optional: true
 
-  '@napi-rs/canvas-linux-x64-gnu@0.1.55':
+  '@napi-rs/canvas-linux-x64-gnu@0.1.61':
     optional: true
 
-  '@napi-rs/canvas-linux-x64-musl@0.1.55':
+  '@napi-rs/canvas-linux-x64-musl@0.1.61':
     optional: true
 
-  '@napi-rs/canvas-win32-x64-msvc@0.1.55':
+  '@napi-rs/canvas-win32-x64-msvc@0.1.61':
     optional: true
 
-  '@napi-rs/canvas@0.1.55':
+  '@napi-rs/canvas@0.1.61':
     optionalDependencies:
-      '@napi-rs/canvas-android-arm64': 0.1.55
-      '@napi-rs/canvas-darwin-arm64': 0.1.55
-      '@napi-rs/canvas-darwin-x64': 0.1.55
-      '@napi-rs/canvas-linux-arm-gnueabihf': 0.1.55
-      '@napi-rs/canvas-linux-arm64-gnu': 0.1.55
-      '@napi-rs/canvas-linux-arm64-musl': 0.1.55
-      '@napi-rs/canvas-linux-x64-gnu': 0.1.55
-      '@napi-rs/canvas-linux-x64-musl': 0.1.55
-      '@napi-rs/canvas-win32-x64-msvc': 0.1.55
+      '@napi-rs/canvas-android-arm64': 0.1.61
+      '@napi-rs/canvas-darwin-arm64': 0.1.61
+      '@napi-rs/canvas-darwin-x64': 0.1.61
+      '@napi-rs/canvas-linux-arm-gnueabihf': 0.1.61
+      '@napi-rs/canvas-linux-arm64-gnu': 0.1.61
+      '@napi-rs/canvas-linux-arm64-musl': 0.1.61
+      '@napi-rs/canvas-linux-x64-gnu': 0.1.61
+      '@napi-rs/canvas-linux-x64-musl': 0.1.61
+      '@napi-rs/canvas-win32-x64-msvc': 0.1.61
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -1783,7 +1783,7 @@ snapshots:
 
   cropify@1.0.9:
     dependencies:
-      '@napi-rs/canvas': 0.1.55
+      '@napi-rs/canvas': 0.1.61
 
   cross-spawn@7.0.3:
     dependencies:
@@ -2471,7 +2471,7 @@ snapshots:
 
   tslib@2.7.0: {}
 
-  tsumi@git+https://git@github.com:Fyphen1223/TsumiLink.git#1f323fff0121bebc9e31fdd49e2eb3ed038920f4:
+  tsumi@git+https://git@github.com:Fyphen1223/TsumiLink.git#66b4814c732927555f05ec643cb2a6758b2b7411:
     dependencies:
       ws: 8.18.0
     transitivePeerDependencies:
